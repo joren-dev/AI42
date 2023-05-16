@@ -15,10 +15,28 @@ Enables 42.nl to use their AI with ease.
 3. Download [JavaFX](https://openjfx.io/) (for windows) and unpack it into `C:/Java`.
 4. Download and install [SceneBuilder](https://gluonhq.com/products/scene-builder/).
 
+## GUI Showcase
+// soon
 
-## How to contribute to this project
-Down here youll find a detailed guide on how to get started with writing code for this project.
 
+## Functionality
+- Chat Interface: Engage in interactive and dynamic conversations with the www.42.nl AI model.
+    - Example: Have real-time conversations with the AI model, receiving dynamic responses based on user input.
+
+- GUI Interface: Provide a graphical user interface for seamless interaction.
+    - Example: Offer a user-friendly interface with intuitive controls, allowing users to interact with the AI model easily.
+
+- Login System: Implement a secure login system to authenticate users.
+    - Example: Require users to create accounts and log in before accessing the AI's functionality for personalized experiences.
+
+- User Profiles: Allow users to create and manage profiles within the application.
+    - Example: Enable users to customize their preferences, save conversation histories, or set individual chat preferences.
+
+- Chat History: Store and display a history of previous conversations.
+    - Example: Save and display past chat sessions, allowing users to refer back to previous interactions.
+
+- Customization Options: Offer customization features to personalize the AI experience.
+    - Example: Allow users to choose chat themes, adjust font sizes, or modify language settings to suit their preferences.
 
 ## Common dev-commands explained
 ### 1. Make text strong (example)
