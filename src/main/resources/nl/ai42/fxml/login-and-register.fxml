@@ -17,28 +17,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<!-- Main Borderpane start -->
-
-<BorderPane prefHeight="708.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.ai42.controllers.LoginAndRegisterController">
-    <!-- Ending of the left part of the Borderpane -->
-
-    <!-- Beginning of the bottom part of the Borderpane -->
-    <bottom>
-
-        <!-- Simple Copyright -->
-        <Label prefHeight="16.0" prefWidth="107.0" style="-fx-text-fill: #B9a9a9;" text="AI42 © 2023" BorderPane.alignment="CENTER" />
-    </bottom>
-   <center>
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="580.0" BorderPane.alignment="TOP_CENTER">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.ai42.controllers.LoginAndRegisterController">
+    <center>
+        <AnchorPane prefHeight="691.0" prefWidth="580.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField layoutX="230.0" layoutY="1.0" prefHeight="57.0" prefWidth="130.0" style="-fx-background-color: transparent; -fx-text-fill: #24a0ed;" text="AI Model">
+                <Label layoutX="230.0" layoutY="1.0" prefHeight="57.0" prefWidth="130.0" style="-fx-text-fill: #24a0ed;" text="AI Model">
                     <font>
                         <Font name="SansSerif Regular" size="25.0" />
                     </font>
-                </TextField>
-                <!-- The End of Logo -->
+                </Label>
 
-                                  <!-- The Beginning of Login form -->
+                <!-- The Beginning of Login form -->
                 <Label layoutX="244.0" layoutY="60.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: #A9A9A9;" text="Login">
                     <font>
                         <Font name="SansSerif Regular" size="30.0" />
@@ -88,12 +77,9 @@
                     </font>
                 </Button>
                 <!-- End of Login Form -->
-
-                                  <!-- A simple line Separator -->
+                <!-- A simple line Separator -->
                 <Line endX="500.0" endY="380.0" fill="DARKGRAY" layoutY="-110.0" opacity="0.5" startX="100.0" startY="380.0" stroke="#a8a8a8ad" strokeLineJoin="BEVEL" strokeWidth="3.0" />
-
-                  
-                                  <!-- The Beginning of Signup form -->
+                <!-- The Beginning of Signup form -->
                 <Label layoutX="230.0" layoutY="275.0" prefHeight="36.0" prefWidth="130.0" style="-fx-text-fill: #A9A9A9;" text="Sign-Up">
                     <font>
                         <Font name="SansSerif Regular" size="30.0" />
@@ -179,13 +165,12 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button layoutX="200.0" layoutY="660.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true">
+                <Button layoutX="213.0" layoutY="662.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
-
-                      <!-- Logo -->
+                <!-- Logo -->
                 <ImageView fitHeight="58.0" fitWidth="126.0" layoutX="18.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/logo.png" />
@@ -196,11 +181,10 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <!-- The End of Signup form -->
-
-                              </children>
+            </children>
         </AnchorPane>
-   </center>
-    <!-- Ending of the left part of the Borderpane -->
-
+    </center>
+    <bottom>
+        <Label prefHeight="17.0" prefWidth="69.0" style="-fx-text-fill: #B9a9a9;" text="AI42 © 2023" BorderPane.alignment="CENTER" />
+    </bottom>
 </BorderPane>
