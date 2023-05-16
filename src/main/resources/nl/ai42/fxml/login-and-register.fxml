@@ -19,7 +19,7 @@
 
 <!-- Main Borderpane start -->
 
-<BorderPane prefHeight="708.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.ai42.AI42Controller">
+<BorderPane prefHeight="708.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.ai42.controllers.LoginAndRegisterController">
     <!-- Ending of the left part of the Borderpane -->
 
     <!-- Beginning of the bottom part of the Borderpane -->

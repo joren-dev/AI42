@@ -8,4 +8,6 @@ module nl.ai42 {
 
     opens nl.ai42 to javafx.fxml;
     exports nl.ai42;
+    exports nl.ai42.controllers;
+    opens nl.ai42.controllers to javafx.fxml;
 }

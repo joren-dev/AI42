@@ -1,4 +1,4 @@
-package nl.ai42;
+package nl.ai42.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AI42Controller {
+public class LoginAndRegisterController {
 
     // Strings which hold css elements to easily re-use in the application
     protected
@@ -66,21 +66,22 @@ public class AI42Controller {
     @FXML
     protected void onSignUpButtonClick() {
 
-        if (signUpUsernameTextField.getText().isBlank() || signUpEmailTextField.getText().isBlank() || signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()) {
+        if (signUpUsernameTextField.getText().isBlank() || signUpEmailTextField.getText().isBlank() ||
+                signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()
+        ) {
             invalidSignupCredentials.setText("Please fill in all fields!");
             invalidSignupCredentials.setStyle(errorMessage);
             invalidLoginCredentials.setText("");
 
-            if (signUpUsernameTextField.getText().isBlank()) {
-                signUpUsernameTextField.setStyle(errorStyle);
-            } else if (signUpEmailTextField.getText().isBlank()) {
-                signUpEmailTextField.setStyle(errorStyle);
-            } else if (signUpPasswordPasswordField.getText().isBlank()) {
-                signUpPasswordPasswordField.setStyle(errorStyle);
-            } else if (signUpRepeatPasswordPasswordField.getText().isBlank()) {
-                signUpRepeatPasswordPasswordField.setStyle(errorStyle);
-            }
-        } else if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
+            if (signUpUsernameTextField.getText().isBlank()) signUpUsernameTextField.setStyle(errorStyle);
+            if (signUpEmailTextField.getText().isBlank()) signUpEmailTextField.setStyle(errorStyle);
+            if (signUpPasswordPasswordField.getText().isBlank()) signUpPasswordPasswordField.setStyle(errorStyle);
+            if (signUpRepeatPasswordPasswordField.getText().isBlank()) signUpRepeatPasswordPasswordField.setStyle(errorStyle);
+
+            return;
+        }
+
+        if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
             invalidSignupCredentials.setText("You are set!");
             invalidSignupCredentials.setStyle(successMessage);
             signUpUsernameTextField.setStyle(successStyle);
