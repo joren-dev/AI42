@@ -37,7 +37,7 @@ public class LoginAndRegisterController {
     @FXML
     private TextField signUpRepeatPasswordPasswordField;
     @FXML
-    private DatePicker signUpDatePicker;    // TODO: This property is apparently null. I am not sure how to fix this.
+    private DatePicker signUpDateDatePicker;
 
     // Creation of methods which are activated on events in the forms
     @FXML
@@ -108,6 +108,12 @@ public class LoginAndRegisterController {
             error = true;
             invalidSignupCredentials.setText("Username does not satisfy requirements.");
             signUpUsernameTextField.setStyle(errorStyle);
+        }
+
+        if (signUpDateDatePicker.getValue() == null) {
+            error = true;
+            invalidSignupCredentials.setText("Signup date invalid.");
+            signUpDateDatePicker.setStyle(errorStyle);
         }
 
         if (error) return;
