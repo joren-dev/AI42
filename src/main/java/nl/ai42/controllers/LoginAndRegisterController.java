@@ -89,6 +89,13 @@ public class LoginAndRegisterController {
             return;
         }
 
+        if (!ValidationUtils.is_valid_email(signUpEmailTextField.getText())) {
+            invalidSignupCredentials.setText("Email does not satisfy requirements.");
+            signUpEmailTextField.setStyle(errorStyle);
+
+            return;
+        }
+
         if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
             invalidSignupCredentials.setText("You are set!");
             invalidSignupCredentials.setStyle(successMessage);
