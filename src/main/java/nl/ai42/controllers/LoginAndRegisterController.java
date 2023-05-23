@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import nl.ai42.utils.ValidationUtils;
 
 public class LoginAndRegisterController {
 
@@ -77,6 +78,13 @@ public class LoginAndRegisterController {
             if (signUpEmailTextField.getText().isBlank()) signUpEmailTextField.setStyle(errorStyle);
             if (signUpPasswordPasswordField.getText().isBlank()) signUpPasswordPasswordField.setStyle(errorStyle);
             if (signUpRepeatPasswordPasswordField.getText().isBlank()) signUpRepeatPasswordPasswordField.setStyle(errorStyle);
+
+            return;
+        }
+
+        if (!ValidationUtils.is_valid_password(signUpPasswordPasswordField.getText())) {
+            invalidSignupCredentials.setText("Password does not satisfy requirements.");
+            signUpPasswordPasswordField.setStyle(errorStyle);
 
             return;
         }
