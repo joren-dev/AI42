@@ -96,6 +96,13 @@ public class LoginAndRegisterController {
             return;
         }
 
+        if (!ValidationUtils.is_valid_name(signUpUsernameTextField.getText())) {
+            invalidSignupCredentials.setText("Username does not satisfy requirements.");
+            signUpUsernameTextField.setStyle(errorStyle);
+
+            return;
+        }
+
         if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
             invalidSignupCredentials.setText("You are set!");
             invalidSignupCredentials.setStyle(successMessage);
