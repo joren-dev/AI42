@@ -37,7 +37,7 @@ public class LoginAndRegisterController {
     @FXML
     private TextField signUpRepeatPasswordPasswordField;
     @FXML
-    private DatePicker signUpDatePicker;
+    private DatePicker signUpDatePicker;    // TODO: This property is apparently null. I am not sure how to fix this.
 
     // Creation of methods which are activated on events in the forms
     @FXML
