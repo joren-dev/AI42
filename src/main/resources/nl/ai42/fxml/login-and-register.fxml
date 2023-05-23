@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.ai42.controllers.LoginAndRegisterController">
+<BorderPane prefHeight="667.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.ai42.controllers.LoginAndRegisterController">
     <center>
         <AnchorPane prefHeight="691.0" prefWidth="580.0" BorderPane.alignment="CENTER">
             <children>
@@ -28,7 +28,7 @@
                 </Label>
 
                 <!-- The Beginning of Login form -->
-                <Label layoutX="244.0" layoutY="60.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: #A9A9A9;" text="Login">
+                <Label alignment="CENTER" layoutX="244.0" layoutY="60.0" prefHeight="30.0" prefWidth="90.0" style="-fx-text-fill: #A9A9A9;" text="Login">
                     <font>
                         <Font name="SansSerif Regular" size="30.0" />
                     </font>
@@ -56,12 +56,7 @@
                         <Image url="@../images/lock.png" />
                     </image>
                 </ImageView>
-                <CheckBox layoutX="150.0" layoutY="195.0" mnemonicParsing="false" style="-fx-text-fill: #A9A9A9;" text="Remember Me">
-                    <font>
-                        <Font name="SansSerif Regular" size="15.0" />
-                    </font>
-                </CheckBox>
-                <Button layoutX="190.0" layoutY="235.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Forgot your Password?" underline="true">
+                <Button alignment="CENTER" layoutX="209.0" layoutY="228.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Forgot your Password?" underline="true">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -71,7 +66,7 @@
                         <Insets />
                     </opaqueInsets>
                 </Label>
-                <Button fx:id="LoginButton" layoutX="335.0" layoutY="195.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Login">
+                <Button fx:id="LoginButton" alignment="CENTER" layoutX="260.0" layoutY="184.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Login">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -80,7 +75,7 @@
                 <!-- A simple line Separator -->
                 <Line endX="500.0" endY="380.0" fill="DARKGRAY" layoutY="-110.0" opacity="0.5" startX="100.0" startY="380.0" stroke="#a8a8a8ad" strokeLineJoin="BEVEL" strokeWidth="3.0" />
                 <!-- The Beginning of Signup form -->
-                <Label layoutX="230.0" layoutY="275.0" prefHeight="36.0" prefWidth="130.0" style="-fx-text-fill: #A9A9A9;" text="Sign-Up">
+                <Label alignment="CENTER" layoutX="230.0" layoutY="275.0" prefHeight="36.0" prefWidth="130.0" style="-fx-text-fill: #A9A9A9;" text="Sign-Up">
                     <font>
                         <Font name="SansSerif Regular" size="30.0" />
                     </font>
@@ -137,7 +132,7 @@
                         <Font name="SansSerif Regular" size="15.0" />
                     </font>
                 </Label>
-                <RadioButton layoutX="300.0" layoutY="515.0" mnemonicParsing="false" selected="true" text="Male" textFill="DARKGRAY">
+                <RadioButton layoutX="250.0" layoutY="515.0" mnemonicParsing="false" selected="true" text="Male" textFill="DARKGRAY">
                     <toggleGroup>
                         <ToggleGroup fx:id="Gender" />
                     </toggleGroup>
@@ -145,7 +140,7 @@
                         <Font size="14.0" />
                     </font>
                 </RadioButton>
-                <RadioButton layoutX="390.0" layoutY="515.0" mnemonicParsing="false" text="Female" textFill="DARKGRAY" toggleGroup="$Gender">
+                <RadioButton layoutX="321.0" layoutY="515.0" mnemonicParsing="false" text="Female" textFill="DARKGRAY" toggleGroup="$Gender">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -160,12 +155,12 @@
                         <Insets />
                     </opaqueInsets>
                 </Label>
-                <Button fx:id="signUpButton" layoutX="230.0" layoutY="615.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="33.0" prefWidth="130.0" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Sign-Up">
+                <Button fx:id="signUpButton" layoutX="231.0" layoutY="580.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="33.0" prefWidth="130.0" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Sign-Up">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button layoutX="213.0" layoutY="662.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true">
+                <Button layoutX="214.0" layoutY="621.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true">
                     <font>
                         <Font size="15.0" />
                     </font>
