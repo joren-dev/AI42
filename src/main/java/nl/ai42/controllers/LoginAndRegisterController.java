@@ -2,6 +2,7 @@ package nl.ai42.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -35,6 +36,8 @@ public class LoginAndRegisterController {
     private TextField signUpPasswordPasswordField;
     @FXML
     private TextField signUpRepeatPasswordPasswordField;
+    @FXML
+    private DatePicker signUpDatePicker;
 
     // Creation of methods which are activated on events in the forms
     @FXML
@@ -67,9 +70,18 @@ public class LoginAndRegisterController {
     @FXML
     protected void onSignUpButtonClick() {
 
+        boolean error = false;
+
+        invalidSignupCredentials.setStyle(successStyle);
+        signUpEmailTextField.setStyle(successStyle);
+        signUpPasswordPasswordField.setStyle(successStyle);
+        signUpRepeatPasswordPasswordField.setStyle(successStyle);
+        signUpUsernameTextField.setStyle(successStyle);
+
         if (signUpUsernameTextField.getText().isBlank() || signUpEmailTextField.getText().isBlank() ||
                 signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()
         ) {
+            error = true;
             invalidSignupCredentials.setText("Please fill in all fields!");
             invalidSignupCredentials.setStyle(errorMessage);
             invalidLoginCredentials.setText("");
@@ -78,30 +90,27 @@ public class LoginAndRegisterController {
             if (signUpEmailTextField.getText().isBlank()) signUpEmailTextField.setStyle(errorStyle);
             if (signUpPasswordPasswordField.getText().isBlank()) signUpPasswordPasswordField.setStyle(errorStyle);
             if (signUpRepeatPasswordPasswordField.getText().isBlank()) signUpRepeatPasswordPasswordField.setStyle(errorStyle);
-
-            return;
         }
 
         if (!ValidationUtils.is_valid_password(signUpPasswordPasswordField.getText())) {
+            error = true;
             invalidSignupCredentials.setText("Password does not satisfy requirements.");
             signUpPasswordPasswordField.setStyle(errorStyle);
-
-            return;
         }
 
         if (!ValidationUtils.is_valid_email(signUpEmailTextField.getText())) {
+            error = true;
             invalidSignupCredentials.setText("Email does not satisfy requirements.");
             signUpEmailTextField.setStyle(errorStyle);
-
-            return;
         }
 
         if (!ValidationUtils.is_valid_name(signUpUsernameTextField.getText())) {
+            error = true;
             invalidSignupCredentials.setText("Username does not satisfy requirements.");
             signUpUsernameTextField.setStyle(errorStyle);
-
-            return;
         }
+
+        if (error) return;
 
         if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
             invalidSignupCredentials.setText("You are set!");
