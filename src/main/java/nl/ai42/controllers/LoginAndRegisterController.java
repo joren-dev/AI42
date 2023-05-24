@@ -129,7 +129,8 @@ public class LoginAndRegisterController {
             sign_up_date_date_picker.setStyle(errorStyle);
         }
 
-        if (error) return;
+        if (error)
+            return;
 
         if (sign_up_repeat_password_password_field.getText().equals(sign_up_password_password_field.getText())) {
             invalid_signup_credentials.setText("You are set!");
