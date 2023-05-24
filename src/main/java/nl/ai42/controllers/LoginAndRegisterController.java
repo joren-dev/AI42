@@ -19,128 +19,120 @@ public class LoginAndRegisterController {
 
     // Import the application's controls
     @FXML
-    private Label invalidLoginCredentials;
+    private Label invalid_login_credentials;
     @FXML
-    private Label invalidSignupCredentials;
+    private Label invalid_signup_credentials;
     @FXML
-    private Button exitButton;
+    private Button exit_button;
     @FXML
-    private TextField loginUsernameTextField;
+    private TextField login_username_text_field;
     @FXML
-    private TextField loginPasswordPasswordField;
+    private TextField login_password_password_field;
     @FXML
-    private TextField signUpUsernameTextField;
+    private TextField sign_up_username_text_field;
     @FXML
-    private TextField signUpEmailTextField;
+    private TextField sign_up_email_text_field;
     @FXML
-    private TextField signUpPasswordPasswordField;
+    private TextField sign_up_password_password_field;
     @FXML
-    private TextField signUpRepeatPasswordPasswordField;
+    private TextField sign_up_repeat_password_password_field;
     @FXML
-    private DatePicker signUpDateDatePicker;
+    private DatePicker sign_up_date_date_picker;
 
     // Creation of methods which are activated on events in the forms
     @FXML
     protected void onExitButton() {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
+        Stage stage = (Stage) exit_button.getScene().getWindow();
         stage.close();
     }
 
+    protected void resetFields() {
+        invalid_signup_credentials.setStyle(successStyle);
+        sign_up_email_text_field.setStyle(successStyle);
+        sign_up_password_password_field.setStyle(successStyle);
+        sign_up_repeat_password_password_field.setStyle(successStyle);
+        sign_up_username_text_field.setStyle(successStyle);
+        invalid_login_credentials.setText("");
+        invalid_login_credentials.setStyle(successMessage);
+        login_username_text_field.setStyle(successStyle);
+        login_password_password_field.setStyle(successStyle);
+        sign_up_date_date_picker.setStyle(successStyle);
+    }
     @FXML
     protected void onLoginButtonClick() {
-//        invalidSignupCredentials.setStyle(successStyle);
-        signUpEmailTextField.setStyle(successStyle);
-        signUpPasswordPasswordField.setStyle(successStyle);
-        signUpRepeatPasswordPasswordField.setStyle(successStyle);
-        signUpUsernameTextField.setStyle(successStyle);
-        invalidLoginCredentials.setText("");
-        invalidLoginCredentials.setStyle(successMessage);
-        loginUsernameTextField.setStyle(successStyle);
-        loginPasswordPasswordField.setStyle(successStyle);
-        signUpDateDatePicker.setStyle(successStyle);
+        this.resetFields();
 
-        if (loginUsernameTextField.getText().isBlank() || loginPasswordPasswordField.getText().isBlank()) {
-            invalidLoginCredentials.setText("Not all required fields are filled in.");
-            invalidLoginCredentials.setStyle(errorMessage);
-            invalidSignupCredentials.setText("");
+        if (login_username_text_field.getText().isBlank() || login_password_password_field.getText().isBlank()) {
+            invalid_login_credentials.setText("Not all required fields are filled in.");
+            invalid_login_credentials.setStyle(errorMessage);
+            invalid_signup_credentials.setText("");
 
-            if (loginUsernameTextField.getText().isBlank()) {
-                loginUsernameTextField.setStyle(errorStyle);
+            if (login_username_text_field.getText().isBlank()) {
+                login_username_text_field.setStyle(errorStyle);
             }
-            if (loginPasswordPasswordField.getText().isBlank()) {
-                loginPasswordPasswordField.setStyle(errorStyle);
+            if (login_password_password_field.getText().isBlank()) {
+                login_password_password_field.setStyle(errorStyle);
             }
         } else {
-            invalidLoginCredentials.setText("Login Successful!");
-            invalidLoginCredentials.setStyle(successMessage);
-            loginUsernameTextField.setStyle(successStyle);
-            loginPasswordPasswordField.setStyle(successStyle);
-            invalidSignupCredentials.setText("");
+            invalid_login_credentials.setText("Login Successful!");
+            invalid_login_credentials.setStyle(successMessage);
+            login_username_text_field.setStyle(successStyle);
+            login_password_password_field.setStyle(successStyle);
+            invalid_signup_credentials.setText("");
         }
     }
 
     @FXML
     protected void onSignUpButtonClick() {
+        this.resetFields();
 
         boolean error = false;
 
-        invalidSignupCredentials.setStyle(successStyle);
-        signUpEmailTextField.setStyle(successStyle);
-        signUpPasswordPasswordField.setStyle(successStyle);
-        signUpRepeatPasswordPasswordField.setStyle(successStyle);
-        signUpUsernameTextField.setStyle(successStyle);
-        invalidLoginCredentials.setText("");
-        invalidLoginCredentials.setStyle(successMessage);
-        loginUsernameTextField.setStyle(successStyle);
-        loginPasswordPasswordField.setStyle(successStyle);
-        signUpDateDatePicker.setStyle(successStyle);
-
-        if (signUpUsernameTextField.getText().isBlank() || signUpEmailTextField.getText().isBlank() ||
-                signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()
+        if (sign_up_username_text_field.getText().isBlank() || sign_up_email_text_field.getText().isBlank() ||
+                sign_up_password_password_field.getText().isBlank() || sign_up_repeat_password_password_field.getText().isBlank()
         ) {
             error = true;
-            invalidSignupCredentials.setText("Not all required fields are filled in.");
-            invalidSignupCredentials.setStyle(errorMessage);
+            invalid_signup_credentials.setText("Not all required fields are filled in.");
+            invalid_signup_credentials.setStyle(errorMessage);
 
-            if (signUpUsernameTextField.getText().isBlank()) signUpUsernameTextField.setStyle(errorStyle);
-            if (signUpEmailTextField.getText().isBlank()) signUpEmailTextField.setStyle(errorStyle);
-            if (signUpPasswordPasswordField.getText().isBlank()) signUpPasswordPasswordField.setStyle(errorStyle);
-            if (signUpRepeatPasswordPasswordField.getText().isBlank()) signUpRepeatPasswordPasswordField.setStyle(errorStyle);
+            if (sign_up_username_text_field.getText().isBlank()) sign_up_username_text_field.setStyle(errorStyle);
+            if (sign_up_email_text_field.getText().isBlank()) sign_up_email_text_field.setStyle(errorStyle);
+            if (sign_up_password_password_field.getText().isBlank()) sign_up_password_password_field.setStyle(errorStyle);
+            if (sign_up_repeat_password_password_field.getText().isBlank()) sign_up_repeat_password_password_field.setStyle(errorStyle);
         }
 
-        if (!ValidationUtils.is_valid_password(signUpPasswordPasswordField.getText())) {
+        if (!ValidationUtils.is_valid_password(sign_up_password_password_field.getText())) {
             error = true;
-            invalidSignupCredentials.setText("Password does not satisfy requirements.");
-            signUpPasswordPasswordField.setStyle(errorStyle);
+            invalid_signup_credentials.setText("Password does not satisfy requirements.");
+            sign_up_password_password_field.setStyle(errorStyle);
         }
 
-        if (!ValidationUtils.is_valid_email(signUpEmailTextField.getText())) {
+        if (!ValidationUtils.is_valid_email(sign_up_email_text_field.getText())) {
             error = true;
-            invalidSignupCredentials.setText("Email does not satisfy requirements.");
-            signUpEmailTextField.setStyle(errorStyle);
+            invalid_signup_credentials.setText("Email does not satisfy requirements.");
+            sign_up_email_text_field.setStyle(errorStyle);
         }
 
-        if (!ValidationUtils.is_valid_name(signUpUsernameTextField.getText())) {
+        if (!ValidationUtils.is_valid_name(sign_up_username_text_field.getText())) {
             error = true;
-            invalidSignupCredentials.setText("Username does not satisfy requirements.");
-            signUpUsernameTextField.setStyle(errorStyle);
+            invalid_signup_credentials.setText("Username does not satisfy requirements.");
+            sign_up_username_text_field.setStyle(errorStyle);
         }
 
-        if (signUpDateDatePicker.getValue() == null) {
+        if (sign_up_date_date_picker.getValue() == null) {
             error = true;
-            invalidSignupCredentials.setText("Not all required fields are filled in.");
-            signUpDateDatePicker.setStyle(errorStyle);
+            invalid_signup_credentials.setText("Not all required fields are filled in.");
+            sign_up_date_date_picker.setStyle(errorStyle);
         }
 
         if (error) return;
 
-        if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
-            invalidSignupCredentials.setText("You are set!");
+        if (sign_up_repeat_password_password_field.getText().equals(sign_up_password_password_field.getText())) {
+            invalid_signup_credentials.setText("You are set!");
         } else {
-            invalidSignupCredentials.setText("The Passwords don't match!");
-//            invalidSignupCredentials.setStyle(errorMessage);
-            signUpPasswordPasswordField.setStyle(errorStyle);
-            signUpRepeatPasswordPasswordField.setStyle(errorStyle);
+            invalid_signup_credentials.setText("The Passwords don't match!");
+            sign_up_password_password_field.setStyle(errorStyle);
+            sign_up_repeat_password_password_field.setStyle(errorStyle);
         }
     }
 }

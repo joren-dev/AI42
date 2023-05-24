@@ -33,7 +33,7 @@
                         <Font name="SansSerif Regular" size="30.0" />
                     </font>
                 </Label>
-                <TextField fx:id="loginUsernameTextField" layoutX="150.0" layoutY="100.0" prefHeight="30.0" prefWidth="300.0" promptText="Username / Email" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
+                <TextField fx:id="login_username_text_field" layoutX="150.0" layoutY="100.0" prefHeight="30.0" prefWidth="300.0" promptText="Username / Email" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
@@ -46,7 +46,7 @@
                         <Image url="@../images/users.png" />
                     </image>
                 </ImageView>
-                <PasswordField fx:id="loginPasswordPasswordField" layoutX="150.0" layoutY="140.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
+                <PasswordField fx:id="login_password_password_field" layoutX="150.0" layoutY="140.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
@@ -61,7 +61,7 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Label fx:id="invalidLoginCredentials" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="175.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
+                <Label fx:id="invalid_login_credentials" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="175.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -80,7 +80,7 @@
                         <Font name="SansSerif Regular" size="30.0" />
                     </font>
                 </Label>
-                <TextField fx:id="signUpUsernameTextField" layoutX="155.0" layoutY="320.0" prefHeight="30.0" prefWidth="300.0" promptText="Username" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
+                <TextField fx:id="sign_up_username_text_field" layoutX="155.0" layoutY="320.0" prefHeight="30.0" prefWidth="300.0" promptText="Username" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
@@ -93,7 +93,7 @@
                         <Image url="@../images/users.png" />
                     </image>
                 </ImageView>
-                <TextField fx:id="signUpEmailTextField" layoutX="155.0" layoutY="360.0" prefHeight="30.0" prefWidth="300.0" promptText="Email" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
+                <TextField fx:id="sign_up_email_text_field" layoutX="155.0" layoutY="360.0" prefHeight="30.0" prefWidth="300.0" promptText="Email" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
@@ -106,7 +106,7 @@
                         <Image url="@../images/email.png" />
                     </image>
                 </ImageView>
-                <PasswordField fx:id="signUpPasswordPasswordField" layoutX="155.0" layoutY="400.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
+                <PasswordField fx:id="sign_up_password_password_field" layoutX="155.0" layoutY="400.0" prefHeight="30.0" prefWidth="300.0" promptText="Password" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
@@ -116,7 +116,7 @@
                         <Image url="@../images/lock.png" />
                     </image>
                 </ImageView>
-                <PasswordField fx:id="signUpRepeatPasswordPasswordField" layoutX="155.0" layoutY="440.0" prefHeight="30.0" prefWidth="300.0" promptText="Repeat Password" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
+                <PasswordField fx:id="sign_up_repeat_password_password_field" layoutX="155.0" layoutY="440.0" prefHeight="30.0" prefWidth="300.0" promptText="Repeat Password" style="-fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
@@ -126,7 +126,7 @@
                         <Font name="SansSerif Regular" size="15.0" />
                     </font>
                 </Label>
-                <DatePicker fx:id="signUpDateDatePicker" layoutX="250.0" layoutY="480.0" promptText="mm/dd/yyyy" showWeekNumbers="true" />
+                <DatePicker fx:id="sign_up_date_date_picker" layoutX="250.0" layoutY="480.0" promptText="mm/dd/yyyy" showWeekNumbers="true" />
                 <Label layoutX="130.0" layoutY="515.0" prefHeight="20.0" prefWidth="90.0" style="-fx-text-fill: #A9A9A9;" text="Gender">
                     <font>
                         <Font name="SansSerif Regular" size="15.0" />
@@ -150,7 +150,7 @@
                         <Font name="SansSerif Regular" size="15.0" />
                     </font>
                 </CheckBox>
-                <Label fx:id="invalidSignupCredentials" alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="572.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
+                <Label fx:id="invalid_signup_credentials" alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="572.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -171,7 +171,7 @@
                         <Image url="@../images/logo.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="exitButton" layoutX="508.0" layoutY="12.0" mnemonicParsing="false" onAction="#onExitButton" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9; -fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;" text="Exit">
+                <Button fx:id="exit_button" layoutX="508.0" layoutY="12.0" mnemonicParsing="false" onAction="#onExitButton" prefHeight="35.0" prefWidth="60.0" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9; -fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;" text="Exit">
                     <font>
                         <Font size="15.0" />
                     </font>

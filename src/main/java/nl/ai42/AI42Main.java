@@ -11,7 +11,7 @@ import java.io.File;
 
 public class AI42Main extends Application {
 
-    private double x_offset = 0;
+    private double x_offset = 0
     private double y_offset = 0;
 
     @Override
