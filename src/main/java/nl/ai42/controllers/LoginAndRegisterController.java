@@ -48,6 +48,16 @@ public class LoginAndRegisterController {
 
     @FXML
     protected void onLoginButtonClick() {
+        invalidSignupCredentials.setStyle(successStyle);
+        signUpEmailTextField.setStyle(successStyle);
+        signUpPasswordPasswordField.setStyle(successStyle);
+        signUpRepeatPasswordPasswordField.setStyle(successStyle);
+        signUpUsernameTextField.setStyle(successStyle);
+        invalidLoginCredentials.setText("");
+        invalidLoginCredentials.setStyle(successMessage);
+        loginUsernameTextField.setStyle(successStyle);
+        loginPasswordPasswordField.setStyle(successStyle);
+
         if (loginUsernameTextField.getText().isBlank() || loginPasswordPasswordField.getText().isBlank()) {
             invalidLoginCredentials.setText("Not all required fields are filled in.");
             invalidLoginCredentials.setStyle(errorMessage);
@@ -78,6 +88,10 @@ public class LoginAndRegisterController {
         signUpPasswordPasswordField.setStyle(successStyle);
         signUpRepeatPasswordPasswordField.setStyle(successStyle);
         signUpUsernameTextField.setStyle(successStyle);
+        invalidLoginCredentials.setText("");
+        invalidLoginCredentials.setStyle(successMessage);
+        loginUsernameTextField.setStyle(successStyle);
+        loginPasswordPasswordField.setStyle(successStyle);
 
         if (signUpUsernameTextField.getText().isBlank() || signUpEmailTextField.getText().isBlank() ||
                 signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()
