@@ -95,10 +95,14 @@ public class LoginAndRegisterController {
             invalid_signup_credentials.setText("Not all required fields are filled in.");
             invalid_signup_credentials.setStyle(errorMessage);
 
-            if (sign_up_username_text_field.getText().isBlank()) sign_up_username_text_field.setStyle(errorStyle);
-            if (sign_up_email_text_field.getText().isBlank()) sign_up_email_text_field.setStyle(errorStyle);
-            if (sign_up_password_password_field.getText().isBlank()) sign_up_password_password_field.setStyle(errorStyle);
-            if (sign_up_repeat_password_password_field.getText().isBlank()) sign_up_repeat_password_password_field.setStyle(errorStyle);
+            if (sign_up_username_text_field.getText().isBlank())
+                sign_up_username_text_field.setStyle(errorStyle);
+            if (sign_up_email_text_field.getText().isBlank())
+                sign_up_email_text_field.setStyle(errorStyle);
+            if (sign_up_password_password_field.getText().isBlank())
+                sign_up_password_password_field.setStyle(errorStyle);
+            if (sign_up_repeat_password_password_field.getText().isBlank())
+                sign_up_repeat_password_password_field.setStyle(errorStyle);
         }
 
         if (!ValidationUtils.is_valid_password(sign_up_password_password_field.getText())) {
