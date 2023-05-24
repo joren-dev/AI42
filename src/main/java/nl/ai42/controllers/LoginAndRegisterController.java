@@ -55,7 +55,8 @@ public class LoginAndRegisterController {
 
             if (loginUsernameTextField.getText().isBlank()) {
                 loginUsernameTextField.setStyle(errorStyle);
-            } else if (loginPasswordPasswordField.getText().isBlank()) {
+            }
+            if (loginPasswordPasswordField.getText().isBlank()) {
                 loginPasswordPasswordField.setStyle(errorStyle);
             }
         } else {
