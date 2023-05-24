@@ -56,7 +56,7 @@
                         <Image url="@../images/lock.png" />
                     </image>
                 </ImageView>
-                <Button alignment="CENTER" layoutX="209.0" layoutY="228.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Forgot your Password?" underline="true">
+                <Button alignment="CENTER" layoutX="209.0" layoutY="234.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Forgot your Password?" underline="true">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -66,7 +66,7 @@
                         <Insets />
                     </opaqueInsets>
                 </Label>
-                <Button fx:id="LoginButton" alignment="CENTER" layoutX="260.0" layoutY="184.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Login">
+                <Button fx:id="LoginButton" alignment="CENTER" layoutX="259.0" layoutY="199.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Login">
                     <font>
                         <Font size="15.0" />
                     </font>

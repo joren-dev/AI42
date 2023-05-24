@@ -33,8 +33,6 @@ public class AI42Main extends Application {
         });
 
         final Scene scene = new Scene(root);
-        String currentDirectory = System.getProperty("user.dir");
-
 
         Image icon = new Image(getClass().getResourceAsStream("images/favicon.png"));
         stage.getIcons().add(icon);
