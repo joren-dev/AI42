@@ -57,6 +57,7 @@ public class LoginAndRegisterController {
         invalidLoginCredentials.setStyle(successMessage);
         loginUsernameTextField.setStyle(successStyle);
         loginPasswordPasswordField.setStyle(successStyle);
+        signUpDateDatePicker.setStyle(successStyle);
 
         if (loginUsernameTextField.getText().isBlank() || loginPasswordPasswordField.getText().isBlank()) {
             invalidLoginCredentials.setText("Not all required fields are filled in.");
@@ -92,6 +93,7 @@ public class LoginAndRegisterController {
         invalidLoginCredentials.setStyle(successMessage);
         loginUsernameTextField.setStyle(successStyle);
         loginPasswordPasswordField.setStyle(successStyle);
+        signUpDateDatePicker.setStyle(successStyle);
 
         if (signUpUsernameTextField.getText().isBlank() || signUpEmailTextField.getText().isBlank() ||
                 signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()
@@ -99,7 +101,6 @@ public class LoginAndRegisterController {
             error = true;
             invalidSignupCredentials.setText("Not all required fields are filled in.");
             invalidSignupCredentials.setStyle(errorMessage);
-            invalidLoginCredentials.setText("");
 
             if (signUpUsernameTextField.getText().isBlank()) signUpUsernameTextField.setStyle(errorStyle);
             if (signUpEmailTextField.getText().isBlank()) signUpEmailTextField.setStyle(errorStyle);
@@ -135,18 +136,11 @@ public class LoginAndRegisterController {
 
         if (signUpRepeatPasswordPasswordField.getText().equals(signUpPasswordPasswordField.getText())) {
             invalidSignupCredentials.setText("You are set!");
-            invalidSignupCredentials.setStyle(successMessage);
-            signUpUsernameTextField.setStyle(successStyle);
-            signUpEmailTextField.setStyle(successStyle);
-            signUpPasswordPasswordField.setStyle(successStyle);
-            signUpRepeatPasswordPasswordField.setStyle(successStyle);
-            invalidLoginCredentials.setText("");
         } else {
             invalidSignupCredentials.setText("The Passwords don't match!");
             invalidSignupCredentials.setStyle(errorMessage);
             signUpPasswordPasswordField.setStyle(errorStyle);
             signUpRepeatPasswordPasswordField.setStyle(errorStyle);
-            invalidLoginCredentials.setText("");
         }
     }
 }
