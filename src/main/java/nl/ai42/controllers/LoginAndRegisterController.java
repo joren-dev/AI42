@@ -48,7 +48,7 @@ public class LoginAndRegisterController {
 
     @FXML
     protected void onLoginButtonClick() {
-        invalidSignupCredentials.setStyle(successStyle);
+//        invalidSignupCredentials.setStyle(successStyle);
         signUpEmailTextField.setStyle(successStyle);
         signUpPasswordPasswordField.setStyle(successStyle);
         signUpRepeatPasswordPasswordField.setStyle(successStyle);
@@ -138,7 +138,7 @@ public class LoginAndRegisterController {
             invalidSignupCredentials.setText("You are set!");
         } else {
             invalidSignupCredentials.setText("The Passwords don't match!");
-            invalidSignupCredentials.setStyle(errorMessage);
+//            invalidSignupCredentials.setStyle(errorMessage);
             signUpPasswordPasswordField.setStyle(errorStyle);
             signUpRepeatPasswordPasswordField.setStyle(errorStyle);
         }
