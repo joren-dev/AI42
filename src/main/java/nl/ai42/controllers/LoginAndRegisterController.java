@@ -67,12 +67,11 @@ public class LoginAndRegisterController {
             invalid_login_credentials.setStyle(errorMessage);
             invalid_signup_credentials.setText("");
 
-            if (login_username_text_field.getText().isBlank()) {
+            if (login_username_text_field.getText().isBlank()) 
                 login_username_text_field.setStyle(errorStyle);
-            }
-            if (login_password_password_field.getText().isBlank()) {
+                
+            if (login_password_password_field.getText().isBlank())
                 login_password_password_field.setStyle(errorStyle);
-            }
         } else {
             invalid_login_credentials.setText("Login Successful!");
             invalid_login_credentials.setStyle(successMessage);
