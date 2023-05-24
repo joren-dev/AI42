@@ -49,7 +49,7 @@ public class LoginAndRegisterController {
     @FXML
     protected void onLoginButtonClick() {
         if (loginUsernameTextField.getText().isBlank() || loginPasswordPasswordField.getText().isBlank()) {
-            invalidLoginCredentials.setText("The Login fields are required!");
+            invalidLoginCredentials.setText("Not all required fields are filled in.");
             invalidLoginCredentials.setStyle(errorMessage);
             invalidSignupCredentials.setText("");
 
@@ -83,7 +83,7 @@ public class LoginAndRegisterController {
                 signUpPasswordPasswordField.getText().isBlank() || signUpRepeatPasswordPasswordField.getText().isBlank()
         ) {
             error = true;
-            invalidSignupCredentials.setText("Please fill in all fields!");
+            invalidSignupCredentials.setText("Not all required fields are filled in.");
             invalidSignupCredentials.setStyle(errorMessage);
             invalidLoginCredentials.setText("");
 
@@ -113,7 +113,7 @@ public class LoginAndRegisterController {
 
         if (signUpDateDatePicker.getValue() == null) {
             error = true;
-            invalidSignupCredentials.setText("Signup date invalid.");
+            invalidSignupCredentials.setText("Not all required fields are filled in.");
             signUpDateDatePicker.setStyle(errorStyle);
         }
 
