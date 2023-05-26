@@ -92,10 +92,13 @@ public class LoginAndRegisterController {
 
             if (sign_up_username_text_field.getText().isBlank())
                 sign_up_username_text_field.setStyle(errorStyle);
+
             if (sign_up_email_text_field.getText().isBlank())
                 sign_up_email_text_field.setStyle(errorStyle);
+
             if (sign_up_password_password_field.getText().isBlank())
                 sign_up_password_password_field.setStyle(errorStyle);
+            
             if (sign_up_repeat_password_password_field.getText().isBlank())
                 sign_up_repeat_password_password_field.setStyle(errorStyle);
         }
