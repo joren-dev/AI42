@@ -47,13 +47,11 @@ public class LoginAndRegisterController {
     }
 
     protected void resetFields() {
-        invalid_signup_credentials.setStyle(successStyle);
         sign_up_email_text_field.setStyle(successStyle);
         sign_up_password_password_field.setStyle(successStyle);
         sign_up_repeat_password_password_field.setStyle(successStyle);
         sign_up_username_text_field.setStyle(successStyle);
         invalid_login_credentials.setText("");
-        invalid_login_credentials.setStyle(successMessage);
         login_username_text_field.setStyle(successStyle);
         login_password_password_field.setStyle(successStyle);
         sign_up_date_date_picker.setStyle(successStyle);
@@ -64,7 +62,6 @@ public class LoginAndRegisterController {
 
         if (login_username_text_field.getText().isBlank() || login_password_password_field.getText().isBlank()) {
             invalid_login_credentials.setText("Not all required fields are filled in.");
-            invalid_login_credentials.setStyle(errorMessage);
             invalid_signup_credentials.setText("");
 
             if (login_username_text_field.getText().isBlank()) 
@@ -92,7 +89,6 @@ public class LoginAndRegisterController {
         ) {
             error = true;
             invalid_signup_credentials.setText("Not all required fields are filled in.");
-            invalid_signup_credentials.setStyle(errorMessage);
 
             if (sign_up_username_text_field.getText().isBlank())
                 sign_up_username_text_field.setStyle(errorStyle);
@@ -133,6 +129,7 @@ public class LoginAndRegisterController {
 
         if (sign_up_repeat_password_password_field.getText().equals(sign_up_password_password_field.getText())) {
             invalid_signup_credentials.setText("You are set!");
+            invalid_signup_credentials.setStyle(successMessage);
         } else {
             invalid_signup_credentials.setText("The Passwords don't match!");
             sign_up_password_password_field.setStyle(errorStyle);
