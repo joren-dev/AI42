@@ -9,5 +9,6 @@ module nl.ai42 {
     opens nl.ai42 to javafx.fxml;
     exports nl.ai42;
     exports nl.ai42.controllers;
+    exports nl.ai42.utils;
     opens nl.ai42.controllers to javafx.fxml;
 }

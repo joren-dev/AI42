@@ -34,11 +34,27 @@ class Table implements Serializable {
     }
 }
 
-class Database implements Serializable {
+public class Database implements Serializable {
     private final HashMap<String, Table> tables;
 
     public Database() {
         this.tables = new HashMap<>();
+    }
+
+    public Database(String filePath) {
+        try {
+            File file = new File(filePath);
+            if (file.exists()) {
+                FileInputStream fileInputStream = new FileInputStream(filePath);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                Database result = (Database) objectInputStream.readObject();
+                this.tables = result.tables;
+            } else {
+                this.tables = new HashMap<>();
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Table getTable(String name) {

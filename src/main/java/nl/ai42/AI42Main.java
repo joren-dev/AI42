@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
+import nl.ai42.utils.Database;
 
 public class AI42Main extends Application {
 
     private double x_offset = 0;
     private double y_offset = 0;
+    public Database database = new Database("AI42.db");
 
     @Override
     public void start(final Stage stage) throws Exception {
