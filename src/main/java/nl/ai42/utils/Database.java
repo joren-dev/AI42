@@ -1,38 +1,7 @@
 package nl.ai42.utils;
 
 import java.io.*;
-import java.util.function.Predicate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
-
-class Row implements Serializable {
-    private final HashMap<String, String> data;
-
-    public Row() {
-        this.data = new HashMap<>();
-    }
-
-    public String getValue(String column) {
-        return this.data.get(column);
-    }
-}
-
-class Table implements Serializable {
-    private final ArrayList<Row> rows;
-
-    public Table() {
-        this.rows = new ArrayList<>();
-    }
-
-    public void insert(Row values) {
-        this.rows.add(values);
-    }
-
-    public ArrayList<Row> select(Predicate<Row> predicate) {
-        return this.rows.stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
-    }
-}
 
 public class Database implements Serializable {
     private final HashMap<String, Table> tables;
@@ -57,10 +26,23 @@ public class Database implements Serializable {
         }
     }
 
+    /**
+     * Get a table by name
+     *
+     * @param name the name of the table to retrieve
+     * @return the table you requested or null if the table doesn't exist
+     */
     public Table getTable(String name) {
         return this.tables.get(name);
     }
 
+    /**
+     * Create a table with a name and a specific set of columns
+     * NOTE: if the table exists already, it is overwritten
+     *
+     * @param name the name of the table to create
+     * @param columns the names of the columns
+     */
     public void createTable(String name, String[] columns) {
         this.tables.put(name, new Table());
     }
