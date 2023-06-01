@@ -1,10 +1,7 @@
 package nl.ai42.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.utils.Row;
@@ -43,6 +40,8 @@ public class LoginAndRegisterController {
     private TextField sign_up_repeat_password_password_field;
     @FXML
     private DatePicker sign_up_date_date_picker;
+    @FXML
+    private CheckBox termsConditionsCheckbox;
 
     // Creation of methods which are activated on events in the forms
     @FXML
@@ -52,6 +51,7 @@ public class LoginAndRegisterController {
     }
 
     protected void resetFields() {
+        termsConditionsCheckbox.setStyle(successStyle);
         sign_up_email_text_field.setStyle(successStyle);
         sign_up_password_password_field.setStyle(successStyle);
         sign_up_repeat_password_password_field.setStyle(successStyle);
@@ -95,6 +95,13 @@ public class LoginAndRegisterController {
         this.resetFields();
 
         boolean error = false;
+
+        if (!termsConditionsCheckbox.isSelected()) {
+            invalid_signup_credentials.setStyle(errorStyle);
+            invalid_signup_credentials.setText("Please accept the terms.");
+            termsConditionsCheckbox.setStyle(errorStyle);
+            error = true;
+        }
 
         if (sign_up_username_text_field.getText().isBlank() || sign_up_email_text_field.getText().isBlank() ||
                 sign_up_password_password_field.getText().isBlank() || sign_up_repeat_password_password_field.getText().isBlank()
