@@ -1,12 +1,14 @@
 package nl.ai42.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import nl.ai42.AI42Main;
+import nl.ai42.utils.Row;
 import nl.ai42.utils.ValidationUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class LoginAndRegisterController {
 
@@ -38,6 +40,8 @@ public class LoginAndRegisterController {
     private TextField sign_up_repeat_password_password_field;
     @FXML
     private DatePicker sign_up_date_date_picker;
+    @FXML
+    private CheckBox termsConditionsCheckbox;
 
     // Creation of methods which are activated on events in the forms
     @FXML
@@ -47,6 +51,7 @@ public class LoginAndRegisterController {
     }
 
     protected void resetFields() {
+        termsConditionsCheckbox.setStyle(successStyle);
         sign_up_email_text_field.setStyle(successStyle);
         sign_up_password_password_field.setStyle(successStyle);
         sign_up_repeat_password_password_field.setStyle(successStyle);
@@ -70,10 +75,17 @@ public class LoginAndRegisterController {
             if (login_password_password_field.getText().isBlank())
                 login_password_password_field.setStyle(errorStyle);
         } else {
-            invalid_login_credentials.setText("Login Successful!");
-            invalid_login_credentials.setStyle(successMessage);
-            login_username_text_field.setStyle(successStyle);
-            login_password_password_field.setStyle(successStyle);
+            if (AI42Main.database.getTable("user").select((row) -> row.getValue("username").equals(login_username_text_field.getText()) && row.getValue("password").equals(login_password_password_field.getText())).size() == 1) {
+                invalid_login_credentials.setText("Login Successful!");
+                invalid_login_credentials.setStyle(successMessage);
+                login_username_text_field.setStyle(successStyle);
+                login_password_password_field.setStyle(successStyle);
+            } else {
+                invalid_login_credentials.setText("Username or password is invalid.");
+                invalid_login_credentials.setStyle(errorMessage);
+                login_username_text_field.setStyle(errorStyle);
+                login_password_password_field.setStyle(errorStyle);
+            }
             invalid_signup_credentials.setText("");
         }
     }
@@ -83,6 +95,13 @@ public class LoginAndRegisterController {
         this.resetFields();
 
         boolean error = false;
+
+        if (!termsConditionsCheckbox.isSelected()) {
+            invalid_signup_credentials.setStyle(errorStyle);
+            invalid_signup_credentials.setText("Please accept the terms.");
+            termsConditionsCheckbox.setStyle(errorStyle);
+            error = true;
+        }
 
         if (sign_up_username_text_field.getText().isBlank() || sign_up_email_text_field.getText().isBlank() ||
                 sign_up_password_password_field.getText().isBlank() || sign_up_repeat_password_password_field.getText().isBlank()
@@ -130,9 +149,34 @@ public class LoginAndRegisterController {
         if (error)
             return;
 
+        if (AI42Main.database.getTable("user").select((row) -> row.getValue("username").equals(sign_up_username_text_field.getText())).size() == 1) {
+            invalid_signup_credentials.setText("Username already registered.");
+            invalid_signup_credentials.setStyle(errorStyle);
+            sign_up_username_text_field.setStyle(errorStyle);
+            return;
+        }
+
+        if (AI42Main.database.getTable("user").select((row) -> row.getValue("email").equals(sign_up_email_text_field.getText())).size() == 1) {
+            invalid_signup_credentials.setText("Email already registered.");
+            invalid_signup_credentials.setStyle(errorStyle);
+            sign_up_email_text_field.setStyle(errorStyle);
+            return;
+        }
+
         if (sign_up_repeat_password_password_field.getText().equals(sign_up_password_password_field.getText())) {
             invalid_signup_credentials.setText("You are set!");
             invalid_signup_credentials.setStyle(successMessage);
+            HashMap<String, String> data = new HashMap<>();
+            data.put("username", sign_up_username_text_field.getText());
+            data.put("email", sign_up_email_text_field.getText());
+            data.put("password", sign_up_password_password_field.getText());
+            data.put("date_of_birth", sign_up_date_date_picker.getValue().toString());
+            AI42Main.database.getTable("user").insert(new Row(data));
+            try {
+                AI42Main.database.storeInFile("AI42.db");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             invalid_signup_credentials.setText("The Passwords don't match!");
             sign_up_password_password_field.setStyle(errorStyle);

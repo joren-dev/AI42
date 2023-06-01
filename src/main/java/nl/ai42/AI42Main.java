@@ -7,14 +7,25 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
+import nl.ai42.utils.Database;
 
 public class AI42Main extends Application {
 
     private double x_offset = 0;
     private double y_offset = 0;
+    public static Database database = new Database("AI42.db");
 
     @Override
     public void start(final Stage stage) throws Exception {
+        if (AI42Main.database.getTable("user") == null)
+            AI42Main.database.createTable("user", new String[]{"username", "email", "password", "date_of_birth", "gender"});
+
+        if (AI42Main.database.getTable("chat") == null)
+            AI42Main.database.createTable("chat", new String[]{"username", "chatname"});
+
+        if (AI42Main.database.getTable("chatmsg") == null)
+            AI42Main.database.createTable("chatmsg", new String[]{"username", "chatname", "msg_counter", "msg_content", "is_ai", "sent"});
+
         Parent root = FXMLLoader.load(getClass().getResource("fxml/login-and-register.fxml"));
 
         stage.initStyle(StageStyle.UNDECORATED);
