@@ -26,7 +26,7 @@ public class AI42Main extends Application {
         if (AI42Main.database.getTable("chatmsg") == null)
             AI42Main.database.createTable("chatmsg", new String[]{"username", "chatname", "msg_counter", "msg_content", "is_ai", "sent"});
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/login-and-register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/login-and-register.fxml"));
 
         stage.initStyle(StageStyle.UNDECORATED);
 
