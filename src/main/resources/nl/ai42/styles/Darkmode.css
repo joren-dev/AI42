@@ -1,0 +1,67 @@
+/* DarkMode.css */
+
+/* Background */
+#borderPane {
+    -fx-background-color: #222222;
+}
+
+/* Text and Label Colors */
+.label, .text-area, .text-field, .button {
+    -fx-text-fill: white;
+}
+
+/* ScrollPane */
+.scroll-pane .viewport {
+    -fx-background-color: #333333;
+}
+
+/* ListView */
+.list-view, .list-cell {
+    -fx-background-color: #333333;
+    -fx-control-inner-background: #333333;
+    -fx-selection-bar: #666666;
+    -fx-selection-bar-text: white;
+}
+
+/* TextArea */
+.text-area, .text-area .content {
+    -fx-control-inner-background: #333333;
+    -fx-text-fill: white;
+}
+
+/* Button */
+.button {
+    -fx-background-color: #444444;
+    -fx-background-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #555555;
+}
+
+/* Conversation Label */
+#onlineUsersHbox .label {
+    -fx-background-color: #222222;
+    -fx-text-fill: #fc6747;
+}
+
+/* Logo */
+#borderPane .left .image-view {
+    -fx-opacity: 0.8;
+}
+
+/* Top Bar */
+#borderPane .top {
+    -fx-background-color: #031c30;
+}
+
+/* Settings Icon */
+#borderPane .top .right .image-view {
+    -fx-opacity: 0.8;
+}
+
+/* AI Model Label */
+#borderPane .top .center .label {
+    -fx-text-fill: #24a0ed;
+}
+
