@@ -81,6 +81,9 @@ public class LoginAndRegisterController {
                 invalid_login_credentials.setStyle(successMessage);
                 login_username_text_field.setStyle(successStyle);
                 login_password_password_field.setStyle(successStyle);
+
+                // Change views to chat-view.fxml
+                SceneManager.getInstance().loadScene("chat-view.fxml");
             } else {
                 invalid_login_credentials.setText("Username or password is invalid.");
                 invalid_login_credentials.setStyle(errorMessage);
@@ -185,8 +188,5 @@ public class LoginAndRegisterController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        // Change views to chat-view.fxml
-        SceneManager.getInstance().loadScene("chat-view.fxml");
     }
 }
