@@ -12,6 +12,9 @@ public class SceneManager {
     private Stage stage;
     private Scene currentScene;
 
+    private double x_offset = 0;
+    private double y_offset = 0;
+
     private SceneManager() {
     }
 
@@ -37,6 +40,18 @@ public class SceneManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // grabs your root here
+        this.getCurrentScene().getRoot().setOnMousePressed(event -> {
+            x_offset = event.getSceneX();
+            y_offset = event.getSceneY();
+        });
+
+        // move window around
+        this.getCurrentScene().getRoot().setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() - x_offset);
+            stage.setY(event.getScreenY() - y_offset);
+        });
     }
 
     public Scene getCurrentScene() {

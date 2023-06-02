@@ -9,8 +9,6 @@ import nl.ai42.utils.Database;
 
 public class AI42Main extends Application {
 
-    private double x_offset = 0;
-    private double y_offset = 0;
     public static Database database = new Database("AI42.db");
     private SceneManager scene_manager;
 
@@ -23,18 +21,6 @@ public class AI42Main extends Application {
         scene_manager = SceneManager.getInstance();
         scene_manager.setStage(stage);
         scene_manager.loadScene("login-and-register.fxml");
-
-        // grabs your root here
-        scene_manager.getCurrentScene().getRoot().setOnMousePressed(event -> {
-            x_offset = event.getSceneX();
-            y_offset = event.getSceneY();
-        });
-
-        // move window around
-        scene_manager.getCurrentScene().getRoot().setOnMouseDragged(event -> {
-            stage.setX(event.getScreenX() - x_offset);
-            stage.setY(event.getScreenY() - y_offset);
-        });
 
         Image icon = new Image(getClass().getResourceAsStream("images/favicon.png"));
         stage.getIcons().add(icon);
