@@ -24,7 +24,10 @@ public class ChatController {
         newConversationButton.setOnAction(this::openConversation);
 
         // Apply the same style as the startConversationButton
-        newConversationButton.setStyle(startConversationButton.getStyle());
+        newConversationButton.setFont(startConversationButton.getFont());
+
+        // Set the spacing between conversations
+        conversationListContainer.setSpacing(10);
 
         // Add the new conversation button at the bottom
         conversationListContainer.getChildren().add(newConversationButton);
