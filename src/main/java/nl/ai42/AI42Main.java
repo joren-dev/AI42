@@ -20,17 +20,18 @@ public class AI42Main extends Application {
 
         stage.initStyle(StageStyle.UNDECORATED);
 
-        scene_manager = SceneManager.getInstance(stage);
+        scene_manager = SceneManager.getInstance();
+        scene_manager.setStage(stage);
         scene_manager.loadScene("login-and-register.fxml");
 
         // grabs your root here
-        scene_manager.getCurrent_scene().getRoot().setOnMousePressed(event -> {
+        scene_manager.getCurrentScene().getRoot().setOnMousePressed(event -> {
             x_offset = event.getSceneX();
             y_offset = event.getSceneY();
         });
 
         // move window around
-        scene_manager.getCurrent_scene().getRoot().setOnMouseDragged(event -> {
+        scene_manager.getCurrentScene().getRoot().setOnMouseDragged(event -> {
             stage.setX(event.getScreenX() - x_offset);
             stage.setY(event.getScreenY() - y_offset);
         });
@@ -38,7 +39,7 @@ public class AI42Main extends Application {
         Image icon = new Image(getClass().getResourceAsStream("images/favicon.png"));
         stage.getIcons().add(icon);
 
-        stage.setScene(scene_manager.getCurrent_scene());
+        stage.setScene(scene_manager.getCurrentScene());
 
         stage.show();
     }

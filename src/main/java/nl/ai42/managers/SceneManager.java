@@ -10,17 +10,20 @@ import java.io.IOException;
 public class SceneManager {
     private static SceneManager instance;
     private Stage stage;
-    private Scene current_scene;
+    private Scene currentScene;
 
-    private SceneManager(Stage stage) {
-        this.stage = stage;
+    private SceneManager() {
     }
 
-    public static SceneManager getInstance(Stage stage) {
+    public static SceneManager getInstance() {
         if (instance == null) {
-            instance = new SceneManager(stage);
+            instance = new SceneManager();
         }
         return instance;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     public void loadScene(String fxmlFile) {
@@ -29,18 +32,14 @@ public class SceneManager {
             Parent root = FXMLLoader.load(getClass().getResource(resourcePath));
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            current_scene = scene;
+            currentScene = scene;
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void switchScene(String fxmlFile) {
-        loadScene(fxmlFile);
-    }
-
-    public Scene getCurrent_scene() {
-        return current_scene;
+    public Scene getCurrentScene() {
+        return currentScene;
     }
 }
