@@ -4,6 +4,8 @@ package nl.ai42.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -11,6 +13,9 @@ import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.utils.Row;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ChatController {
@@ -19,6 +24,9 @@ public class ChatController {
     private VBox conversationListContainer;
     @FXML
     private Button startConversationButton;
+    @FXML
+    private TextArea messageBox;
+    public static String currentConversation;
 
     private int conversationCount = 0;
 
@@ -30,6 +38,7 @@ public class ChatController {
             put("username", AI42Main.currentUser);
             put("chatname", "Conversation " + conversationCount);
         }}));
+        currentConversation = "Conversation " + conversationCount;
         newConversationButton.setPrefWidth(300);
         newConversationButton.setOnAction(this::openConversation);
 
@@ -54,10 +63,30 @@ public class ChatController {
 
         // Perform actions to open the conversation and start chatting
         System.out.println("Opening conversation: " + conversationName);
+        currentConversation = conversationName;
         // Add your code here to open the conversation and start chatting
     }
     public void sendButtonAction(ActionEvent actionEvent) {
         // Handle send button action
+        ArrayList<Row> data = AI42Main.database.getTable("chatmsg").select((row) -> true);
+        int counter;
+        if (data.size() == 0)
+            counter = 0;
+        else
+            counter = Integer.parseInt(data.get(data.size() - 1).getValue("msg_counter"));
+        counter++;
+        int finalCounter = counter;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
+            put("username", AI42Main.currentUser);
+            put("chatname", currentConversation);
+            put("msg_counter", String.valueOf(finalCounter));
+            put("msg_content", messageBox.getText());
+            put("is_ai", "false");
+            put("sent", format.format(new Date()));
+        }}));
+
+        messageBox.setText("");
     }
 
     public void sendMethod(KeyEvent keyEvent) {
