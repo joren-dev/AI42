@@ -1,6 +1,6 @@
-package nl.ai42.utils;
+package nl.ai42.managers;
 
-public class AI {
+public class AIManager {
     public static String ask(String query) {
         return "AI geeft antwoord.";
     }

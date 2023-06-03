@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
-import nl.ai42.utils.AI;
+import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
 import java.text.SimpleDateFormat;
@@ -97,7 +97,7 @@ public class ChatController {
         }
         String conversation = conversationHistory.toString();
 
-        String response = AI.ask(conversation.replace("\n------------------------------------------------------------------------\n", ""));
+        String response = AIManager.ask(conversation.replace("\n------------------------------------------------------------------------\n", ""));
         AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
             put("username", AI42Main.currentUser);
             put("chatname", currentConversation);
