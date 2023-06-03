@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ChatController {
 
@@ -55,6 +56,8 @@ public class ChatController {
     }
 
     public void handleExitButtonClick(MouseEvent mouseEvent) {
+        Stage window = (Stage) conversationListContainer.getScene().getWindow();
+        window.close();
     }
 
     public void handleSettingsButton(MouseEvent mouseEvent) {
