@@ -92,7 +92,7 @@ public class ChatController {
 
         StringBuilder conversationHistory = new StringBuilder();
         for (Row row : rows) {
-            conversationHistory.append(row.getValue("msg_content")).append("\n");
+            conversationHistory.append(row.getValue("msg_content")).append("\n------------------------------------------------------------------------\n");
         }
         String conversation = conversationHistory.toString();
 
