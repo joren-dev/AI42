@@ -1,0 +1,71 @@
+/* Top Pane Styles */
+.border-pane .top {
+  -fx-background-color: #252525;
+}
+
+/* VBox Styles */
+.vbox, #conversationsContainer {
+  -fx-background-color: #1f1f1f;
+}
+
+/* ScrollPane Styles */
+.scroll-pane {
+  -fx-background-color: #1f1f1f;
+}
+
+/* ListView Styles */
+.list-view {
+  -fx-background-color: #1f1f1f;
+  -fx-text-fill: #ffffff;
+}
+
+/* HBox Styles */
+.hbox {
+  /* Add your HBox styles here */
+}
+
+/* TextArea Styles */
+.text-area {
+  -fx-background-color: #1f1f1f;
+  -fx-text-fill: #000000;
+}
+
+/* Button Styles */
+.button {
+  -fx-background-color: #363636;
+  -fx-text-fill: #ffffff;
+}
+
+/* ImageView Styles */
+.image-view {
+  /* Add your ImageView styles here */
+}
+
+/* Label Styles */
+.label {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 25.0;
+  -fx-font-family: "SansSerif Regular";
+}
+
+/* BorderPane Styles */
+.border-pane {
+  -fx-background-color: #1f1f1f;
+}
+
+/* Conversation List Styles */
+#conversationListContainer {
+  -fx-background-color: #1f1f1f;
+}
+
+/* Left Section Styles */
+#conversationsContainer, #conversationsContainer .scroll-pane {
+  -fx-background-color: #1f1f1f;
+}
+
+/* TextArea Styles */
+.text-area.dark-mode {
+    -fx-control-inner-background: #1f1f1f;
+    -fx-background: #1f1f1f, #1f1f1f;
+    -fx-text-fill: #ffffff;
+}

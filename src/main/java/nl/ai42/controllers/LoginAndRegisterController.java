@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
+import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Row;
 import nl.ai42.utils.ValidationUtils;
 
@@ -80,6 +81,10 @@ public class LoginAndRegisterController {
                 invalid_login_credentials.setStyle(successMessage);
                 login_username_text_field.setStyle(successStyle);
                 login_password_password_field.setStyle(successStyle);
+
+                // Change views to chat-view.fxml
+                AI42Main.currentUser = login_username_text_field.getText();
+                SceneManager.getInstance().loadScene("chat-view.fxml");
             } else {
                 invalid_login_credentials.setText("Username or password is invalid.");
                 invalid_login_credentials.setStyle(errorMessage);
@@ -163,24 +168,26 @@ public class LoginAndRegisterController {
             return;
         }
 
-        if (sign_up_repeat_password_password_field.getText().equals(sign_up_password_password_field.getText())) {
-            invalid_signup_credentials.setText("You are set!");
-            invalid_signup_credentials.setStyle(successMessage);
-            HashMap<String, String> data = new HashMap<>();
-            data.put("username", sign_up_username_text_field.getText());
-            data.put("email", sign_up_email_text_field.getText());
-            data.put("password", sign_up_password_password_field.getText());
-            data.put("date_of_birth", sign_up_date_date_picker.getValue().toString());
-            AI42Main.database.getTable("user").insert(new Row(data));
-            try {
-                AI42Main.database.storeInFile("AI42.db");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
+        if (!sign_up_repeat_password_password_field.getText().equals(sign_up_password_password_field.getText())) {
             invalid_signup_credentials.setText("The Passwords don't match!");
             sign_up_password_password_field.setStyle(errorStyle);
             sign_up_repeat_password_password_field.setStyle(errorStyle);
+            return; // Return early if passwords don't match
+        }
+
+        invalid_signup_credentials.setText("You are set!");
+        invalid_signup_credentials.setStyle(successMessage);
+        HashMap<String, String> data = new HashMap<>();
+        data.put("username", sign_up_username_text_field.getText());
+        data.put("email", sign_up_email_text_field.getText());
+        data.put("password", sign_up_password_password_field.getText());
+        data.put("date_of_birth", sign_up_date_date_picker.getValue().toString());
+        AI42Main.database.getTable("user").insert(new Row(data));
+
+        try {
+            AI42Main.database.storeInFile("AI42.db");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -1,5 +1,7 @@
 package nl.ai42.utils;
 
+import nl.ai42.AI42Main;
+
 import java.io.*;
 import java.util.HashMap;
 
@@ -58,6 +60,6 @@ public class Database implements Serializable {
     public void storeInFile(String filePath) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(this);
+        objectOutputStream.writeObject(AI42Main.database);
     }
 }
