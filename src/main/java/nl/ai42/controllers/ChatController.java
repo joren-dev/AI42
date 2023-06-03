@@ -22,6 +22,7 @@ public class ChatController {
     public void startConversation(ActionEvent actionEvent) {
         // Create a new conversation button
         Button newConversationButton = new Button("Conversation " + conversationCount);
+        newConversationButton.setPrefWidth(300);
         newConversationButton.setOnAction(this::openConversation);
 
         // Apply the same style as the startConversationButton
