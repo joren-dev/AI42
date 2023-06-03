@@ -27,7 +27,7 @@
 /* TextArea Styles */
 .text-area {
   -fx-background-color: #1f1f1f;
-  -fx-text-fill: #ffffff;
+  -fx-text-fill: #000000;
 }
 
 /* Button Styles */
