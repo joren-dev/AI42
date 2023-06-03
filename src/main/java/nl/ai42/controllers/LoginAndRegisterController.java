@@ -83,6 +83,7 @@ public class LoginAndRegisterController {
                 login_password_password_field.setStyle(successStyle);
 
                 // Change views to chat-view.fxml
+                AI42Main.currentUser = login_username_text_field.getText();
                 SceneManager.getInstance().loadScene("chat-view.fxml");
             } else {
                 invalid_login_credentials.setText("Username or password is invalid.");

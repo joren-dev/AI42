@@ -8,6 +8,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import nl.ai42.AI42Main;
+import nl.ai42.utils.Row;
+
+import java.util.HashMap;
 
 public class ChatController {
 
@@ -22,6 +26,10 @@ public class ChatController {
     public void startConversation(ActionEvent actionEvent) {
         // Create a new conversation button
         Button newConversationButton = new Button("Conversation " + conversationCount);
+        AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
+            put("username", AI42Main.currentUser);
+            put("chatname", "Conversation " + conversationCount);
+        }}));
         newConversationButton.setPrefWidth(300);
         newConversationButton.setOnAction(this::openConversation);
 

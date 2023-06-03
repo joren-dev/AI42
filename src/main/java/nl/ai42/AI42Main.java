@@ -12,6 +12,8 @@ public class AI42Main extends Application {
     public static Database database = new Database("AI42.db");
     private SceneManager scene_manager;
 
+    public static String currentUser = "";
+
     @Override
     public void start(final Stage stage) throws Exception {
         initialize_database();
