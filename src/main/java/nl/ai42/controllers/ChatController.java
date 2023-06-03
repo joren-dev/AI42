@@ -89,8 +89,18 @@ public class ChatController {
             put("sent", format.format(new Date()));
         }}));
 
-        Label newMsg = new Label(messageBox.getText());
+        ArrayList<Row> rows = AI42Main.database.getTable("chatmsg").select((row) -> row.getValue("username").equals(AI42Main.currentUser) && row.getValue("chatname").equals(currentConversation));
 
+        StringBuilder conversationHistory = new StringBuilder();
+        for (Row row : rows) {
+            conversationHistory.append(row.getValue("msg_content")).append("\n");
+        }
+        String conversation = conversationHistory.toString();
+
+        if (chatPane.getChildren().size() != 0) {
+            chatPane.getChildren().remove(0);
+        }
+        Label newMsg = new Label(conversation);
         chatPane.getChildren().add(newMsg);
 
         messageBox.setText("");
