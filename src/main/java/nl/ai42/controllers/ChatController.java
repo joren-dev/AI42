@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
+import nl.ai42.utils.AI;
 import nl.ai42.utils.Row;
 
 import java.text.SimpleDateFormat;
@@ -95,6 +96,18 @@ public class ChatController {
             conversationHistory.append(row.getValue("msg_content")).append("\n------------------------------------------------------------------------\n");
         }
         String conversation = conversationHistory.toString();
+
+        String response = AI.ask(conversation.replace("\n------------------------------------------------------------------------\n", ""));
+        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
+            put("username", AI42Main.currentUser);
+            put("chatname", currentConversation);
+            put("msg_counter", String.valueOf(finalCounter));
+            put("msg_content", response);
+            put("is_ai", "true");
+            put("sent", format.format(new Date()));
+        }}));
+
+        conversation += response + "\n------------------------------------------------------------------------\n";
 
         if (chatPane.getChildren().size() != 0) {
             chatPane.getChildren().remove(0);
