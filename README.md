@@ -1,23 +1,21 @@
 # AI42
 Enables 42.nl to use their AI with ease.
 
-
-
-## UML Diagram
-![UML class diagram example](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/uml/Ai42.png)
-
 ## Prerequisites
 1. Install [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/), with the following options:
-	- Language: Java
-	- JDK Version: 11 or above
-	- Build System: IntelliJ
+    - Language: Java
+    - JDK Version: 11 or above
+    - Build System: IntelliJ
 2. Install [Git Bash](https://gitforwindows.org/) (for windows), alternatively use: Windows Powershell or CMD.
 3. Download [JavaFX](https://openjfx.io/) (for windows) and unpack it into `C:/Java`.
 4. Download and install [SceneBuilder](https://gluonhq.com/products/scene-builder/).
 
+## UML Diagram
+![UML class diagram example](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/uml/Ai42.png)
+
+
 ## GUI Showcase
 ![GUI preview gif](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/preview/GUI%20Preview.gif)
-
 
 ## Functionality
 - Chat Interface: Engage in interactive and dynamic conversations with the www.42.nl AI model.
