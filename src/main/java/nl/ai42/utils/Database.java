@@ -58,9 +58,13 @@ public class Database implements Serializable {
         this.tables.clear();
     }
 
-    public void storeInFile() throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(this.file_path);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(this);
+    public void storeInFile() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(this.file_path);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(this);
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
