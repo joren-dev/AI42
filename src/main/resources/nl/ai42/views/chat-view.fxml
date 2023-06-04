@@ -21,12 +21,12 @@
          <children>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="496.0" styleClass="scroll-pane" vbarPolicy="NEVER" vmin="1.0" vvalue="1.0" VBox.vgrow="ALWAYS">
                <content>
-                  <VBox fx:id="chatPane" style="-fx-background-color: #2b2a2a;" styleClass="list-view" />
+                  <VBox fx:id="chat_panel" style="-fx-background-color: #2b2a2a;" styleClass="list-view" />
                </content>
             </ScrollPane>
             <HBox minHeight="-Infinity" minWidth="100.0" VBox.vgrow="NEVER">
                <children>
-                  <TextArea fx:id="messageBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="100.0" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#sendMethod" prefHeight="16.0" prefWidth="698.0" promptText="Enter Message..." scaleShape="false" styleClass="text-area dark-mode">
+                  <TextArea fx:id="message_box" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="100.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="698.0" promptText="Enter Message..." scaleShape="false" styleClass="text-area dark-mode">
                      <font>
                         <Font name="SansSerif Regular" size="14.0" />
                      </font>
@@ -42,7 +42,7 @@
          <children>
             <VBox prefHeight="41.0" prefWidth="300.0" style="-fx-background-color: transparent;">
                <children>
-                  <Button fx:id="startConversationButton" maxHeight="35.0" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#startConversation" prefHeight="35.0" prefWidth="300.0" styleClass="button" text="Start new conversation" textAlignment="CENTER">
+                  <Button fx:id="start_conversation_button" maxHeight="35.0" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#startConversation" prefHeight="35.0" prefWidth="300.0" styleClass="button" text="Start new conversation" textAlignment="CENTER">
                      <font>
                         <Font name="SansSerif Regular" size="14.0" />
                      </font>
@@ -54,7 +54,7 @@
             </VBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="484.0" prefWidth="300.0" styleClass="scroll-pane" vbarPolicy="NEVER">
                <content>
-                  <VBox fx:id="conversationListContainer" prefHeight="527.0" prefWidth="298.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
+                  <VBox fx:id="conversation_list_container" prefHeight="527.0" prefWidth="298.0" style="-fx-background-color: #1F1F1F;" BorderPane.alignment="CENTER">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>

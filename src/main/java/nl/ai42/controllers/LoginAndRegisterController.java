@@ -48,7 +48,7 @@ public class LoginAndRegisterController {
     @FXML
     protected void onExitButton() {
         try {
-            AI42Main.database.storeInFile("AI42.db");
+            AI42Main.database.storeInFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -191,7 +191,7 @@ public class LoginAndRegisterController {
         AI42Main.database.getTable("user").insert(new Row(data));
 
         try {
-            AI42Main.database.storeInFile("AI42.db");
+            AI42Main.database.storeInFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
