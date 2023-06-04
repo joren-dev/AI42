@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.AIManager;
+import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Row;
 
 import java.io.Serializable;
@@ -184,5 +185,9 @@ public class ChatController implements Serializable {
     }
 
     public void handleSettingsButton(MouseEvent mouseEvent) {
+    }
+
+    public void handleLogoutButton(MouseEvent mouseEvent) {
+        SceneManager.getInstance().loadScene("login-and-register.fxml");
     }
 }
