@@ -82,7 +82,7 @@
                   </ImageView>
                   <ImageView fitHeight="23.0" fitWidth="30.0" onMouseClicked="#handleLogoutButton" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
                      <image>
-                        <Image url="@../images/login-register/lock.png" />
+                        <Image url="@../images/chat-view/logout.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="30.0" top="30.0" />
