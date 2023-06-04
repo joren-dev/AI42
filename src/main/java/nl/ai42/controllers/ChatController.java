@@ -149,6 +149,8 @@ public class ChatController implements Serializable {
     }
 
     public void sendButtonAction(ActionEvent actionEvent) {
+        if (message_box.getText().isEmpty())
+            return;
         String ai_response = AIManager.ask(message_box.getText());
         addQuestionAndAnswer(message_box.getText(), ai_response);
 
