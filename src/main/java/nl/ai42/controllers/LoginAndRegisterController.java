@@ -47,6 +47,11 @@ public class LoginAndRegisterController {
     // Creation of methods which are activated on events in the forms
     @FXML
     protected void onExitButton() {
+        try {
+            AI42Main.database.storeInFile("AI42.db");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Stage stage = (Stage) exit_button.getScene().getWindow();
         stage.close();
     }

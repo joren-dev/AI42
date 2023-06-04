@@ -18,6 +18,7 @@ import nl.ai42.AI42Main;
 import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -155,6 +156,11 @@ public class ChatController {
     }
 
     public void handleExitButtonClick(MouseEvent mouseEvent) {
+        try {
+            AI42Main.database.storeInFile("AI42.db");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         Stage window = (Stage) conversationListContainer.getScene().getWindow();
         window.close();
     }
