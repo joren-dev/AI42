@@ -39,9 +39,6 @@
    </center>
    <left>
       <VBox fx:id="conversationsContainer" style="-fx-background-color: #2A2A36;" prefHeight="539.0" prefWidth="290.0" styleClass="vbox" BorderPane.alignment="CENTER">
-         <style>
-            .vbox {
-            -fx-background-color: #2A2A36;-fx-background-color: #2A2A36;</style>
          <children>
             <VBox prefHeight="41.0" prefWidth="300.0" style="-fx-background-color: transparent;">
                <children>
