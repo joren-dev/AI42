@@ -56,11 +56,6 @@
                         <Image url="@../images/login-register/lock.png" />
                     </image>
                 </ImageView>
-                <Button alignment="CENTER" layoutX="209.0" layoutY="234.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Forgot your Password?" underline="true">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Button>
                 <Label fx:id="invalid_login_credentials" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="175.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
                     <opaqueInsets>
                         <Insets />
@@ -160,7 +155,7 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button layoutX="213.0" layoutY="631.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true">
+                <Button layoutX="213.0" layoutY="631.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true" onAction="#onTermsAndConditions">
                     <font>
                         <Font size="15.0" />
                     </font>
