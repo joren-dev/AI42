@@ -15,12 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
-import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class ChatController {
