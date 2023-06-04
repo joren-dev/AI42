@@ -35,10 +35,3 @@ Enables 42.nl to use their AI with ease.
 
 - Customization Options: Offer customization features to personalize the AI experience.
     - Example: Allow users to choose chat themes, adjust font sizes, or modify language settings to suit their preferences.
-
-## Common dev-commands explained
-### 1. Make text strong (example)
-1. Put this in front of your string: `\033[1m`
-2. Put this after your string: `\033[0m`
-
-Example: `System.out.println("\033[1mtekst\033[0m");`
