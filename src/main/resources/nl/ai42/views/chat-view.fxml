@@ -80,6 +80,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="30.0" onMouseClicked="#handleLogoutButton" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                     <image>
+                        <Image url="@../images/login-register/lock.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="30.0" top="30.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                   <ImageView fitHeight="23.0" fitWidth="30.0" onMouseClicked="#handleExitButtonClick" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
                      <image>
                         <Image url="@../images/chat-view/close_normal.png" />
