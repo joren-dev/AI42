@@ -3,8 +3,8 @@ Enables 42.nl to use their AI with ease.
 
 
 
-
-![UML class diagram example](wwww.soon.tm)
+## UML Diagram
+![UML class diagram example](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/uml/Ai42.png)
 
 ## Prerequisites
 1. Install [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/), with the following options:
