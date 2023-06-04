@@ -52,6 +52,7 @@ public class LoginAndRegisterController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         Stage stage = (Stage) exit_button.getScene().getWindow();
         stage.close();
     }

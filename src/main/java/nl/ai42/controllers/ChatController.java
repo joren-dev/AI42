@@ -19,20 +19,21 @@ import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ChatController {
+public class ChatController implements Serializable {
 
     @FXML
-    private VBox chatPane;
+    private transient VBox chatPane;
     @FXML
-    private VBox conversationListContainer;
+    private transient VBox conversationListContainer;
     @FXML
-    private Button startConversationButton;
+    private transient Button startConversationButton;
     @FXML
-    private TextArea messageBox;
+    private transient TextArea messageBox;
     public static String currentConversation;
 
     private int conversationCount = 0;
@@ -41,10 +42,12 @@ public class ChatController {
     public void startConversation(ActionEvent actionEvent) {
         // Create a new conversation button
         Button newConversationButton = new Button("Conversation " + conversationCount);
+
         AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
             put("username", AI42Main.currentUser);
             put("chatname", "Conversation " + conversationCount);
         }}));
+
 
         currentConversation = "Conversation " + conversationCount;
         newConversationButton.setPrefWidth(300);
@@ -156,13 +159,14 @@ public class ChatController {
     }
 
     public void handleExitButtonClick(MouseEvent mouseEvent) {
+        Stage window = (Stage) conversationListContainer.getScene().getWindow();
+        window.close();
+
         try {
             AI42Main.database.storeInFile("AI42.db");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Stage window = (Stage) conversationListContainer.getScene().getWindow();
-        window.close();
     }
 
     public void handleSettingsButton(MouseEvent mouseEvent) {
