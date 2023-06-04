@@ -16,7 +16,7 @@ Enables 42.nl to use their AI with ease.
 4. Download and install [SceneBuilder](https://gluonhq.com/products/scene-builder/).
 
 ## GUI Showcase
-// soon
+![GUI preview gif](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/preview/GUI%20Preview.gif)
 
 
 ## Functionality
