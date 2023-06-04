@@ -172,7 +172,7 @@ public class ChatController implements Serializable {
         }}));
 
         AI42Main.database.storeInFile();
-
+        message_box.setText("");
     }
     public void updateDisplayedMessages()
     {
