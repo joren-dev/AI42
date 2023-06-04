@@ -2,13 +2,19 @@ package nl.ai42.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Row;
 import nl.ai42.utils.ValidationUtils;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 public class LoginAndRegisterController {
@@ -52,6 +58,19 @@ public class LoginAndRegisterController {
 
         Stage stage = (Stage) exit_button.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    protected void onTermsAndConditions() {
+        // Replace the URL below with the actual link you want to open
+        String url = "https://www.example.com/terms";
+
+        // Open the link in the default browser
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void resetFields() {
