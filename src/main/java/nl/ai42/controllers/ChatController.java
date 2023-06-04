@@ -15,7 +15,6 @@ import nl.ai42.AI42Main;
 import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,15 +35,32 @@ public class ChatController implements Serializable {
     private int conversation_count = 0;
 
     @FXML
-    public void startConversation(ActionEvent action_event)
+    public void initialize() {
+        final int conversationCount = AI42Main.database.getTable("chat").select(
+                (row) -> row.getValue("username").equals(AI42Main.currentUser)
+        ).size();
+
+        // Create the amount of conversations based on the user's conversations
+        for (int i = 0; i < conversationCount; i++)
+            this.startConversation(new ActionEvent(), false);
+    }
+
+    @FXML
+    public void startConversation(ActionEvent actionEvent) {
+        startConversation(actionEvent, true);
+    }
+    @FXML
+    public void startConversation(ActionEvent action_event, boolean create)
     {
         // Create a new conversation button
         final Button new_conversation_button = new Button("Conversation " + conversation_count);
 
-        AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
-            put("username", AI42Main.currentUser);
-            put("chatname", "Conversation " + conversation_count);
-        }}));
+        if (create) {
+            AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
+                put("username", AI42Main.currentUser);
+                put("chatname", "Conversation " + conversation_count);
+            }}));
+        }
 
         AI42Main.database.storeInFile();
 
