@@ -3,12 +3,16 @@ package nl.ai42.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.AIManager;
@@ -41,6 +45,7 @@ public class ChatController {
             put("username", AI42Main.currentUser);
             put("chatname", "Conversation " + conversationCount);
         }}));
+
         currentConversation = "Conversation " + conversationCount;
         newConversationButton.setPrefWidth(300);
         newConversationButton.setOnAction(this::openConversation);
@@ -69,53 +74,42 @@ public class ChatController {
         currentConversation = conversationName;
         // Add your code here to open the conversation and start chatting
     }
+
     public void sendButtonAction(ActionEvent actionEvent) {
-        // Handle send button action
-        ArrayList<Row> data = AI42Main.database.getTable("chatmsg").select((row) -> true);
-        int counter;
-        if (data.size() == 0)
-            counter = 0;
-        else
-            counter = Integer.parseInt(data.get(data.size() - 1).getValue("msg_counter"));
-        counter++;
-        int finalCounter = counter;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
-            put("username", AI42Main.currentUser);
-            put("chatname", currentConversation);
-            put("msg_counter", String.valueOf(finalCounter));
-            put("msg_content", messageBox.getText());
-            put("is_ai", "false");
-            put("sent", format.format(new Date()));
-        }}));
+        // Create question box
+        HBox questionBox = new HBox();
+        questionBox.getStyleClass().add("question");
+        questionBox.setPadding(new Insets(10, 0, 5, 0)); // Add padding between question and answer
 
-        ArrayList<Row> rows = AI42Main.database.getTable("chatmsg").select((row) -> row.getValue("username").equals(AI42Main.currentUser) && row.getValue("chatname").equals(currentConversation));
+        Text question = new Text(messageBox.getText());
+        question.wrappingWidthProperty().bind(questionBox.widthProperty().multiply(.8));
 
-        StringBuilder conversationHistory = new StringBuilder();
-        for (Row row : rows) {
-            conversationHistory.append(row.getValue("msg_content")).append("\n------------------------------------------------------------------------\n");
-        }
-        String conversation = conversationHistory.toString();
+        questionBox.getChildren().addAll(question);
 
-        String response = AIManager.ask(conversation.replace("\n------------------------------------------------------------------------\n", ""));
-        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
-            put("username", AI42Main.currentUser);
-            put("chatname", currentConversation);
-            put("msg_counter", String.valueOf(finalCounter));
-            put("msg_content", response);
-            put("is_ai", "true");
-            put("sent", format.format(new Date()));
-        }}));
+        // Create answer box
+        HBox answerBox = new HBox();
+        answerBox.getStyleClass().add("answer");
 
-        conversation += response + "\n------------------------------------------------------------------------\n";
+        Text answer = new Text("automated response");
+        answerBox.getChildren().addAll(answer);
+        answer.wrappingWidthProperty().bind(answerBox.widthProperty().multiply(.8));
 
-        if (chatPane.getChildren().size() != 0) {
-            chatPane.getChildren().remove(0);
-        }
-        Label newMsg = new Label(conversation);
-        chatPane.getChildren().add(newMsg);
+        // Create message pair container
+        VBox messagePairContainer = new VBox();
+        messagePairContainer.setSpacing(5); // Add spacing between question and answer
+        messagePairContainer.getChildren().addAll(questionBox, answerBox);
 
-        messageBox.setText("");
+        // Add message pair container to chatPane
+        chatPane.getChildren().add(messagePairContainer);
+
+        // Add spacing at the end of each message pair
+        Region spacing = new Region();
+        spacing.setMinHeight(10);
+        chatPane.getChildren().add(spacing);
+    }
+    public void updateDisplayedMessages()
+    {
+
     }
 
     public void sendMethod(KeyEvent keyEvent) {
