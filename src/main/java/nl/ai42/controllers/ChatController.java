@@ -42,19 +42,25 @@ public class ChatController implements Serializable {
 
         // Create the amount of conversations based on the user's conversations
         for (int i = 0; i < conversationCount; i++)
-            this.startConversation(new ActionEvent());
+            this.startConversation(new ActionEvent(), false);
     }
 
     @FXML
-    public void startConversation(ActionEvent action_event)
+    public void startConversation(ActionEvent actionEvent) {
+        startConversation(actionEvent, true);
+    }
+    @FXML
+    public void startConversation(ActionEvent action_event, boolean create)
     {
         // Create a new conversation button
         final Button new_conversation_button = new Button("Conversation " + conversation_count);
 
-        AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
-            put("username", AI42Main.currentUser);
-            put("chatname", "Conversation " + conversation_count);
-        }}));
+        if (create) {
+            AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
+                put("username", AI42Main.currentUser);
+                put("chatname", "Conversation " + conversation_count);
+            }}));
+        }
 
         AI42Main.database.storeInFile();
 
