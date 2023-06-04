@@ -18,6 +18,8 @@ import nl.ai42.AI42Main;
 import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ChatController {
@@ -70,15 +72,32 @@ public class ChatController {
         System.out.println("Opening conversation: " + conversationName);
         currentConversation = conversationName;
         // Add your code here to open the conversation and start chatting
+        chatPane.getChildren().clear();
+        ArrayList<Row> rows = AI42Main.database.getTable("chatmsg").select((row) -> row.getValue("username").equals(AI42Main.currentUser) && row.getValue("chatname").equals(currentConversation));
+
+        HBox questionBox = new HBox();
+        questionBox.getStyleClass().add("question");
+        questionBox.setPadding(new Insets(10, 0, 5, 0)); // Add padding between question and answer
+
+        String question = "";
+        String answer;
+        for (Row row : rows) {
+            if (row.getValue("is_ai").equals("false")) {
+                question = row.getValue("msg_content");
+            } else {
+                answer = row.getValue("msg_content");
+                addQuestionAndAnswer(question, answer);
+            }
+        }
     }
 
-    public void sendButtonAction(ActionEvent actionEvent) {
+    public void addQuestionAndAnswer(String query, String response) {
         // Create question box
         HBox questionBox = new HBox();
         questionBox.getStyleClass().add("question");
         questionBox.setPadding(new Insets(10, 0, 5, 0)); // Add padding between question and answer
 
-        Text question = new Text(messageBox.getText());
+        Text question = new Text(query);
         question.wrappingWidthProperty().bind(questionBox.widthProperty().multiply(.8));
 
         questionBox.getChildren().addAll(question);
@@ -87,7 +106,7 @@ public class ChatController {
         HBox answerBox = new HBox();
         answerBox.getStyleClass().add("answer");
 
-        Text answer = new Text(AIManager.ask(messageBox.getText()));
+        Text answer = new Text(response);
         answerBox.getChildren().addAll(answer);
         answer.wrappingWidthProperty().bind(answerBox.widthProperty().multiply(.8));
 
@@ -103,6 +122,28 @@ public class ChatController {
         Region spacing = new Region();
         spacing.setMinHeight(10);
         chatPane.getChildren().add(spacing);
+    }
+
+    public void sendButtonAction(ActionEvent actionEvent) {
+        String aiResponse = AIManager.ask(messageBox.getText());
+        addQuestionAndAnswer(messageBox.getText(), aiResponse);
+
+        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
+            put("username", AI42Main.currentUser);
+            put("chatname", currentConversation);
+            put("msg_counter", String.valueOf(AI42Main.database.getTable("chatmsg").select((row) -> true).size() + 1));
+            put("msg_content", messageBox.getText());
+            put("is_ai", "false");
+            put("sent", new Date().toString());
+        }}));
+        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
+            put("username", AI42Main.currentUser);
+            put("chatname", currentConversation);
+            put("msg_counter", String.valueOf(AI42Main.database.getTable("chatmsg").select((row) -> true).size() + 1));
+            put("msg_content", aiResponse);
+            put("is_ai", "true");
+            put("sent", new Date().toString());
+        }}));
     }
     public void updateDisplayedMessages()
     {
