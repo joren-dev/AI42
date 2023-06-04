@@ -36,6 +36,16 @@ public class ChatController implements Serializable {
     private int conversation_count = 0;
 
     @FXML
+    public void initialize() {
+       ArrayList<Row> rows = AI42Main.database.getTable("chat").select(
+               (row) -> row.getValue("username").equals(AI42Main.currentUser)
+       );
+       for (Row row : rows) {
+           this.startConversation(new ActionEvent());
+       }
+    }
+
+    @FXML
     public void startConversation(ActionEvent action_event)
     {
         // Create a new conversation button
