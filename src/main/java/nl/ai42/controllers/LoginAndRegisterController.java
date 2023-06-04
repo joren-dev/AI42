@@ -46,7 +46,10 @@ public class LoginAndRegisterController {
 
     // Creation of methods which are activated on events in the forms
     @FXML
-    protected void onExitButton() {
+    protected void onExitButton()
+    {
+        AI42Main.database.storeInFile();
+
         Stage stage = (Stage) exit_button.getScene().getWindow();
         stage.close();
     }
@@ -184,10 +187,6 @@ public class LoginAndRegisterController {
         data.put("date_of_birth", sign_up_date_date_picker.getValue().toString());
         AI42Main.database.getTable("user").insert(new Row(data));
 
-        try {
-            AI42Main.database.storeInFile("AI42.db");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        AI42Main.database.storeInFile();
     }
 }

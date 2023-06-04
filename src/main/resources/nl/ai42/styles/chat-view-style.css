@@ -5,17 +5,18 @@
 
 /* VBox Styles */
 .vbox, #conversationsContainer {
-  -fx-background-color: #1f1f1f;
+  -fx-background-color: #2A2A36;
 }
 
 /* ScrollPane Styles */
 .scroll-pane {
-  -fx-background-color: #1f1f1f;
+  -fx-background-color: transparent;
+  -fx-border-width: 0px;
 }
 
 /* ListView Styles */
 .list-view {
-  -fx-background-color: #1f1f1f;
+  -fx-background-color: #2A2A36;
   -fx-text-fill: #ffffff;
 }
 
@@ -26,7 +27,7 @@
 
 /* TextArea Styles */
 .text-area {
-  -fx-background-color: #1f1f1f;
+  -fx-background-color: #2A2A36;
   -fx-text-fill: #000000;
 }
 
@@ -53,11 +54,6 @@
   -fx-background-color: #1f1f1f;
 }
 
-/* Conversation List Styles */
-#conversationListContainer {
-  -fx-background-color: #1f1f1f;
-}
-
 /* Left Section Styles */
 #conversationsContainer, #conversationsContainer .scroll-pane {
   -fx-background-color: #1f1f1f;
@@ -65,7 +61,30 @@
 
 /* TextArea Styles */
 .text-area.dark-mode {
-    -fx-control-inner-background: #1f1f1f;
-    -fx-background: #1f1f1f, #1f1f1f;
+    -fx-control-inner-background: #2A2A36;
+    -fx-background: #2A2A36, #2A2A36;
     -fx-text-fill: #ffffff;
+}
+
+/* TextArea Styles Question/Answer */
+.answer, .question {
+  -fx-font-size: 14px;
+  -fx-pref-width: -1;
+  -fx-spacing: 20;
+  -fx-alignment: TOP_LEFT;
+  -fx-background-radius: 5px;
+  -fx-padding: 15;
+}
+
+.answer Text, .question Text {
+  -fx-text-fill: white;
+  -fx-fill: white;
+}
+
+.question {
+  -fx-background-color: #3C3C45;
+}
+
+.answer {
+  -fx-background-color: #434353;
 }

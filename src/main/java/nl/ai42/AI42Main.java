@@ -27,7 +27,7 @@ public class AI42Main extends Application {
         Image icon = new Image(getClass().getResourceAsStream("images/favicon.png"));
         stage.getIcons().add(icon);
 
-        stage.setScene(scene_manager.getCurrentScene());
+        stage.setScene(scene_manager.getCurrent_scene());
 
         stage.show();
     }

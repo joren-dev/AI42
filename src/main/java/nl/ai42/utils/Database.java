@@ -8,15 +8,16 @@ import java.util.HashMap;
 public class Database implements Serializable {
     private final HashMap<String, Table> tables;
 
-    public Database() {
-        this.tables = new HashMap<>();
-    }
+    private final String file_path;
 
-    public Database(String filePath) {
+
+    public Database(String file_path) {
+        this.file_path = file_path;
+
         try {
-            File file = new File(filePath);
+            File file = new File(file_path);
             if (file.exists()) {
-                FileInputStream fileInputStream = new FileInputStream(filePath);
+                FileInputStream fileInputStream = new FileInputStream(file_path);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                 Database result = (Database) objectInputStream.readObject();
                 this.tables = result.tables;
@@ -57,9 +58,13 @@ public class Database implements Serializable {
         this.tables.clear();
     }
 
-    public void storeInFile(String filePath) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(AI42Main.database);
+    public void storeInFile() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(this.file_path);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(this);
+        } catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
