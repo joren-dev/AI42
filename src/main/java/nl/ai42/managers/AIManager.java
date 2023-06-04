@@ -2,6 +2,6 @@ package nl.ai42.managers;
 
 public class AIManager {
     public static String ask(String query) {
-        return "AI geeft antwoord.";
+        return "automated response";
     }
 }

@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
+import nl.ai42.managers.AIManager;
 import nl.ai42.utils.Row;
 
 import java.util.HashMap;
@@ -86,7 +87,7 @@ public class ChatController {
         HBox answerBox = new HBox();
         answerBox.getStyleClass().add("answer");
 
-        Text answer = new Text("automated response");
+        Text answer = new Text(AIManager.ask(messageBox.getText()));
         answerBox.getChildren().addAll(answer);
         answer.wrappingWidthProperty().bind(answerBox.widthProperty().multiply(.8));
 
