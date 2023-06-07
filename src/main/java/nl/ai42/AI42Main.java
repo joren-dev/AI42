@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
+import nl.ai42.managers.AIManager;
 import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Database;
 
@@ -16,6 +17,7 @@ public class AI42Main extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
+        AIManager.initialize();
         initialize_database();
 
         stage.initStyle(StageStyle.UNDECORATED);
