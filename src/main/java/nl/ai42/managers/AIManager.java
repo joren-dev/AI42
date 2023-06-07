@@ -2,25 +2,51 @@ package nl.ai42.managers;
 
 import java.util.Locale;
 
+interface AIAdapter {
+    String processQuery(String query);
+}
+
 public class AIManager {
-    /**
-     * This is the function that turns a question into an answer.
-     *
-     * @param query the question to ask the AI.
-     * @return the response from the AI.
-     */
-    public static String ask(final String query) {
+    public static String ask(String query) {
+        AIAdapter adapter = new AIAdapterImpl();
+        return adapter.processQuery(query);
+    }
+}
+
+class AIAdapterImpl implements AIAdapter {
+    public String processQuery(String query) {
         String lowerCaseQuery = query.toLowerCase(Locale.ROOT);
+
         if (lowerCaseQuery.contains("hello") || lowerCaseQuery.contains("hi")) {
-            return "Hello there!";
+            return this.handleGreeting();
         } else if (lowerCaseQuery.contains("how are you")) {
-            return "I'm doing well, thank you!";
+            return this.handleHowAreYou();
         } else if (lowerCaseQuery.contains("goodbye") || lowerCaseQuery.contains("bye")) {
-            return "Goodbye! Have a nice day!";
+            return this.handleGoodbye();
         } else if (lowerCaseQuery.contains("help")) {
-            return "I'm here to assist you. How can I help?";
+            return this.handleHelp();
         } else {
-            return "I'm sorry, I didn't understand. Can you please rephrase?";
+            return this.handleDefault();
         }
+    }
+
+    private String handleGreeting() {
+        return "Hello there!";
+    }
+
+    private String handleHowAreYou() {
+        return "I'm doing well, thank you!";
+    }
+
+    private String handleGoodbye() {
+        return "Goodbye! Have a nice day!";
+    }
+
+    private String handleHelp() {
+        return "I'm here to assist you. How can I help?";
+    }
+
+    private String handleDefault() {
+        return "I'm sorry, I didn't understand. Can you please rephrase?";
     }
 }
