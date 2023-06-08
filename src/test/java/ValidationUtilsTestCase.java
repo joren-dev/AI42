@@ -50,4 +50,22 @@ public class ValidationUtilsTestCase {
         // Assert
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testIsValidFullNameInvalidCharacter() {
+        // Act
+        boolean result = ValidationUtils.is_valid_full_name("H3nk de Steen");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsValidFullNameEmptyString() {
+        // Act
+        boolean result = ValidationUtils.is_valid_full_name("");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
 }
