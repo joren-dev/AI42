@@ -121,4 +121,13 @@ public class DatabaseTestCase implements Serializable {
         Assertions.assertNull(database.getTable("newTable"));
         Assertions.assertInstanceOf(Table.class, database.getTable("newTable2"));
     }
+
+    @Test
+    public void testConstructFromNonExistingFile() {
+        // Act
+        Database database = new Database("nonexistingFile.db");
+
+        // Assert
+        Assertions.assertNotNull(database);
+    }
 }
