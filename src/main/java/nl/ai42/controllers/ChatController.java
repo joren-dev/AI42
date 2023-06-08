@@ -56,7 +56,7 @@ public class ChatController implements Serializable {
     {
         // Create a new conversation button
 //        final Button new_conversation_button = new Button("Conversation " + conversation_count);
-        final Conversation convo = new Conversation(new Button("Conversation " + conversation_count));
+        final Conversation convo = new Conversation(new Button("Conversation " + conversation_count), start_conversation_button.getFont());
 
         if (create) {
             AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
@@ -71,14 +71,11 @@ public class ChatController implements Serializable {
 
         convo.setOnAction(this::openConversation);
 
-        // Apply the same style as the startConversationButton
-        new_conversation_button.setFont(start_conversation_button.getFont());
-
         // Set the spacing between conversations
         conversation_list_container.setSpacing(10);
 
         // Add the new conversation button at the bottom
-        conversation_list_container.getChildren().add(new_conversation_button);
+        conversation_list_container.getChildren().add(convo.getButton());
 
         conversation_count++;
     }
