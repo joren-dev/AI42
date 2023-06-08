@@ -17,7 +17,6 @@ public class AI42Main extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
-        AIManager.initialize();
         initialize_database();
 
         stage.initStyle(StageStyle.UNDECORATED);

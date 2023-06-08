@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
+import nl.ai42.entity.conversation.Conversation;
 import nl.ai42.managers.AIManager;
 import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Row;
@@ -54,7 +55,8 @@ public class ChatController implements Serializable {
     public void startConversation(ActionEvent action_event, boolean create)
     {
         // Create a new conversation button
-        final Button new_conversation_button = new Button("Conversation " + conversation_count);
+//        final Button new_conversation_button = new Button("Conversation " + conversation_count);
+        final Conversation convo = new Conversation(new Button("Conversation " + conversation_count));
 
         if (create) {
             AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
@@ -66,8 +68,8 @@ public class ChatController implements Serializable {
         AI42Main.database.storeInFile();
 
         current_conversation = "Conversation " + conversation_count;
-        new_conversation_button.setPrefWidth(300);
-        new_conversation_button.setOnAction(this::openConversation);
+
+        convo.setOnAction(this::openConversation);
 
         // Apply the same style as the startConversationButton
         new_conversation_button.setFont(start_conversation_button.getFont());
