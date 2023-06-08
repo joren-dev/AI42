@@ -150,14 +150,14 @@ public class ChatController {
         if (message_box.getText().isBlank())
             return;
 
-        final String ai_response = AIManager.ask(message_box.getText());
+        final String complete_ai_response = "Ai Response: " + AIManager.ask(message_box.getText());
 
         // Combine both and display.
-        addQuestionAndAnswer(message_box.getText(), ai_response);
+        addQuestionAndAnswer(message_box.getText(), complete_ai_response);
 
         // Add conversation to DB
         conversation_manager.insertMessageToChat(current_conversation, message_box.getText(), false);
-        conversation_manager.insertMessageToChat(current_conversation, ai_response, true);
+        conversation_manager.insertMessageToChat(current_conversation, complete_ai_response, true);
 
         // Empty current chatbox field
         message_box.setText("");
