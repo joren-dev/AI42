@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.entity.conversation.Conversation;
 import nl.ai42.managers.AIManager;
+import nl.ai42.managers.ConversationManager;
 import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Row;
 
@@ -38,13 +39,13 @@ public class ChatController implements Serializable {
 
     @FXML
     public void initialize() {
-        final int conversationCount = AI42Main.database.getTable("chat").select(
-                (row) -> row.getValue("username").equals(AI42Main.currentUser)
-        ).size();
+        final int conversationCount = ConversationManager.getInstance().getConversationCount();
 
         // Create the amount of conversations based on the user's conversations
         for (int i = 0; i < conversationCount; i++)
             this.startConversation(new ActionEvent(), false);
+
+        // TODO: set conversation_count to same amount - 1?
     }
 
     @FXML
@@ -54,21 +55,24 @@ public class ChatController implements Serializable {
     @FXML
     public void startConversation(ActionEvent action_event, boolean create)
     {
+        final ConversationManager conversation_manager = ConversationManager.getInstance();
+
         // Create a new conversation button
-//        final Button new_conversation_button = new Button("Conversation " + conversation_count);
-        final Conversation convo = new Conversation(new Button("Conversation " + conversation_count), start_conversation_button.getFont());
+        final Conversation convo = conversation_manager.startConversation(new Conversation(
+                "Conversation " + conversation_count, start_conversation_button.getFont())
+        );
 
-        if (create) {
-            AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
-                put("username", AI42Main.currentUser);
-                put("chatname", "Conversation " + conversation_count);
-            }}));
-        }
+        // In case the convo is new and doesn't exist in DB, then create new one in DB.
+        if (create)
+            convo.saveToDataBase(Integer.toString(conversation_count));
 
+        // Store new or previous conversations (in case they changed contents) in DB
         AI42Main.database.storeInFile();
 
+        // Set current conversation to newly created convo
         current_conversation = "Conversation " + conversation_count;
 
+        // Set method on what to do if the convo is clicked on (opening the convo)
         convo.setOnAction(this::openConversation);
 
         // Set the spacing between conversations
@@ -82,20 +86,17 @@ public class ChatController implements Serializable {
 
     private void openConversation(ActionEvent action_event) {
         // Retrieve the clicked conversation button
-        final Button conversationButton = (Button) action_event.getSource();
-
         // Get the conversation name from the button's text
-        final String conversation_name = conversationButton.getText();
+        final String conversation_name = ((Button) action_event.getSource()).getText();
 
         // Perform actions to open the conversation and start chatting
         System.out.println("Opening conversation: " + conversation_name);
         current_conversation = conversation_name;
 
         chat_panel.getChildren().clear();
-        ArrayList<Row> rows = AI42Main.database.getTable("chatmsg").select((row) ->
-                row.getValue("username").equals(AI42Main.currentUser) && row.getValue("chatname").equals(
-                        current_conversation)
-        );
+
+        // Get chat history from selected conversation
+        final ArrayList<Row> rows = ConversationManager.getInstance().getChatHistoryFromConversation(current_conversation);
 
         final HBox question_box = new HBox();
         question_box.getStyleClass().add("question");
@@ -103,7 +104,7 @@ public class ChatController implements Serializable {
 
         String question = "";
         String answer;
-        for (Row row : rows) {
+        for (final Row row : rows) {
             if (row.getValue("is_ai").equals("false")) {
                 question = row.getValue("msg_content");
             } else {
@@ -150,32 +151,18 @@ public class ChatController implements Serializable {
     public void sendButtonAction(ActionEvent actionEvent) {
         if (message_box.getText().isBlank())
             return;
-        String ai_response = AIManager.ask(message_box.getText());
+
+        final String ai_response = AIManager.ask(message_box.getText());
+
+        // Combine both and display.
         addQuestionAndAnswer(message_box.getText(), ai_response);
 
-        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
-            put("username", AI42Main.currentUser);
-            put("chatname", current_conversation);
-            put("msg_counter", String.valueOf(AI42Main.database.getTable("chatmsg").select((row) -> true).size() + 1));
-            put("msg_content", message_box.getText());
-            put("is_ai", "false");
-            put("sent", new Date().toString());
-        }}));
-        AI42Main.database.getTable("chatmsg").insert(new Row(new HashMap<>() {{
-            put("username", AI42Main.currentUser);
-            put("chatname", current_conversation);
-            put("msg_counter", String.valueOf(AI42Main.database.getTable("chatmsg").select((row) -> true).size() + 1));
-            put("msg_content", ai_response);
-            put("is_ai", "true");
-            put("sent", new Date().toString());
-        }}));
+        // Add conversation to DB
+        ConversationManager.getInstance().insertMessageToChat(current_conversation, message_box.getText(), false);
+        ConversationManager.getInstance().insertMessageToChat(current_conversation, ai_response, true);
 
-        AI42Main.database.storeInFile();
+        // Empty current chatbox field
         message_box.setText("");
-    }
-    public void updateDisplayedMessages()
-    {
-
     }
 
     public void handleExitButtonClick(MouseEvent mouseEvent) {
