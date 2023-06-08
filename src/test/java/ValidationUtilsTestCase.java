@@ -106,4 +106,31 @@ public class ValidationUtilsTestCase {
         // Assert
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testIsValidPasswordNoDigits() {
+        // Act
+        boolean result = ValidationUtils.is_valid_password("IC*MOz;!PrGmde_H&^q'*'JzZzqZ(?),<giLi(RO");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsValidPasswordNoSpecialCharacter() {
+        // Act
+        boolean result = ValidationUtils.is_valid_password("dCrunM5XMCoBvWs6KSLgR3rVgBMMUFob7HW34AY8");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsValidPasswordWithOkayIshPassword() {
+        // Act
+        boolean result = ValidationUtils.is_valid_password("n@Xduc\\'u=QHdr<B\\\\DR%:GAKE|/eY{7|<+9]L6Ymx$H+_x^3!g)?$H]z=ushUTAfn1/W(9O,$fYJF+\"*~");
+
+        // Assert
+        Assertions.assertTrue(result);
+    }
 }
