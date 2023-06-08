@@ -7,6 +7,7 @@ module nl.ai42 {
     requires java.desktop;
 
     opens nl.ai42 to javafx.fxml;
+    opens nl.ai42.utils;
     exports nl.ai42;
     exports nl.ai42.controllers;
     exports nl.ai42.utils;
