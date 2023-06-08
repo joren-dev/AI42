@@ -97,4 +97,13 @@ public class ValidationUtilsTestCase {
         // Assert
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testIsValidPasswordShoutyCaps() {
+        // Act
+        boolean result = ValidationUtils.is_valid_password("TH1S P@S$WORD SHOULD N0T BE ACCEPTED!!!");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
 }
