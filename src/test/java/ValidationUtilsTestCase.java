@@ -32,4 +32,22 @@ public class ValidationUtilsTestCase {
         Assertions.assertTrue(piet);
         Assertions.assertFalse(frans);
     }
+
+    @Test
+    public void testIsValidEmailWithNull() {
+        // Act
+        boolean result = ValidationUtils.is_valid_email(null);
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsValidEmailWithEmptyString() {
+        // Act
+        boolean result = ValidationUtils.is_valid_email("");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
 }
