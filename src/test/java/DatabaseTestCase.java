@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -129,5 +130,21 @@ public class DatabaseTestCase implements Serializable {
 
         // Assert
         Assertions.assertNotNull(database);
+    }
+
+    @Test
+    public void testStoreError() throws NoSuchFieldException, IllegalAccessException {
+        // Arrange
+        Database database = new Database("testingdb.db");
+        database.storeInFile();
+
+        database = new Database("testingdb.db");
+        Field field = Database.class.getDeclaredField("file_path");
+        field.setAccessible(true);
+        field.set(database, "src");
+        field.setAccessible(false);
+
+        // Act / Assert
+        Assertions.assertThrows(RuntimeException.class, database::storeInFile);
     }
 }
