@@ -88,4 +88,13 @@ public class ValidationUtilsTestCase {
         Assertions.assertFalse(tooShort);
         Assertions.assertTrue(longEnough);
     }
+
+    @Test
+    public void testIsValidPasswordNoCapitals() {
+        // Act
+        boolean result = ValidationUtils.is_valid_password("all_lowercase with $ymb0l$ @nd d1g1t$, but n0 c@p1t@1$");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
 }
