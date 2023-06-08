@@ -11,18 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ConversationManager implements Serializable {
-    private static ConversationManager instance;
     private transient List<Conversation> conversations;
 
-    private ConversationManager() {
+    public ConversationManager() {
         conversations = new ArrayList<>();
-    }
-
-    public static synchronized ConversationManager getInstance() {
-        if (instance == null)
-            instance = new ConversationManager();
-
-        return instance;
     }
 
     public int getConversationCount()

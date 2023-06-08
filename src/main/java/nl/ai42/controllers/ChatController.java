@@ -31,10 +31,15 @@ public class ChatController {
     private TextArea message_box;
     public static String current_conversation;
     private int conversation_count = 0;
+    private ConversationManager conversation_manager;
 
     @FXML
-    public void initialize() {
-        final int conversationCount = ConversationManager.getInstance().getConversationCount();
+    public void initialize()
+    {
+        // Initialize manager
+        conversation_manager = new ConversationManager();
+
+        final int conversationCount = conversation_manager.getConversationCount();
 
         // Create the amount of conversations based on the user's conversations
         for (int i = 0; i < conversationCount; i++)
@@ -50,8 +55,6 @@ public class ChatController {
     @FXML
     public void startConversation(ActionEvent action_event, boolean create)
     {
-        final ConversationManager conversation_manager = ConversationManager.getInstance();
-
         // Create a new conversation button
         final Conversation convo = conversation_manager.startConversation(new Conversation(
                 "Conversation " + conversation_count, start_conversation_button.getFont())
@@ -91,7 +94,7 @@ public class ChatController {
         chat_panel.getChildren().clear();
 
         // Get chat history from selected conversation
-        final ArrayList<Row> rows = ConversationManager.getInstance().getChatHistoryFromConversation(current_conversation);
+        final ArrayList<Row> rows = conversation_manager.getChatHistoryFromConversation(current_conversation);
 
         final HBox question_box = new HBox();
         question_box.getStyleClass().add("question");
@@ -153,8 +156,8 @@ public class ChatController {
         addQuestionAndAnswer(message_box.getText(), ai_response);
 
         // Add conversation to DB
-        ConversationManager.getInstance().insertMessageToChat(current_conversation, message_box.getText(), false);
-        ConversationManager.getInstance().insertMessageToChat(current_conversation, ai_response, true);
+        conversation_manager.insertMessageToChat(current_conversation, message_box.getText(), false);
+        conversation_manager.insertMessageToChat(current_conversation, ai_response, true);
 
         // Empty current chatbox field
         message_box.setText("");
