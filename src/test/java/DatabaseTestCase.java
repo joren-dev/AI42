@@ -81,4 +81,44 @@ public class DatabaseTestCase implements Serializable {
         // Act / Assert
         Assertions.assertThrows(RuntimeException.class, () -> new Database("brokenTestDatabase.db"));
     }
+
+    @Test
+    public void testDropDatabase() {
+        // Arrange
+        Database database = new Database("testingdb.db");
+        database.createTable("newTable", new String[]{"col1", "col2"});
+        database.createTable("newTable2", new String[]{"col1", "col2"});
+        HashMap<String, String> data = new HashMap<>();
+        data.put("col1", "val1");
+        data.put("col2", "val2");
+        Row row = new Row(data);
+        database.getTable("newTable").insert(row);
+
+        // Act
+        database.dropDatabase();
+
+        // Assert
+        Assertions.assertNull(database.getTable("newTable"));
+        Assertions.assertNull(database.getTable("newTable2"));
+    }
+
+    @Test
+    public void testDropTable() {
+        // Arrange
+        Database database = new Database("testingdb.db");
+        database.createTable("newTable", new String[]{"col1", "col2"});
+        database.createTable("newTable2", new String[]{"col1", "col2"});
+        HashMap<String, String> data = new HashMap<>();
+        data.put("col1", "val1");
+        data.put("col2", "val2");
+        Row row = new Row(data);
+        database.getTable("newTable").insert(row);
+
+        // Act
+        database.dropTable("newTable");
+
+        // Assert
+        Assertions.assertNull(database.getTable("newTable"));
+        Assertions.assertInstanceOf(Table.class, database.getTable("newTable2"));
+    }
 }
