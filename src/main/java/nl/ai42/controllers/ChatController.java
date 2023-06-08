@@ -18,18 +18,17 @@ import nl.ai42.managers.ConversationManager;
 import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.Row;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ChatController implements Serializable {
+public class ChatController {
     @FXML
-    private transient VBox chat_panel;
+    private VBox chat_panel;
     @FXML
-    private transient VBox conversation_list_container;
+    private VBox conversation_list_container;
     @FXML
-    private transient Button start_conversation_button;
+    private Button start_conversation_button;
     @FXML
-    private transient TextArea message_box;
+    private TextArea message_box;
     public static String current_conversation;
     private int conversation_count = 0;
 
