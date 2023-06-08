@@ -1,10 +1,10 @@
-import nl.ai42.AI42Main;
 import nl.ai42.utils.Database;
 import nl.ai42.utils.Row;
 import nl.ai42.utils.Table;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +38,36 @@ public class DatabaseTestCase {
         // Assert
         ArrayList<Row> actualRows = database.getTable("testingtable").select((row) -> true);
         ArrayList<Row> expectedRows = new ArrayList<>(List.of(new Row(data)));
+
+        for (int i = 0; i < actualRows.size(); i++) {
+            Assertions.assertEquals(actualRows.get(i).getValue("key1"), expectedRows.get(i).getValue("key1"));
+            Assertions.assertEquals(actualRows.get(i).getValue("key2"), expectedRows.get(i).getValue("key2"));
+        }
+        Assertions.assertEquals(actualRows.size(), expectedRows.size());
+    }
+
+    @Test
+    public void testConstructDatabaseFromFile() {
+        // Arrange
+        File file = new File("testingdb.db");
+        if (file.exists()) {
+            file.delete();
+        }
+
+        HashMap<String, String> data = new HashMap<>();
+        data.put("key1", "valueOfKey1");
+        data.put("key2", "valueOfKey2");
+        Database database = new Database("testingdb.db");
+        database.createTable("testingtable", new String[]{"key1", "key2"});
+        database.getTable("testingtable").insert(new Row(data));
+        database.storeInFile();
+
+        // Act
+        Database loaded = new Database("testingdb.db");
+
+        // Assert
+        ArrayList<Row> actualRows = loaded.getTable("testingtable").select((row) -> true);
+        ArrayList<Row> expectedRows = database.getTable("testingtable").select((row) -> true);
 
         for (int i = 0; i < actualRows.size(); i++) {
             Assertions.assertEquals(actualRows.get(i).getValue("key1"), expectedRows.get(i).getValue("key1"));
