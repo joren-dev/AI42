@@ -31,12 +31,10 @@ public class Conversation extends VBox implements Serializable {
 
     public void saveToDataBase(final String conversation_count)
     {
-        /*
         AI42Main.database.getTable("chat").insert(new Row(new HashMap<>() {{
             put("username", AI42Main.currentUser);
             put("chatname", "Conversation " + conversation_count);
         }}));
-        */
     }
 
     public Button getButton() {

@@ -4,14 +4,15 @@ import nl.ai42.AI42Main;
 import nl.ai42.entity.conversation.Conversation;
 import nl.ai42.utils.Row;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class ConversationManager {
+public class ConversationManager implements Serializable {
     private static ConversationManager instance;
-    private List<Conversation> conversations;
+    private transient List<Conversation> conversations;
 
     private ConversationManager() {
         conversations = new ArrayList<>();
