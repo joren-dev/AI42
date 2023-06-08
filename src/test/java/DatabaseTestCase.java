@@ -4,12 +4,12 @@ import nl.ai42.utils.Table;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DatabaseTestCase {
+public class DatabaseTestCase implements Serializable {
     @Test
     public void testCreateTable() {
         // Arrange
@@ -74,5 +74,11 @@ public class DatabaseTestCase {
             Assertions.assertEquals(actualRows.get(i).getValue("key2"), expectedRows.get(i).getValue("key2"));
         }
         Assertions.assertEquals(actualRows.size(), expectedRows.size());
+    }
+
+    @Test
+    public void testConstructDatabaseFromFileWithError() {
+        // Act / Assert
+        Assertions.assertThrows(RuntimeException.class, () -> new Database("brokenTestDatabase.db"));
     }
 }
