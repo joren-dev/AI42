@@ -68,4 +68,24 @@ public class ValidationUtilsTestCase {
         // Assert
         Assertions.assertFalse(result);
     }
+
+    @Test
+    public void testIsValidPasswordTooShort() {
+        // Act
+        boolean result = ValidationUtils.is_valid_password("Sh0rt");
+
+        // Assert
+        Assertions.assertFalse(result);
+    }
+
+    @Test
+    public void testIsValidPasswordEdgeCases() {
+        // Act
+        boolean tooShort = ValidationUtils.is_valid_password("$h0rTpw");
+        boolean longEnough = ValidationUtils.is_valid_password("$h0rTpw!");
+
+        // Assert
+        Assertions.assertFalse(tooShort);
+        Assertions.assertTrue(longEnough);
+    }
 }
