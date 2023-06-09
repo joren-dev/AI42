@@ -1,0 +1,12 @@
+default_excludes: false
+components: [] 
+languages:
+- name: "Batch"
+- name: "Css"
+- name: "Java"
+  
+dependencychecker: 
+  blacklist: []
+  
+thirdpartyfindings:
+  enabled: true
