@@ -11,7 +11,7 @@ Enables 42.nl to use their AI with ease.
 4. Download and install [SceneBuilder](https://gluonhq.com/products/scene-builder/).
 
 ## UML Diagram
-![UML class diagram example](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/uml/Ai42.png)
+![UML class diagram example]()
 
 
 ## GUI Showcase
