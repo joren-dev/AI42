@@ -29,6 +29,3 @@ Enables 42.nl to use their AI with ease.
 
 - Chat History: Store and display a history of previous conversations.
     - Example: Save and display past chat sessions, allowing users to refer back to previous interactions.
-
-- Customization Options: Offer customization features to personalize the AI experience.
-    - Example: Allow users to choose chat themes, adjust font sizes, or modify language settings to suit their preferences.
