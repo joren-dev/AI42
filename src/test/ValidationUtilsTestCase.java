@@ -4,37 +4,51 @@ import org.junit.jupiter.api.Assertions;
 
 public class ValidationUtilsTestCase {
     @Test
-    public void testIsValidName() {
+    public void isValidName_ValidName_ReturnsTrue() {
         // Act
         boolean henk = ValidationUtils.is_valid_name("Henk");
         boolean pieter = ValidationUtils.is_valid_name("Pieter");
-        boolean frans123 = ValidationUtils.is_valid_name("Frans123");
-        boolean hashtagPiet = ValidationUtils.is_valid_name("#Piet");
 
         // Assert
         Assertions.assertTrue(henk);
         Assertions.assertTrue(pieter);
+    }
+
+    @Test
+    public void isValidName_InvalidName_ReturnsFalse() {
+        // Act
+        boolean frans123 = ValidationUtils.is_valid_name("Frans123");
+        boolean hashtagPiet = ValidationUtils.is_valid_name("#Piet");
+
+        // Assert
         Assertions.assertFalse(frans123);
         Assertions.assertFalse(hashtagPiet);
     }
 
     @Test
-    public void testIsValidEmail() {
+    public void isValidEmail_ValidEmail_ReturnsTrue() {
         // Act
         boolean henk = ValidationUtils.is_valid_email("henk@gmail.com");
-        boolean pieter = ValidationUtils.is_valid_email("pietergmail.com");
         boolean piet = ValidationUtils.is_valid_email("p.krediet@student.hhs.nl");
-        boolean frans = ValidationUtils.is_valid_email("frans@gmailcom");
 
         // Assert
         Assertions.assertTrue(henk);
-        Assertions.assertFalse(pieter);
         Assertions.assertTrue(piet);
+    }
+
+    @Test
+    public void isValidEmail_InvalidEmail_ReturnsFalse() {
+        // Act
+        boolean pieter = ValidationUtils.is_valid_email("pietergmail.com");
+        boolean frans = ValidationUtils.is_valid_email("frans@gmailcom");
+
+        // Assert
+        Assertions.assertFalse(pieter);
         Assertions.assertFalse(frans);
     }
 
     @Test
-    public void testIsValidEmailWithNull() {
+    public void isValidEmailWithNull_NullEmail_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_email(null);
 
@@ -43,7 +57,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidEmailWithEmptyString() {
+    public void isValidEmailWithEmptyString_EmptyEmail_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_email("");
 
@@ -52,7 +66,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidFullNameInvalidCharacter() {
+    public void isValidFullNameInvalidCharacter_InvalidCharacterInFullName_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_full_name("H3nk de Steen");
 
@@ -61,7 +75,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidFullNameEmptyString() {
+    public void isValidFullNameEmptyString_EmptyFullName_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_full_name("");
 
@@ -70,7 +84,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordTooShort() {
+    public void isValidPasswordTooShort_PasswordTooShort_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_password("Sh0rt");
 
@@ -79,7 +93,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordEdgeCases() {
+    public void isValidPasswordEdgeCases_TooShortAndLongEnoughPasswords_ReturnsFalseAndTrue() {
         // Act
         boolean tooShort = ValidationUtils.is_valid_password("$h0rTpw");
         boolean longEnough = ValidationUtils.is_valid_password("$h0rTpw!");
@@ -90,7 +104,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordNoCapitals() {
+    public void isValidPasswordNoCapitals_PasswordWithoutCapitals_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_password("all_lowercase with $ymb0l$ @nd d1g1t$, but n0 c@p1t@1$");
 
@@ -99,7 +113,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordShoutyCaps() {
+    public void isValidPasswordShoutyCaps_PasswordWithShoutyCaps_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_password("TH1S P@S$WORD SHOULD N0T BE ACCEPTED!!!");
 
@@ -108,7 +122,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordNoDigits() {
+    public void isValidPasswordNoDigits_PasswordWithoutDigits_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_password("IC*MOz;!PrGmde_H&^q'*'JzZzqZ(?),<giLi(RO");
 
@@ -117,7 +131,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordNoSpecialCharacter() {
+    public void isValidPasswordNoSpecialCharacter_PasswordWithoutSpecialCharacter_ReturnsFalse() {
         // Act
         boolean result = ValidationUtils.is_valid_password("dCrunM5XMCoBvWs6KSLgR3rVgBMMUFob7HW34AY8");
 
@@ -126,7 +140,7 @@ public class ValidationUtilsTestCase {
     }
 
     @Test
-    public void testIsValidPasswordWithOkayIshPassword() {
+    public void isValidPasswordWithOkayIshPassword_ValidPassword_ReturnsTrue() {
         // Act
         boolean result = ValidationUtils.is_valid_password("n@Xduc\\'u=QHdr<B\\\\DR%:GAKE|/eY{7|<+9]L6Ymx$H+_x^3!g)?$H]z=ushUTAfn1/W(9O,$fYJF+\"*~");
 
