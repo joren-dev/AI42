@@ -51,4 +51,9 @@ public class ValidationUtils {
         // Password meets all requirements
         return true;
     }
+
+    public static boolean is_valid_date(String date) {
+        String pattern = "^\\d{4}-\\d{2}-\\d{2}$";
+        return date.matches(pattern);
+    }
 }

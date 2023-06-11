@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
-import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.datastructs.SignUpData;
 import nl.ai42.utils.validation.LoginValidator;
 import nl.ai42.utils.validation.SignUpValidator;
@@ -20,11 +19,7 @@ import java.net.URISyntaxException;
 public class LoginAndRegisterController {
 
     // Strings which hold css elements to easily re-use in the application
-    protected
-    String successMessage = String.format("-fx-text-fill: GREEN;");
-    String errorMessage = String.format("-fx-text-fill: RED;");
-    String errorStyle = String.format("-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;");
-    String successStyle = String.format("-fx-border-color: #A9A9A9; -fx-border-width: 2; -fx-border-radius: 5;");
+    protected String successStyle = String.format("-fx-border-color: #A9A9A9; -fx-border-width: 2; -fx-border-radius: 5;");
 
     // Import the application's controls
     @FXML
@@ -97,12 +92,13 @@ public class LoginAndRegisterController {
 
     @FXML
     protected void onSignUpButtonClick() {
-        final SignUpData sign_up_data = new SignUpData(sign_up_username_text_field, sign_up_email_text_field,
-                sign_up_password_password_field, sign_up_repeat_password_password_field,
-                termsConditionsCheckbox, invalid_signup_credentials, sign_up_date_date_picker
-        );
+        SignUpData signUpData = new SignUpData();
+        signUpData.setUsernameAndEmailTextField(sign_up_username_text_field, sign_up_email_text_field);
+        signUpData.setPasswordAndRepeatPasswordField(sign_up_password_password_field, sign_up_repeat_password_password_field);
+        signUpData.setTermsConditionsCheckboxAndInvalidCredentialsLabel(termsConditionsCheckbox, invalid_signup_credentials);
+        signUpData.setDatePicker(sign_up_date_date_picker);
 
-        SignUpValidator signUpValidator = new SignUpValidator(sign_up_data, invalid_signup_credentials);
+        SignUpValidator signUpValidator = new SignUpValidator(signUpData, invalid_signup_credentials);
 
         signUpValidator.validateAndRegister();
     }

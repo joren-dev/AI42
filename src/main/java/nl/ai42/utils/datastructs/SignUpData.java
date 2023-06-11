@@ -14,16 +14,22 @@ public class SignUpData {
     private Label invalidCredentialsLabel;
     private DatePicker datePicker;
 
-    public SignUpData(TextField usernameTextField, TextField emailTextField,
-                      TextField passwordField, TextField repeatPasswordField,
-                      CheckBox termsConditionsCheckbox, Label invalidCredentialsLabel,
-                      DatePicker datePicker) {
+    public void setUsernameAndEmailTextField(TextField usernameTextField, TextField emailTextField) {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
+    }
+
+    public void setPasswordAndRepeatPasswordField(TextField passwordField, TextField repeatPasswordField) {
         this.passwordField = passwordField;
         this.repeatPasswordField = repeatPasswordField;
+    }
+
+    public void setTermsConditionsCheckboxAndInvalidCredentialsLabel(CheckBox termsConditionsCheckbox, Label invalidCredentialsLabel) {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
+    }
+
+    public void setDatePicker(DatePicker datePicker) {
         this.datePicker = datePicker;
     }
 

@@ -61,7 +61,7 @@
                         <Insets />
                     </opaqueInsets>
                 </Label>
-                <Button fx:id="LoginButton" alignment="CENTER" layoutX="259.0" layoutY="199.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Login">
+                <Button fx:id="LoginButton" alignment="CENTER" layoutX="260.0" layoutY="192.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: #24a0ed; -fx-text-fill: white; -fx-border-radius: 5; -fx-border-width: 2; -fx-border-color: #24a0ed;" text="Login">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -145,7 +145,7 @@
                         <Font name="SansSerif Regular" size="15.0" />
                     </font>
                 </CheckBox>
-                <Label fx:id="invalid_signup_credentials" alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="572.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
+                <Label fx:id="invalid_signup_credentials" alignment="CENTER" contentDisplay="CENTER" layoutX="139.0" layoutY="569.0" prefHeight="16.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -155,7 +155,7 @@
                         <Font size="15.0" />
                     </font>
                 </Button>
-                <Button layoutX="213.0" layoutY="631.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true" onAction="#onTermsAndConditions">
+                <Button layoutX="213.0" layoutY="631.0" mnemonicParsing="false" onAction="#onTermsAndConditions" style="-fx-background-color: transparent; -fx-text-fill: #A9A9A9;" text="Terms and Conditions" underline="true">
                     <font>
                         <Font size="15.0" />
                     </font>

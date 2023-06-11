@@ -1,6 +1,9 @@
 package nl.ai42.utils.validation;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 import nl.ai42.utils.database.Row;
 import javafx.scene.control.TextField;
 
@@ -18,7 +21,7 @@ public class SignUpValidator {
     }
 
     public void validateAndRegister() {
-        resetFields();
+        resetErrorFields();
         if (!validateSignUpForm())
             return;
 
@@ -36,7 +39,8 @@ public class SignUpValidator {
         }
 
         if (isEmptyField(signUpData.getUsernameTextField()) || isEmptyField(signUpData.getEmailTextField()) ||
-                isEmptyField(signUpData.getPasswordField()) || isEmptyField(signUpData.getRepeatPasswordField())) {
+                isEmptyField(signUpData.getPasswordField()) || isEmptyField(signUpData.getRepeatPasswordField())
+                || signUpData.getDatePicker().getValue() == null) {
             setErrorMessage("Not all required fields are filled in.");
             handleEmptyFields();
             error = true;
@@ -60,10 +64,12 @@ public class SignUpValidator {
             error = true;
         }
 
-        if (signUpData.getDatePicker().getValue() == null) {
-            setErrorMessage("Not all required fields are filled in.");
-            setErrorStyle(signUpData.getDatePicker());
-            error = true;
+        if (signUpData.getDatePicker().getValue() != null) {
+            if (!ValidationUtils.is_valid_date(signUpData.getDatePicker().getValue().toString())) {
+                setErrorMessage("Please select a valid date of birth.");
+                setErrorStyle(signUpData.getDatePicker());
+                error = true;
+            }
         }
 
         return !error;
@@ -85,6 +91,9 @@ public class SignUpValidator {
 
         if (isEmptyField(signUpData.getRepeatPasswordField()))
             setErrorStyle(signUpData.getRepeatPasswordField());
+
+        if (signUpData.getDatePicker().getValue() == null)
+            setErrorStyle(signUpData.getDatePicker());
     }
 
     private boolean checkUniqueCredentials() {
@@ -97,9 +106,13 @@ public class SignUpValidator {
             setErrorStyle(signUpData.getEmailTextField());
             return false;
         } else if (!signUpData.getRepeatPasswordField().getText().equals(signUpData.getPasswordField().getText())) {
-            setErrorMessage("The Passwords don't match!");
+            setErrorMessage("The passwords don't match!");
             setErrorStyle(signUpData.getPasswordField());
             setErrorStyle(signUpData.getRepeatPasswordField());
+            return false;
+        } else if (signUpData.getDatePicker().getValue() == null) {
+            setErrorMessage("Please select a date of birth.");
+            setErrorStyle(signUpData.getDatePicker());
             return false;
         }
         return true;
@@ -116,7 +129,7 @@ public class SignUpValidator {
     }
 
     private void registerUser() {
-        setSuccessMessage("You are set!");
+        setSuccessMessage("Registration successful!");
         HashMap<String, String> data = new HashMap<>();
         data.put("username", signUpData.getUsernameTextField().getText());
         data.put("email", signUpData.getEmailTextField().getText());
@@ -124,14 +137,36 @@ public class SignUpValidator {
         data.put("date_of_birth", signUpData.getDatePicker().getValue().toString());
         AI42Main.database.getTable("user").insert(new Row(data));
         AI42Main.database.storeInFile();
+
+        resetFields();
     }
 
     private void resetFields() {
+        // Delay in milliseconds before resetting the fields
+        final int delay = 2000;
+
+        // Create a timeline with the specified delay
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(delay), event -> {
+            // Reset the fields here
+            signUpData.getUsernameTextField().setText("");
+            signUpData.getEmailTextField().setText("");
+            signUpData.getPasswordField().setText("");
+            signUpData.getRepeatPasswordField().setText("");
+            signUpData.getTermsConditionsCheckbox().setSelected(false);
+            signUpData.getDatePicker().setValue(null);
+        }));
+
+        // Start the timeline
+        timeline.play();
+    }
+
+    private void resetErrorFields() {
         clearErrorMessage();
         clearErrorStyle(signUpData.getUsernameTextField());
         clearErrorStyle(signUpData.getEmailTextField());
         clearErrorStyle(signUpData.getPasswordField());
         clearErrorStyle(signUpData.getRepeatPasswordField());
+        clearErrorStyle(signUpData.getDatePicker());
     }
 
     private void setErrorMessage(String message) {
