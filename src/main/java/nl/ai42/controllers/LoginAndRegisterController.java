@@ -85,12 +85,9 @@ public class LoginAndRegisterController {
     protected void onLoginButtonClick() {
         resetFields();
 
-        LoginData loginData = new LoginData();
-        loginData.setUsernameTextField(login_username_text_field);
-        loginData.setPasswordField(login_password_password_field);
-        loginData.setInvalidCredentialsLabel(invalid_login_credentials);
-
-        LoginValidator loginValidator = new LoginValidator(loginData);
+        LoginValidator loginValidator = new LoginValidator(new LoginData(
+                login_username_text_field, login_password_password_field, invalid_login_credentials)
+        );
         loginValidator.validateAndLogin();
 
         invalid_signup_credentials.setText("");

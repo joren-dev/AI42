@@ -4,19 +4,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoginData {
-    private TextField usernameTextField;
-    private TextField passwordField;
-    private Label invalidCredentialsLabel;
+    private final TextField usernameTextField;
+    private final TextField passwordField;
+    private final Label invalidCredentialsLabel;
 
-    public void setUsernameTextField(TextField usernameTextField) {
+    public LoginData(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
         this.usernameTextField = usernameTextField;
-    }
-
-    public void setPasswordField(TextField passwordField) {
         this.passwordField = passwordField;
-    }
-
-    public void setInvalidCredentialsLabel(Label invalidCredentialsLabel) {
         this.invalidCredentialsLabel = invalidCredentialsLabel;
     }
 
