@@ -1,11 +1,11 @@
 package nl.ai42.utils.validation;
 
 import javafx.scene.control.*;
-import nl.ai42.utils.Database;
 import nl.ai42.utils.Row;
 import javafx.scene.control.TextField;
 
 import java.util.HashMap;
+import nl.ai42.AI42Main;
 
 public class SignUpValidator {
     private final TextField usernameTextField;
@@ -15,12 +15,11 @@ public class SignUpValidator {
     private final CheckBox termsConditionsCheckbox;
     private final Label invalidCredentialsLabel;
     private final DatePicker datePicker;
-    private final Database database;
 
     public SignUpValidator(TextField usernameTextField, TextField emailTextField,
                            TextField passwordField, TextField repeatPasswordField,
                            CheckBox termsConditionsCheckbox, Label invalidCredentialsLabel,
-                           DatePicker datePicker, Database database) {
+                           DatePicker datePicker) {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
         this.passwordField = passwordField;
@@ -28,7 +27,6 @@ public class SignUpValidator {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
         this.datePicker = datePicker;
-        this.database = database;
     }
 
     public void validateAndRegister() {
@@ -119,12 +117,12 @@ public class SignUpValidator {
     }
 
     private boolean isUsernameRegistered() {
-        return database.getTable("user").select(row ->
+        return AI42Main.database.getTable("user").select(row ->
                 row.getValue("username").equals(usernameTextField.getText())).size() == 1;
     }
 
     private boolean isEmailRegistered() {
-        return database.getTable("user").select(row ->
+        return AI42Main.database.getTable("user").select(row ->
                 row.getValue("email").equals(emailTextField.getText())).size() == 1;
     }
 
@@ -135,8 +133,8 @@ public class SignUpValidator {
         data.put("email", emailTextField.getText());
         data.put("password", passwordField.getText());
         data.put("date_of_birth", datePicker.getValue().toString());
-        database.getTable("user").insert(new Row(data));
-        database.storeInFile();
+        AI42Main.database.getTable("user").insert(new Row(data));
+        AI42Main.database.storeInFile();
     }
 
     private void resetFields() {

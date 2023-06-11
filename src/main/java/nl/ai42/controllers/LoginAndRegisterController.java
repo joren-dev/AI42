@@ -8,15 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;
-import nl.ai42.utils.Row;
 import nl.ai42.utils.validation.SignUpValidator;
-import nl.ai42.utils.validation.ValidationUtils;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 
 public class LoginAndRegisterController {
 
@@ -122,7 +119,7 @@ public class LoginAndRegisterController {
     protected void onSignUpButtonClick() {
         SignUpValidator signUpValidator = new SignUpValidator(sign_up_username_text_field, sign_up_email_text_field,
                 sign_up_password_password_field, sign_up_repeat_password_password_field, termsConditionsCheckbox,
-                invalid_signup_credentials, sign_up_date_date_picker, AI42Main.database);
+                invalid_signup_credentials, sign_up_date_date_picker);
 
         signUpValidator.validateAndRegister();
     }
