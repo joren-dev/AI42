@@ -1,3 +1,5 @@
+package nl.ai42;
+
 import nl.ai42.managers.AIManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -7,8 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
-import nl.ai42.utils.datastructs.LoginData;
-import nl.ai42.utils.datastructs.SignUpData;
+
 import nl.ai42.utils.validation.LoginValidator;
 import nl.ai42.utils.validation.SignUpValidator;
 
@@ -86,27 +85,20 @@ public class LoginAndRegisterController {
     protected void onLoginButtonClick() throws NoSuchAlgorithmException {
         resetFields();
 
-        LoginData loginData = new LoginData();
-        loginData.setUsernameTextField(login_username_text_field);
-        loginData.setPasswordField(login_password_password_field);
-        loginData.setInvalidCredentialsLabel(invalid_login_credentials);
-
-        LoginValidator loginValidator = new LoginValidator(loginData);
+        LoginValidator loginValidator = new LoginValidator(
+                login_username_text_field, login_password_password_field, invalid_login_credentials
+        );
         loginValidator.validateAndLogin();
 
         invalid_signup_credentials.setText("");
     }
 
-
     @FXML
     protected void onSignUpButtonClick() throws NoSuchAlgorithmException {
-        SignUpData signUpData = new SignUpData();
-        signUpData.setUsernameAndEmailTextField(sign_up_username_text_field, sign_up_email_text_field);
-        signUpData.setPasswordAndRepeatPasswordField(sign_up_password_password_field, sign_up_repeat_password_password_field);
-        signUpData.setTermsConditionsCheckboxAndInvalidCredentialsLabel(termsConditionsCheckbox, invalid_signup_credentials);
-        signUpData.setDatePicker(sign_up_date_date_picker);
-
-        SignUpValidator signUpValidator = new SignUpValidator(signUpData);
+        SignUpValidator signUpValidator = new SignUpValidator(sign_up_username_text_field, sign_up_email_text_field,
+                sign_up_password_password_field, sign_up_repeat_password_password_field,
+                termsConditionsCheckbox, invalid_signup_credentials, sign_up_date_date_picker
+                );
 
         signUpValidator.validateAndRegister();
     }

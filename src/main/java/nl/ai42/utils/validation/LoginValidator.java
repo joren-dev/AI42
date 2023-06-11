@@ -5,16 +5,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;
-import nl.ai42.utils.datastructs.LoginData;
 import nl.ai42.utils.security.Sha3Hash;
 
 import java.security.NoSuchAlgorithmException;
 
-public class LoginValidator {
-    private LoginData loginData;
 
-    public LoginValidator(LoginData loginData) {
-        this.loginData = loginData;
+public class LoginValidator {
+    private final TextField usernameTextField;
+    private final TextField passwordField;
+    private final Label invalidCredentialsLabel;
+
+    public LoginValidator(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
+        this.usernameTextField = usernameTextField;
+        this.passwordField = passwordField;
+        this.invalidCredentialsLabel = invalidCredentialsLabel;
     }
 
     public void validateAndLogin() throws NoSuchAlgorithmException {
@@ -29,7 +33,7 @@ public class LoginValidator {
     private boolean validateLoginForm() {
         boolean error = false;
 
-        if (isEmptyField(loginData.getUsernameTextField()) || isEmptyField(loginData.getPasswordField())) {
+        if (isEmptyField(usernameTextField) || isEmptyField(passwordField)) {
             setErrorMessage("Not all required fields are filled in.");
             handleEmptyFields();
             error = true;
@@ -42,57 +46,53 @@ public class LoginValidator {
         return textField.getText().isBlank();
     }
 
-    private boolean isEmptyField(PasswordField passwordField) {
-        return passwordField.getText().isBlank();
-    }
-
     private void handleEmptyFields() {
-        if (isEmptyField(loginData.getUsernameTextField()))
-            setErrorStyle(loginData.getUsernameTextField());
+        if (isEmptyField(usernameTextField))
+            setErrorStyle(usernameTextField);
 
-        if (isEmptyField(loginData.getPasswordField()))
-            setErrorStyle(loginData.getPasswordField());
+        if (isEmptyField(passwordField))
+            setErrorStyle(passwordField);
     }
 
     private boolean checkCredentials() throws NoSuchAlgorithmException {
-        String username = loginData.getUsernameTextField().getText();
-        String password = Sha3Hash.calculateSHA3Hash(loginData.getPasswordField().getText());
+        String username = usernameTextField.getText();
+        String password = Sha3Hash.calculateSHA3Hash(passwordField.getText());
 
         if (AI42Main.database.getTable("user").select(row ->
                 row.getValue("username").equals(username) && row.getValue("password").equals(password)).size() == 1) {
             return true;
         } else {
             setErrorMessage("Username or password is invalid.");
-            setErrorStyle(loginData.getUsernameTextField());
-            setErrorStyle(loginData.getPasswordField());
+            setErrorStyle(usernameTextField);
+            setErrorStyle(passwordField);
             return false;
         }
     }
 
     private void loginUser() {
         setSuccessMessage("Login Successful!");
-        AI42Main.currentUser = loginData.getUsernameTextField().getText();
+        AI42Main.currentUser = usernameTextField.getText();
         SceneManager.getInstance().loadScene("chat-view.fxml");
     }
 
     private void resetFields() {
         clearErrorMessage();
-        clearErrorStyle(loginData.getUsernameTextField());
-        clearErrorStyle(loginData.getPasswordField());
+        clearErrorStyle(usernameTextField);
+        clearErrorStyle(passwordField);
     }
 
     private void setErrorMessage(String message) {
-        loginData.getInvalidCredentialsLabel().setText(message);
-        loginData.getInvalidCredentialsLabel().setStyle("-fx-text-fill: red;");
+        invalidCredentialsLabel.setText(message);
+        invalidCredentialsLabel.setStyle("-fx-text-fill: red;");
     }
 
     private void setSuccessMessage(String message) {
-        loginData.getInvalidCredentialsLabel().setText(message);
-        loginData.getInvalidCredentialsLabel().setStyle("-fx-text-fill: green;");
+        invalidCredentialsLabel.setText(message);
+        invalidCredentialsLabel.setStyle("-fx-text-fill: green;");
     }
 
     private void clearErrorMessage() {
-        loginData.getInvalidCredentialsLabel().setText("");
+        invalidCredentialsLabel.setText("");
     }
 
     private void setErrorStyle(TextField textField) {

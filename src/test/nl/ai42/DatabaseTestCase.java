@@ -1,3 +1,5 @@
+package nl.ai42;
+
 import nl.ai42.utils.database.Database;
 import nl.ai42.utils.database.Row;
 import nl.ai42.utils.database.Table;
