@@ -28,12 +28,10 @@ public class SignUpValidator {
     }
 
     private boolean validateSignUpForm() {
-        boolean error = false;
-
         if (!signUpData.getTermsConditionsCheckbox().isSelected()) {
             setErrorMessage("Please accept the terms.");
             setErrorStyle(signUpData.getTermsConditionsCheckbox());
-            error = true;
+            return false;
         }
 
         if (isEmptyField(signUpData.getUsernameTextField()) || isEmptyField(signUpData.getEmailTextField()) ||
@@ -41,36 +39,36 @@ public class SignUpValidator {
                 || signUpData.getDatePicker().getValue() == null) {
             setErrorMessage("Not all required fields are filled in.");
             handleEmptyFields();
-            error = true;
-        }
-
-        if (!ValidationUtils.is_valid_password(signUpData.getPasswordField().getText())) {
-            setErrorMessage("Password does not satisfy requirements.");
-            setErrorStyle(signUpData.getPasswordField());
-            error = true;
-        }
-
-        if (!ValidationUtils.is_valid_email(signUpData.getEmailTextField().getText())) {
-            setErrorMessage("Email does not satisfy requirements.");
-            setErrorStyle(signUpData.getEmailTextField());
-            error = true;
+            return false;
         }
 
         if (!ValidationUtils.is_valid_name(signUpData.getUsernameTextField().getText())) {
             setErrorMessage("Username does not satisfy requirements.");
             setErrorStyle(signUpData.getUsernameTextField());
-            error = true;
+            return false;
+        }
+
+        if (!ValidationUtils.is_valid_email(signUpData.getEmailTextField().getText())) {
+            setErrorMessage("Email does not satisfy requirements.");
+            setErrorStyle(signUpData.getEmailTextField());
+            return false;
+        }
+
+        if (!ValidationUtils.is_valid_password(signUpData.getPasswordField().getText())) {
+            setErrorMessage("Password does not satisfy requirements.");
+            setErrorStyle(signUpData.getPasswordField());
+            return false;
         }
 
         if (signUpData.getDatePicker().getValue() != null) {
             if (!ValidationUtils.is_valid_date(signUpData.getDatePicker().getValue().toString())) {
                 setErrorMessage("Please select a valid date of birth.");
                 setErrorStyle(signUpData.getDatePicker());
-                error = true;
+                return false;
             }
         }
 
-        return !error;
+        return true;
     }
 
     private boolean isEmptyField(TextField textField) {
