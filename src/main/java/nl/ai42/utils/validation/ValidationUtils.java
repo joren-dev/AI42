@@ -32,24 +32,8 @@ public class ValidationUtils {
         if (password.length() < 8)
             return false;
 
-        // Contains at least one uppercase letter
-        if (!Pattern.compile("[A-Z]").matcher(password).find())
-            return false;
-
-        // Contains at least one lowercase letter
-        if (!Pattern.compile("[a-z]").matcher(password).find())
-            return false;
-
-        // Contains at least one digit
-        if (!Pattern.compile("\\d").matcher(password).find())
-            return false;
-
-        // Contains at least one special character (non-alphanumeric)
-        if (!Pattern.compile("[^a-zA-Z\\d]").matcher(password).find())
-            return false;
-
-        // Password meets all requirements
-        return true;
+        // Contains at least 1 lowercase letter, one uppercase letter, one digit and one symbol
+        return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+|{}[\\\\]:\\\";'<>?,./]).+$").matcher(password).find();
     }
 
     public static boolean is_valid_date(String date) {
