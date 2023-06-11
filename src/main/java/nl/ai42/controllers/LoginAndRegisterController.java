@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
+import nl.ai42.utils.datastructs.LoginData;
 import nl.ai42.utils.datastructs.SignUpData;
 import nl.ai42.utils.validation.LoginValidator;
 import nl.ai42.utils.validation.SignUpValidator;
@@ -82,13 +83,19 @@ public class LoginAndRegisterController {
 
     @FXML
     protected void onLoginButtonClick() {
-        this.resetFields();
+        resetFields();
 
-        LoginValidator loginValidator = new LoginValidator(login_username_text_field, login_password_password_field, invalid_login_credentials);
+        LoginData loginData = new LoginData();
+        loginData.setUsernameTextField(login_username_text_field);
+        loginData.setPasswordField(login_password_password_field);
+        loginData.setInvalidCredentialsLabel(invalid_login_credentials);
+
+        LoginValidator loginValidator = new LoginValidator(loginData);
         loginValidator.validateAndLogin();
 
         invalid_signup_credentials.setText("");
     }
+
 
     @FXML
     protected void onSignUpButtonClick() {
