@@ -14,8 +14,11 @@ import nl.ai42.utils.datastructs.SignUpData;
 public class SignUpValidator {
     private final SignUpData signUpData;
 
-    public SignUpValidator(SignUpData signUpData) {
-        this.signUpData = signUpData;
+    public SignUpValidator(TextField usernameTextField, TextField emailTextField, TextField passwordField,
+                           TextField repeatPasswordField, CheckBox termsConditionsCheckbox,
+                           Label invalidCredentialsLabel, DatePicker datePicker) {
+        this.signUpData = new SignUpData(usernameTextField, emailTextField, passwordField, repeatPasswordField,
+                termsConditionsCheckbox, invalidCredentialsLabel, datePicker);
     }
 
     public void validateAndRegister() {

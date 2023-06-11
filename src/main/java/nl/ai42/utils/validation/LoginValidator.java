@@ -10,8 +10,8 @@ import nl.ai42.utils.datastructs.LoginData;
 public class LoginValidator {
     private LoginData loginData;
 
-    public LoginValidator(LoginData loginData) {
-        this.loginData = loginData;
+    public LoginValidator(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
+        this.loginData = new LoginData(usernameTextField, passwordField, invalidCredentialsLabel);
     }
 
     public void validateAndLogin() {

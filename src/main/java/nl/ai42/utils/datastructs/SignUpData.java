@@ -6,30 +6,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SignUpData {
-    private TextField usernameTextField;
-    private TextField emailTextField;
-    private TextField passwordField;
-    private TextField repeatPasswordField;
-    private CheckBox termsConditionsCheckbox;
-    private Label invalidCredentialsLabel;
-    private DatePicker datePicker;
+    private final TextField usernameTextField;
+    private final TextField emailTextField;
+    private final TextField passwordField;
+    private final TextField repeatPasswordField;
+    private final CheckBox termsConditionsCheckbox;
+    private final Label invalidCredentialsLabel;
+    private final DatePicker datePicker;
 
-    public void setUsernameAndEmailTextField(TextField usernameTextField, TextField emailTextField) {
+    public SignUpData(TextField usernameTextField, TextField emailTextField, TextField passwordField,
+                      TextField repeatPasswordField, CheckBox termsConditionsCheckbox, Label invalidCredentialsLabel,
+                      DatePicker datePicker) {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
-    }
-
-    public void setPasswordAndRepeatPasswordField(TextField passwordField, TextField repeatPasswordField) {
         this.passwordField = passwordField;
         this.repeatPasswordField = repeatPasswordField;
-    }
-
-    public void setTermsConditionsCheckboxAndInvalidCredentialsLabel(CheckBox termsConditionsCheckbox, Label invalidCredentialsLabel) {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
-    }
-
-    public void setDatePicker(DatePicker datePicker) {
         this.datePicker = datePicker;
     }
 
