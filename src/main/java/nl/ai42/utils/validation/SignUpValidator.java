@@ -14,21 +14,26 @@ import nl.ai42.utils.security.Sha3Hash;
 
 
 public class SignUpValidator {
-    private final TextField usernameTextField;
-    private final TextField emailTextField;
-    private final TextField passwordField;
-    private final TextField repeatPasswordField;
-    private final CheckBox termsConditionsCheckbox;
-    private final Label invalidCredentialsLabel;
-    private final DatePicker datePicker;
+    private TextField usernameTextField;
+    private TextField emailTextField;
+    private TextField passwordField;
+    private TextField repeatPasswordField;
+    private CheckBox termsConditionsCheckbox;
+    private Label invalidCredentialsLabel;
+    private DatePicker datePicker;
 
-    public SignUpValidator(TextField usernameTextField, TextField emailTextField, TextField passwordField,
-                           TextField repeatPasswordField, CheckBox termsConditionsCheckbox,
-                           Label invalidCredentialsLabel, DatePicker datePicker) {
+    public void set_credential_fields(TextField usernameTextField, TextField emailTextField, TextField passwordField,
+                                      TextField repeatPasswordField)
+    {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
         this.passwordField = passwordField;
         this.repeatPasswordField = repeatPasswordField;
+    }
+
+    public void set_additional_fields(CheckBox termsConditionsCheckbox,
+                                      Label invalidCredentialsLabel, DatePicker datePicker)
+    {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
         this.datePicker = datePicker;

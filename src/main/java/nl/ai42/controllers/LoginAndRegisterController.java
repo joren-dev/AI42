@@ -95,11 +95,13 @@ public class LoginAndRegisterController {
 
     @FXML
     protected void onSignUpButtonClick() throws NoSuchAlgorithmException {
-        SignUpValidator signUpValidator = new SignUpValidator(sign_up_username_text_field, sign_up_email_text_field,
-                sign_up_password_password_field, sign_up_repeat_password_password_field,
-                termsConditionsCheckbox, invalid_signup_credentials, sign_up_date_date_picker
-                );
+        SignUpValidator signUpValidator = new SignUpValidator();
+
+        signUpValidator.set_credential_fields(sign_up_username_text_field, sign_up_email_text_field,
+                sign_up_password_password_field, sign_up_repeat_password_password_field);
+        signUpValidator.set_additional_fields(termsConditionsCheckbox, invalid_signup_credentials, sign_up_date_date_picker);
 
         signUpValidator.validateAndRegister();
     }
+
 }
