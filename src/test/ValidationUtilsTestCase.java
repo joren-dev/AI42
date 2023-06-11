@@ -1,4 +1,4 @@
-import nl.ai42.utils.ValidationUtils;
+import nl.ai42.utils.validation.ValidationUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

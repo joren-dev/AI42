@@ -13,5 +13,7 @@ module nl.ai42 {
     exports nl.ai42.utils;
     exports nl.ai42.managers;
     opens nl.ai42.controllers to javafx.fxml;
+    exports nl.ai42.utils.validation;
+    opens nl.ai42.utils.validation;
 
 }

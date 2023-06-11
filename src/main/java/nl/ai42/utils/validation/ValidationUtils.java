@@ -1,4 +1,4 @@
-package nl.ai42.utils;
+package nl.ai42.utils.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
