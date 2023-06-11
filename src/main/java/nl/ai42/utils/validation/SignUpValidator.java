@@ -49,38 +49,76 @@ public class SignUpValidator {
     }
 
     private boolean validateSignUpForm() {
+        if (!validateRequiredFields()) {
+            handleEmptyFields();
+            return false;
+        }
+
+        if (!validateUsername())
+            return false;
+
+        if (!validateEmail())
+            return false;
+
+        if (!validatePassword())
+            return false;
+
+        if (!validateDateOfBirth())
+            return false;
+
+        if (!validateTermsConditions())
+            return false;
+
+        return true;
+    }
+
+    private boolean validateTermsConditions() {
         if (!termsConditionsCheckbox.isSelected()) {
             setErrorMessage("Please accept the terms.");
             setErrorStyle(termsConditionsCheckbox);
             return false;
         }
+        return true;
+    }
 
+    private boolean validateRequiredFields() {
         if (isEmptyField(usernameTextField) || isEmptyField(emailTextField) ||
                 isEmptyField(passwordField) || isEmptyField(repeatPasswordField) ||
                 datePicker.getValue() == null) {
             setErrorMessage("Not all required fields are filled in.");
-            handleEmptyFields();
             return false;
         }
+        return true;
+    }
 
+    private boolean validateUsername() {
         if (!ValidationUtils.is_valid_name(usernameTextField.getText())) {
             setErrorMessage("Username does not satisfy requirements.");
             setErrorStyle(usernameTextField);
             return false;
         }
+        return true;
+    }
 
+    private boolean validateEmail() {
         if (!ValidationUtils.is_valid_email(emailTextField.getText())) {
             setErrorMessage("Email does not satisfy requirements.");
             setErrorStyle(emailTextField);
             return false;
         }
+        return true;
+    }
 
+    private boolean validatePassword() {
         if (!ValidationUtils.is_valid_password(passwordField.getText())) {
             setErrorMessage("Password does not satisfy requirements.");
             setErrorStyle(passwordField);
             return false;
         }
+        return true;
+    }
 
+    private boolean validateDateOfBirth() {
         if (datePicker.getValue() != null) {
             if (!ValidationUtils.is_valid_date(datePicker.getValue().toString())) {
                 setErrorMessage("Please select a valid date of birth.");
@@ -88,7 +126,6 @@ public class SignUpValidator {
                 return false;
             }
         }
-
         return true;
     }
 
