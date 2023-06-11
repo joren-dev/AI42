@@ -32,7 +32,7 @@ public class ValidationUtils {
         if (password.length() < 8)
             return false;
 
-        // Contains at least 1 lowercase letter, one uppercase letter, one digit and one symbol
+        // Contains at least 1 lowercase letter, 1 uppercase letter, 1 digit and 1 symbol
         return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+|{}[\\\\]:\\\";'<>?,./]).+$").matcher(password).find();
     }
 
