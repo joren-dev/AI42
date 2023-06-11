@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;
+import nl.ai42.utils.datastructs.SignUpData;
 import nl.ai42.utils.validation.LoginValidator;
 import nl.ai42.utils.validation.SignUpValidator;
 
@@ -96,11 +97,13 @@ public class LoginAndRegisterController {
 
     @FXML
     protected void onSignUpButtonClick() {
-        SignUpValidator signUpValidator = new SignUpValidator(sign_up_username_text_field, sign_up_email_text_field,
-                sign_up_password_password_field, sign_up_repeat_password_password_field, termsConditionsCheckbox,
-                invalid_signup_credentials, sign_up_date_date_picker);
+        final SignUpData sign_up_data = new SignUpData(sign_up_username_text_field, sign_up_email_text_field,
+                sign_up_password_password_field, sign_up_repeat_password_password_field,
+                termsConditionsCheckbox, invalid_signup_credentials, sign_up_date_date_picker
+        );
+
+        SignUpValidator signUpValidator = new SignUpValidator(sign_up_data, invalid_signup_credentials);
 
         signUpValidator.validateAndRegister();
     }
-
 }

@@ -6,27 +6,15 @@ import javafx.scene.control.TextField;
 
 import java.util.HashMap;
 import nl.ai42.AI42Main;
+import nl.ai42.utils.datastructs.SignUpData;
 
 public class SignUpValidator {
-    private final TextField usernameTextField;
-    private final TextField emailTextField;
-    private final TextField passwordField;
-    private final TextField repeatPasswordField;
-    private final CheckBox termsConditionsCheckbox;
+    private final SignUpData signUpData;
     private final Label invalidCredentialsLabel;
-    private final DatePicker datePicker;
 
-    public SignUpValidator(TextField usernameTextField, TextField emailTextField,
-                           TextField passwordField, TextField repeatPasswordField,
-                           CheckBox termsConditionsCheckbox, Label invalidCredentialsLabel,
-                           DatePicker datePicker) {
-        this.usernameTextField = usernameTextField;
-        this.emailTextField = emailTextField;
-        this.passwordField = passwordField;
-        this.repeatPasswordField = repeatPasswordField;
-        this.termsConditionsCheckbox = termsConditionsCheckbox;
+    public SignUpValidator(SignUpData signUpData, Label invalidCredentialsLabel) {
+        this.signUpData = signUpData;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
-        this.datePicker = datePicker;
     }
 
     public void validateAndRegister() {
@@ -37,43 +25,44 @@ public class SignUpValidator {
         if (checkUniqueCredentials())
             registerUser();
     }
+
     private boolean validateSignUpForm() {
         boolean error = false;
 
-        if (!termsConditionsCheckbox.isSelected()) {
+        if (!signUpData.getTermsConditionsCheckbox().isSelected()) {
             setErrorMessage("Please accept the terms.");
-            setErrorStyle(termsConditionsCheckbox);
+            setErrorStyle(signUpData.getTermsConditionsCheckbox());
             error = true;
         }
 
-        if (isEmptyField(usernameTextField) || isEmptyField(emailTextField) ||
-                isEmptyField(passwordField) || isEmptyField(repeatPasswordField)) {
+        if (isEmptyField(signUpData.getUsernameTextField()) || isEmptyField(signUpData.getEmailTextField()) ||
+                isEmptyField(signUpData.getPasswordField()) || isEmptyField(signUpData.getRepeatPasswordField())) {
             setErrorMessage("Not all required fields are filled in.");
             handleEmptyFields();
             error = true;
         }
 
-        if (!ValidationUtils.is_valid_password(passwordField.getText())) {
+        if (!ValidationUtils.is_valid_password(signUpData.getPasswordField().getText())) {
             setErrorMessage("Password does not satisfy requirements.");
-            setErrorStyle(passwordField);
+            setErrorStyle(signUpData.getPasswordField());
             error = true;
         }
 
-        if (!ValidationUtils.is_valid_email(emailTextField.getText())) {
+        if (!ValidationUtils.is_valid_email(signUpData.getEmailTextField().getText())) {
             setErrorMessage("Email does not satisfy requirements.");
-            setErrorStyle(emailTextField);
+            setErrorStyle(signUpData.getEmailTextField());
             error = true;
         }
 
-        if (!ValidationUtils.is_valid_name(usernameTextField.getText())) {
+        if (!ValidationUtils.is_valid_name(signUpData.getUsernameTextField().getText())) {
             setErrorMessage("Username does not satisfy requirements.");
-            setErrorStyle(usernameTextField);
+            setErrorStyle(signUpData.getUsernameTextField());
             error = true;
         }
 
-        if (datePicker.getValue() == null) {
+        if (signUpData.getDatePicker().getValue() == null) {
             setErrorMessage("Not all required fields are filled in.");
-            setErrorStyle(datePicker);
+            setErrorStyle(signUpData.getDatePicker());
             error = true;
         }
 
@@ -85,32 +74,32 @@ public class SignUpValidator {
     }
 
     private void handleEmptyFields() {
-        if (isEmptyField(usernameTextField))
-            setErrorStyle(usernameTextField);
+        if (isEmptyField(signUpData.getUsernameTextField()))
+            setErrorStyle(signUpData.getUsernameTextField());
 
-        if (isEmptyField(emailTextField))
-            setErrorStyle(emailTextField);
+        if (isEmptyField(signUpData.getEmailTextField()))
+            setErrorStyle(signUpData.getEmailTextField());
 
-        if (isEmptyField(passwordField))
-            setErrorStyle(passwordField);
+        if (isEmptyField(signUpData.getPasswordField()))
+            setErrorStyle(signUpData.getPasswordField());
 
-        if (isEmptyField(repeatPasswordField))
-            setErrorStyle(repeatPasswordField);
+        if (isEmptyField(signUpData.getRepeatPasswordField()))
+            setErrorStyle(signUpData.getRepeatPasswordField());
     }
 
     private boolean checkUniqueCredentials() {
         if (isUsernameRegistered()) {
             setErrorMessage("Username already registered.");
-            setErrorStyle(usernameTextField);
+            setErrorStyle(signUpData.getUsernameTextField());
             return false;
         } else if (isEmailRegistered()) {
             setErrorMessage("Email already registered.");
-            setErrorStyle(emailTextField);
+            setErrorStyle(signUpData.getEmailTextField());
             return false;
-        } else if (!repeatPasswordField.getText().equals(passwordField.getText())) {
+        } else if (!signUpData.getRepeatPasswordField().getText().equals(signUpData.getPasswordField().getText())) {
             setErrorMessage("The Passwords don't match!");
-            setErrorStyle(passwordField);
-            setErrorStyle(repeatPasswordField);
+            setErrorStyle(signUpData.getPasswordField());
+            setErrorStyle(signUpData.getRepeatPasswordField());
             return false;
         }
         return true;
@@ -118,31 +107,31 @@ public class SignUpValidator {
 
     private boolean isUsernameRegistered() {
         return AI42Main.database.getTable("user").select(row ->
-                row.getValue("username").equals(usernameTextField.getText())).size() == 1;
+                row.getValue("username").equals(signUpData.getUsernameTextField().getText())).size() == 1;
     }
 
     private boolean isEmailRegistered() {
         return AI42Main.database.getTable("user").select(row ->
-                row.getValue("email").equals(emailTextField.getText())).size() == 1;
+                row.getValue("email").equals(signUpData.getEmailTextField().getText())).size() == 1;
     }
 
     private void registerUser() {
         setSuccessMessage("You are set!");
         HashMap<String, String> data = new HashMap<>();
-        data.put("username", usernameTextField.getText());
-        data.put("email", emailTextField.getText());
-        data.put("password", passwordField.getText());
-        data.put("date_of_birth", datePicker.getValue().toString());
+        data.put("username", signUpData.getUsernameTextField().getText());
+        data.put("email", signUpData.getEmailTextField().getText());
+        data.put("password", signUpData.getPasswordField().getText());
+        data.put("date_of_birth", signUpData.getDatePicker().getValue().toString());
         AI42Main.database.getTable("user").insert(new Row(data));
         AI42Main.database.storeInFile();
     }
 
     private void resetFields() {
         clearErrorMessage();
-        clearErrorStyle(usernameTextField);
-        clearErrorStyle(emailTextField);
-        clearErrorStyle(passwordField);
-        clearErrorStyle(repeatPasswordField);
+        clearErrorStyle(signUpData.getUsernameTextField());
+        clearErrorStyle(signUpData.getEmailTextField());
+        clearErrorStyle(signUpData.getPasswordField());
+        clearErrorStyle(signUpData.getRepeatPasswordField());
     }
 
     private void setErrorMessage(String message) {
