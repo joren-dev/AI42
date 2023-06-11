@@ -1,0 +1,8 @@
+nl.ai42
+nl.ai42.controllers
+nl.ai42.entity.conversation
+nl.ai42.managers
+nl.ai42.managers.AIAdapter
+nl.ai42.utils.database
+nl.ai42.utils.security
+nl.ai42.utils.validation
