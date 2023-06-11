@@ -16,6 +16,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginAndRegisterController {
 
@@ -82,7 +83,7 @@ public class LoginAndRegisterController {
     }
 
     @FXML
-    protected void onLoginButtonClick() {
+    protected void onLoginButtonClick() throws NoSuchAlgorithmException {
         resetFields();
 
         LoginData loginData = new LoginData();
@@ -98,7 +99,7 @@ public class LoginAndRegisterController {
 
 
     @FXML
-    protected void onSignUpButtonClick() {
+    protected void onSignUpButtonClick() throws NoSuchAlgorithmException {
         SignUpData signUpData = new SignUpData();
         signUpData.setUsernameAndEmailTextField(sign_up_username_text_field, sign_up_email_text_field);
         signUpData.setPasswordAndRepeatPasswordField(sign_up_password_password_field, sign_up_repeat_password_password_field);

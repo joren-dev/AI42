@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;
 import nl.ai42.utils.datastructs.LoginData;
+import nl.ai42.utils.security.Sha3Hash;
+
+import java.security.NoSuchAlgorithmException;
 
 public class LoginValidator {
     private LoginData loginData;
@@ -14,7 +17,7 @@ public class LoginValidator {
         this.loginData = loginData;
     }
 
-    public void validateAndLogin() {
+    public void validateAndLogin() throws NoSuchAlgorithmException {
         resetFields();
         if (!validateLoginForm())
             return;
@@ -51,9 +54,9 @@ public class LoginValidator {
             setErrorStyle(loginData.getPasswordField());
     }
 
-    private boolean checkCredentials() {
+    private boolean checkCredentials() throws NoSuchAlgorithmException {
         String username = loginData.getUsernameTextField().getText();
-        String password = loginData.getPasswordField().getText();
+        String password = Sha3Hash.calculateSHA3Hash(loginData.getPasswordField().getText());
 
         if (AI42Main.database.getTable("user").select(row ->
                 row.getValue("username").equals(username) && row.getValue("password").equals(password)).size() == 1) {
