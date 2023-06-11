@@ -2,7 +2,7 @@ package nl.ai42.managers.AIAdapter;
 
 import nl.ai42.managers.AIManager;
 
-public class AIManagerAdapter implements AIAdapter {
+public class AIManagerAdapter extends AIAdapter {
     private static AIManagerAdapter instance;
     private AIManager aiManager;
 
@@ -18,11 +18,21 @@ public class AIManagerAdapter implements AIAdapter {
     }
 
     @Override
-    public String processQuery(String query) {
+    protected String preprocessQuery(String query) {
+        // Implement preprocessing logic specific to AIManager
+        return query;
+    }
 
-        // Process data before calling aiManager.ask
+    @Override
+    protected String performQuery(String processedQuery) {
+        // Implement AIManager query execution logic
+        return processedQuery;
+    }
 
-        return aiManager.ask(query);
+    @Override
+    protected String postprocessResult(String result) {
+        // Implement postprocessing logic specific to AIManager
+        return result;
     }
 }
 
