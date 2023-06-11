@@ -15,6 +15,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginAndRegisterController {
 
@@ -81,7 +82,7 @@ public class LoginAndRegisterController {
     }
 
     @FXML
-    protected void onLoginButtonClick() {
+    protected void onLoginButtonClick() throws NoSuchAlgorithmException {
         resetFields();
 
         LoginValidator loginValidator = new LoginValidator(
@@ -93,8 +94,7 @@ public class LoginAndRegisterController {
     }
 
     @FXML
-    protected void onSignUpButtonClick() {
-
+    protected void onSignUpButtonClick() throws NoSuchAlgorithmException {
         SignUpValidator signUpValidator = new SignUpValidator(sign_up_username_text_field, sign_up_email_text_field,
                 sign_up_password_password_field, sign_up_repeat_password_password_field,
                 termsConditionsCheckbox, invalid_signup_credentials, sign_up_date_date_picker

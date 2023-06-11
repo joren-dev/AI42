@@ -7,7 +7,11 @@ import javafx.util.Duration;
 import nl.ai42.AI42Main;
 import nl.ai42.utils.database.Row;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+
+import nl.ai42.utils.security.Sha3Hash;
+
 
 public class SignUpValidator {
     private final TextField usernameTextField;
@@ -30,7 +34,7 @@ public class SignUpValidator {
         this.datePicker = datePicker;
     }
 
-    public void validateAndRegister() {
+    public void validateAndRegister() throws NoSuchAlgorithmException {
         resetErrorFields();
         if (!validateSignUpForm())
             return;
@@ -136,13 +140,15 @@ public class SignUpValidator {
                 row.getValue("email").equals(emailTextField.getText())).size() == 1;
     }
 
-    private void registerUser() {
+    private void registerUser() throws NoSuchAlgorithmException {
         setSuccessMessage("Registration successful!");
         HashMap<String, String> data = new HashMap<>();
+
         data.put("username", usernameTextField.getText());
         data.put("email", emailTextField.getText());
-        data.put("password", passwordField.getText());
+        data.put("password", Sha3Hash.calculateSHA3Hash(passwordField.getText()));
         data.put("date_of_birth", datePicker.getValue().toString());
+
         AI42Main.database.getTable("user").insert(new Row(data));
         AI42Main.database.storeInFile();
 
