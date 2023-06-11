@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;
+import nl.ai42.utils.validation.LoginValidator;
 import nl.ai42.utils.validation.SignUpValidator;
 
 import java.awt.*;
@@ -82,37 +83,15 @@ public class LoginAndRegisterController {
         login_password_password_field.setStyle(successStyle);
         sign_up_date_date_picker.setStyle(successStyle);
     }
+
     @FXML
     protected void onLoginButtonClick() {
         this.resetFields();
 
-        if (login_username_text_field.getText().isBlank() || login_password_password_field.getText().isBlank()) {
-            invalid_login_credentials.setText("Not all required fields are filled in.");
-            invalid_signup_credentials.setText("");
+        LoginValidator loginValidator = new LoginValidator(login_username_text_field, login_password_password_field, invalid_login_credentials);
+        loginValidator.validateAndLogin();
 
-            if (login_username_text_field.getText().isBlank())
-                login_username_text_field.setStyle(errorStyle);
-
-            if (login_password_password_field.getText().isBlank())
-                login_password_password_field.setStyle(errorStyle);
-        } else {
-            if (AI42Main.database.getTable("user").select((row) -> row.getValue("username").equals(login_username_text_field.getText()) && row.getValue("password").equals(login_password_password_field.getText())).size() == 1) {
-                invalid_login_credentials.setText("Login Successful!");
-                invalid_login_credentials.setStyle(successMessage);
-                login_username_text_field.setStyle(successStyle);
-                login_password_password_field.setStyle(successStyle);
-
-                // Change views to chat-view.fxml
-                AI42Main.currentUser = login_username_text_field.getText();
-                SceneManager.getInstance().loadScene("chat-view.fxml");
-            } else {
-                invalid_login_credentials.setText("Username or password is invalid.");
-                invalid_login_credentials.setStyle(errorMessage);
-                login_username_text_field.setStyle(errorStyle);
-                login_password_password_field.setStyle(errorStyle);
-            }
-            invalid_signup_credentials.setText("");
-        }
+        invalid_signup_credentials.setText("");
     }
 
     @FXML
