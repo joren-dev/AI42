@@ -11,11 +11,11 @@ Enables 42.nl to use their AI with ease.
 4. Download and install [SceneBuilder](https://gluonhq.com/products/scene-builder/).
 
 ## UML Diagram
-![UML class diagram example](https://github.com/joren-dev/AI42/blob/main/docs/uml/AI42.png)
+![UML class diagram example]()
 
 
 ## GUI Showcase
-![GUI preview gif](https://raw.githubusercontent.com/joren-dev/AI42/main/docs/preview/GUI%20Preview.gif)
+![GUI preview gif](https://raw.githubusercontent.com/joren-dev/AI42/main/resources/preview/GUI%20Preview.gif)
 
 ## Functionality
 - Chat Interface: Engage in interactive and dynamic conversations with the www.42.nl AI model.
