@@ -4,21 +4,30 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.*;
 import javafx.util.Duration;
+import nl.ai42.AI42Main;
 import nl.ai42.utils.database.Row;
-import javafx.scene.control.TextField;
 
 import java.util.HashMap;
-import nl.ai42.AI42Main;
-import nl.ai42.utils.datastructs.SignUpData;
 
 public class SignUpValidator {
-    private final SignUpData signUpData;
+    private final TextField usernameTextField;
+    private final TextField emailTextField;
+    private final TextField passwordField;
+    private final TextField repeatPasswordField;
+    private final CheckBox termsConditionsCheckbox;
+    private final Label invalidCredentialsLabel;
+    private final DatePicker datePicker;
 
     public SignUpValidator(TextField usernameTextField, TextField emailTextField, TextField passwordField,
                            TextField repeatPasswordField, CheckBox termsConditionsCheckbox,
                            Label invalidCredentialsLabel, DatePicker datePicker) {
-        this.signUpData = new SignUpData(usernameTextField, emailTextField, passwordField, repeatPasswordField,
-                termsConditionsCheckbox, invalidCredentialsLabel, datePicker);
+        this.usernameTextField = usernameTextField;
+        this.emailTextField = emailTextField;
+        this.passwordField = passwordField;
+        this.repeatPasswordField = repeatPasswordField;
+        this.termsConditionsCheckbox = termsConditionsCheckbox;
+        this.invalidCredentialsLabel = invalidCredentialsLabel;
+        this.datePicker = datePicker;
     }
 
     public void validateAndRegister() {
@@ -31,42 +40,42 @@ public class SignUpValidator {
     }
 
     private boolean validateSignUpForm() {
-        if (!signUpData.getTermsConditionsCheckbox().isSelected()) {
+        if (!termsConditionsCheckbox.isSelected()) {
             setErrorMessage("Please accept the terms.");
-            setErrorStyle(signUpData.getTermsConditionsCheckbox());
+            setErrorStyle(termsConditionsCheckbox);
             return false;
         }
 
-        if (isEmptyField(signUpData.getUsernameTextField()) || isEmptyField(signUpData.getEmailTextField()) ||
-                isEmptyField(signUpData.getPasswordField()) || isEmptyField(signUpData.getRepeatPasswordField())
-                || signUpData.getDatePicker().getValue() == null) {
+        if (isEmptyField(usernameTextField) || isEmptyField(emailTextField) ||
+                isEmptyField(passwordField) || isEmptyField(repeatPasswordField) ||
+                datePicker.getValue() == null) {
             setErrorMessage("Not all required fields are filled in.");
             handleEmptyFields();
             return false;
         }
 
-        if (!ValidationUtils.is_valid_name(signUpData.getUsernameTextField().getText())) {
+        if (!ValidationUtils.is_valid_name(usernameTextField.getText())) {
             setErrorMessage("Username does not satisfy requirements.");
-            setErrorStyle(signUpData.getUsernameTextField());
+            setErrorStyle(usernameTextField);
             return false;
         }
 
-        if (!ValidationUtils.is_valid_email(signUpData.getEmailTextField().getText())) {
+        if (!ValidationUtils.is_valid_email(emailTextField.getText())) {
             setErrorMessage("Email does not satisfy requirements.");
-            setErrorStyle(signUpData.getEmailTextField());
+            setErrorStyle(emailTextField);
             return false;
         }
 
-        if (!ValidationUtils.is_valid_password(signUpData.getPasswordField().getText())) {
+        if (!ValidationUtils.is_valid_password(passwordField.getText())) {
             setErrorMessage("Password does not satisfy requirements.");
-            setErrorStyle(signUpData.getPasswordField());
+            setErrorStyle(passwordField);
             return false;
         }
 
-        if (signUpData.getDatePicker().getValue() != null) {
-            if (!ValidationUtils.is_valid_date(signUpData.getDatePicker().getValue().toString())) {
+        if (datePicker.getValue() != null) {
+            if (!ValidationUtils.is_valid_date(datePicker.getValue().toString())) {
                 setErrorMessage("Please select a valid date of birth.");
-                setErrorStyle(signUpData.getDatePicker());
+                setErrorStyle(datePicker);
                 return false;
             }
         }
@@ -79,39 +88,39 @@ public class SignUpValidator {
     }
 
     private void handleEmptyFields() {
-        if (isEmptyField(signUpData.getUsernameTextField()))
-            setErrorStyle(signUpData.getUsernameTextField());
+        if (isEmptyField(usernameTextField))
+            setErrorStyle(usernameTextField);
 
-        if (isEmptyField(signUpData.getEmailTextField()))
-            setErrorStyle(signUpData.getEmailTextField());
+        if (isEmptyField(emailTextField))
+            setErrorStyle(emailTextField);
 
-        if (isEmptyField(signUpData.getPasswordField()))
-            setErrorStyle(signUpData.getPasswordField());
+        if (isEmptyField(passwordField))
+            setErrorStyle(passwordField);
 
-        if (isEmptyField(signUpData.getRepeatPasswordField()))
-            setErrorStyle(signUpData.getRepeatPasswordField());
+        if (isEmptyField(repeatPasswordField))
+            setErrorStyle(repeatPasswordField);
 
-        if (signUpData.getDatePicker().getValue() == null)
-            setErrorStyle(signUpData.getDatePicker());
+        if (datePicker.getValue() == null)
+            setErrorStyle(datePicker);
     }
 
     private boolean checkUniqueCredentials() {
         if (isUsernameRegistered()) {
             setErrorMessage("Username already registered.");
-            setErrorStyle(signUpData.getUsernameTextField());
+            setErrorStyle(usernameTextField);
             return false;
         } else if (isEmailRegistered()) {
             setErrorMessage("Email already registered.");
-            setErrorStyle(signUpData.getEmailTextField());
+            setErrorStyle(emailTextField);
             return false;
-        } else if (!signUpData.getRepeatPasswordField().getText().equals(signUpData.getPasswordField().getText())) {
+        } else if (!repeatPasswordField.getText().equals(passwordField.getText())) {
             setErrorMessage("The passwords don't match!");
-            setErrorStyle(signUpData.getPasswordField());
-            setErrorStyle(signUpData.getRepeatPasswordField());
+            setErrorStyle(passwordField);
+            setErrorStyle(repeatPasswordField);
             return false;
-        } else if (signUpData.getDatePicker().getValue() == null) {
+        } else if (datePicker.getValue() == null) {
             setErrorMessage("Please select a date of birth.");
-            setErrorStyle(signUpData.getDatePicker());
+            setErrorStyle(datePicker);
             return false;
         }
         return true;
@@ -119,21 +128,21 @@ public class SignUpValidator {
 
     private boolean isUsernameRegistered() {
         return AI42Main.database.getTable("user").select(row ->
-                row.getValue("username").equals(signUpData.getUsernameTextField().getText())).size() == 1;
+                row.getValue("username").equals(usernameTextField.getText())).size() == 1;
     }
 
     private boolean isEmailRegistered() {
         return AI42Main.database.getTable("user").select(row ->
-                row.getValue("email").equals(signUpData.getEmailTextField().getText())).size() == 1;
+                row.getValue("email").equals(emailTextField.getText())).size() == 1;
     }
 
     private void registerUser() {
         setSuccessMessage("Registration successful!");
         HashMap<String, String> data = new HashMap<>();
-        data.put("username", signUpData.getUsernameTextField().getText());
-        data.put("email", signUpData.getEmailTextField().getText());
-        data.put("password", signUpData.getPasswordField().getText());
-        data.put("date_of_birth", signUpData.getDatePicker().getValue().toString());
+        data.put("username", usernameTextField.getText());
+        data.put("email", emailTextField.getText());
+        data.put("password", passwordField.getText());
+        data.put("date_of_birth", datePicker.getValue().toString());
         AI42Main.database.getTable("user").insert(new Row(data));
         AI42Main.database.storeInFile();
 
@@ -147,12 +156,12 @@ public class SignUpValidator {
         // Create a timeline with the specified delay
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(delay), event -> {
             // Reset the fields here
-            signUpData.getUsernameTextField().setText("");
-            signUpData.getEmailTextField().setText("");
-            signUpData.getPasswordField().setText("");
-            signUpData.getRepeatPasswordField().setText("");
-            signUpData.getTermsConditionsCheckbox().setSelected(false);
-            signUpData.getDatePicker().setValue(null);
+            usernameTextField.setText("");
+            emailTextField.setText("");
+            passwordField.setText("");
+            repeatPasswordField.setText("");
+            termsConditionsCheckbox.setSelected(false);
+            datePicker.setValue(null);
         }));
 
         // Start the timeline
@@ -161,25 +170,25 @@ public class SignUpValidator {
 
     private void resetErrorFields() {
         clearErrorMessage();
-        clearErrorStyle(signUpData.getUsernameTextField());
-        clearErrorStyle(signUpData.getEmailTextField());
-        clearErrorStyle(signUpData.getPasswordField());
-        clearErrorStyle(signUpData.getRepeatPasswordField());
-        clearErrorStyle(signUpData.getDatePicker());
+        clearErrorStyle(usernameTextField);
+        clearErrorStyle(emailTextField);
+        clearErrorStyle(passwordField);
+        clearErrorStyle(repeatPasswordField);
+        clearErrorStyle(datePicker);
     }
 
     private void setErrorMessage(String message) {
-        signUpData.getInvalidCredentialsLabel().setText(message);
-        signUpData.getInvalidCredentialsLabel().setStyle("-fx-text-fill: red;");
+        invalidCredentialsLabel.setText(message);
+        invalidCredentialsLabel.setStyle("-fx-text-fill: red;");
     }
 
     private void setSuccessMessage(String message) {
-        signUpData.getInvalidCredentialsLabel().setText(message);
-        signUpData.getInvalidCredentialsLabel().setStyle("-fx-text-fill: green;");
+        invalidCredentialsLabel.setText(message);
+        invalidCredentialsLabel.setStyle("-fx-text-fill: green;");
     }
 
     private void clearErrorMessage() {
-        signUpData.getInvalidCredentialsLabel().setText("");
+        invalidCredentialsLabel.setText("");
     }
 
     private void setErrorStyle(Control control) {
