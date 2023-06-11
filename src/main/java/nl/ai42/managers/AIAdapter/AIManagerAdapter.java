@@ -35,4 +35,3 @@ public class AIManagerAdapter extends AIAdapter {
         return result;
     }
 }
-
