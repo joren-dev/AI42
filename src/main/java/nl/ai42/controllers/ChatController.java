@@ -16,7 +16,7 @@ import nl.ai42.entity.conversation.Conversation;
 import nl.ai42.managers.AIManager;
 import nl.ai42.managers.ConversationManager;
 import nl.ai42.managers.SceneManager;
-import nl.ai42.utils.Row;
+import nl.ai42.utils.database.Row;
 
 import java.util.ArrayList;
 

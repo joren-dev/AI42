@@ -1,7 +1,7 @@
 package nl.ai42.utils.validation;
 
 import javafx.scene.control.*;
-import nl.ai42.utils.Row;
+import nl.ai42.utils.database.Row;
 import javafx.scene.control.TextField;
 
 import java.util.HashMap;

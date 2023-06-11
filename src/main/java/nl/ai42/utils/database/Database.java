@@ -1,6 +1,4 @@
-package nl.ai42.utils;
-
-import nl.ai42.AI42Main;
+package nl.ai42.utils.database;
 
 import java.io.*;
 import java.util.HashMap;

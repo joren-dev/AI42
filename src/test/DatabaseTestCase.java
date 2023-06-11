@@ -1,6 +1,6 @@
-import nl.ai42.utils.Database;
-import nl.ai42.utils.Row;
-import nl.ai42.utils.Table;
+import nl.ai42.utils.database.Database;
+import nl.ai42.utils.database.Row;
+import nl.ai42.utils.database.Table;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;

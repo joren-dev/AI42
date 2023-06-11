@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Font;
 import nl.ai42.AI42Main;
-import nl.ai42.utils.Row;
+import nl.ai42.utils.database.Row;
 
 import java.io.Serializable;
 import java.util.HashMap;

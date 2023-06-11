@@ -1,4 +1,4 @@
-package nl.ai42.utils;
+package nl.ai42.utils.database;
 
 import java.io.Serializable;
 import java.util.ArrayList;

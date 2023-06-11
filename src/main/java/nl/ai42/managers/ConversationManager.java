@@ -2,7 +2,7 @@ package nl.ai42.managers;
 
 import nl.ai42.AI42Main;
 import nl.ai42.entity.conversation.Conversation;
-import nl.ai42.utils.Row;
+import nl.ai42.utils.database.Row;
 
 import java.io.Serializable;
 import java.util.ArrayList;
