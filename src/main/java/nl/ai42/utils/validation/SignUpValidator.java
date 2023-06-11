@@ -13,11 +13,9 @@ import nl.ai42.utils.datastructs.SignUpData;
 
 public class SignUpValidator {
     private final SignUpData signUpData;
-    private final Label invalidCredentialsLabel;
 
-    public SignUpValidator(SignUpData signUpData, Label invalidCredentialsLabel) {
+    public SignUpValidator(SignUpData signUpData) {
         this.signUpData = signUpData;
-        this.invalidCredentialsLabel = invalidCredentialsLabel;
     }
 
     public void validateAndRegister() {
@@ -170,17 +168,17 @@ public class SignUpValidator {
     }
 
     private void setErrorMessage(String message) {
-        invalidCredentialsLabel.setText(message);
-        invalidCredentialsLabel.setStyle("-fx-text-fill: red;");
+        signUpData.getInvalidCredentialsLabel().setText(message);
+        signUpData.getInvalidCredentialsLabel().setStyle("-fx-text-fill: red;");
     }
 
     private void setSuccessMessage(String message) {
-        invalidCredentialsLabel.setText(message);
-        invalidCredentialsLabel.setStyle("-fx-text-fill: green;");
+        signUpData.getInvalidCredentialsLabel().setText(message);
+        signUpData.getInvalidCredentialsLabel().setStyle("-fx-text-fill: green;");
     }
 
     private void clearErrorMessage() {
-        invalidCredentialsLabel.setText("");
+        signUpData.getInvalidCredentialsLabel().setText("");
     }
 
     private void setErrorStyle(Control control) {

@@ -105,7 +105,7 @@ public class LoginAndRegisterController {
         signUpData.setTermsConditionsCheckboxAndInvalidCredentialsLabel(termsConditionsCheckbox, invalid_signup_credentials);
         signUpData.setDatePicker(sign_up_date_date_picker);
 
-        SignUpValidator signUpValidator = new SignUpValidator(signUpData, invalid_signup_credentials);
+        SignUpValidator signUpValidator = new SignUpValidator(signUpData);
 
         signUpValidator.validateAndRegister();
     }
