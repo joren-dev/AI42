@@ -6,3 +6,4 @@ nl.ai42.managers.AIAdapter
 nl.ai42.utils.database
 nl.ai42.utils.security
 nl.ai42.utils.validation
+nl.ai42.utils.validation.utility

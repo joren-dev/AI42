@@ -1,15 +1,15 @@
 package nl.ai42;
 
-import nl.ai42.utils.validation.ValidationUtils;
+import nl.ai42.utils.validation.utility.PatternMatchUtility;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class ValidationUtilsTestCase {
+public class PatternMatchUtilityTestCase {
     @Test
     public void isValidName_ValidName_ReturnsTrue() {
         // Act
-        boolean henk = ValidationUtils.is_valid_name("Henk");
-        boolean pieter = ValidationUtils.is_valid_name("Pieter");
+        boolean henk = PatternMatchUtility.isValidName("Henk");
+        boolean pieter = PatternMatchUtility.isValidName("Pieter");
 
         // Assert
         Assertions.assertTrue(henk);
@@ -19,8 +19,8 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidName_InvalidName_ReturnsFalse() {
         // Act
-        boolean frans123 = ValidationUtils.is_valid_name("Frans123");
-        boolean hashtagPiet = ValidationUtils.is_valid_name("#Piet");
+        boolean frans123 = PatternMatchUtility.isValidName("Frans123");
+        boolean hashtagPiet = PatternMatchUtility.isValidName("#Piet");
 
         // Assert
         Assertions.assertFalse(frans123);
@@ -30,8 +30,8 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidEmail_ValidEmail_ReturnsTrue() {
         // Act
-        boolean henk = ValidationUtils.is_valid_email("henk@gmail.com");
-        boolean piet = ValidationUtils.is_valid_email("p.krediet@student.hhs.nl");
+        boolean henk = PatternMatchUtility.isValidEmail("henk@gmail.com");
+        boolean piet = PatternMatchUtility.isValidEmail("p.krediet@student.hhs.nl");
 
         // Assert
         Assertions.assertTrue(henk);
@@ -41,8 +41,8 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidEmail_InvalidEmail_ReturnsFalse() {
         // Act
-        boolean pieter = ValidationUtils.is_valid_email("pietergmail.com");
-        boolean frans = ValidationUtils.is_valid_email("frans@gmailcom");
+        boolean pieter = PatternMatchUtility.isValidEmail("pietergmail.com");
+        boolean frans = PatternMatchUtility.isValidEmail("frans@gmailcom");
 
         // Assert
         Assertions.assertFalse(pieter);
@@ -52,7 +52,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidEmailWithNull_NullEmail_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_email(null);
+        boolean result = PatternMatchUtility.isValidEmail(null);
 
         // Assert
         Assertions.assertFalse(result);
@@ -61,7 +61,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidEmailWithEmptyString_EmptyEmail_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_email("");
+        boolean result = PatternMatchUtility.isValidEmail("");
 
         // Assert
         Assertions.assertFalse(result);
@@ -70,7 +70,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidFullNameInvalidCharacter_InvalidCharacterInFullName_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_full_name("H3nk de Steen");
+        boolean result = PatternMatchUtility.isValidFullName("H3nk de Steen");
 
         // Assert
         Assertions.assertFalse(result);
@@ -79,7 +79,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidFullNameEmptyString_EmptyFullName_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_full_name("");
+        boolean result = PatternMatchUtility.isValidFullName("");
 
         // Assert
         Assertions.assertFalse(result);
@@ -88,7 +88,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordTooShort_PasswordTooShort_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_password("Sh0rt");
+        boolean result = PatternMatchUtility.isValidPassword("Sh0rt");
 
         // Assert
         Assertions.assertFalse(result);
@@ -97,8 +97,8 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordEdgeCases_TooShortAndLongEnoughPasswords_ReturnsFalseAndTrue() {
         // Act
-        boolean tooShort = ValidationUtils.is_valid_password("$h0rTpw");
-        boolean longEnough = ValidationUtils.is_valid_password("$h0rTpw!");
+        boolean tooShort = PatternMatchUtility.isValidPassword("$h0rTpw");
+        boolean longEnough = PatternMatchUtility.isValidPassword("$h0rTpw!");
 
         // Assert
         Assertions.assertFalse(tooShort);
@@ -108,7 +108,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordNoCapitals_PasswordWithoutCapitals_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_password("all_lowercase with $ymb0l$ @nd d1g1t$, but n0 c@p1t@1$");
+        boolean result = PatternMatchUtility.isValidPassword("all_lowercase with $ymb0l$ @nd d1g1t$, but n0 c@p1t@1$");
 
         // Assert
         Assertions.assertFalse(result);
@@ -117,7 +117,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordShoutyCaps_PasswordWithShoutyCaps_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_password("TH1S P@S$WORD SHOULD N0T BE ACCEPTED!!!");
+        boolean result = PatternMatchUtility.isValidPassword("TH1S P@S$WORD SHOULD N0T BE ACCEPTED!!!");
 
         // Assert
         Assertions.assertFalse(result);
@@ -126,7 +126,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordNoDigits_PasswordWithoutDigits_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_password("IC*MOz;!PrGmde_H&^q'*'JzZzqZ(?),<giLi(RO");
+        boolean result = PatternMatchUtility.isValidPassword("IC*MOz;!PrGmde_H&^q'*'JzZzqZ(?),<giLi(RO");
 
         // Assert
         Assertions.assertFalse(result);
@@ -135,7 +135,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordNoSpecialCharacter_PasswordWithoutSpecialCharacter_ReturnsFalse() {
         // Act
-        boolean result = ValidationUtils.is_valid_password("dCrunM5XMCoBvWs6KSLgR3rVgBMMUFob7HW34AY8");
+        boolean result = PatternMatchUtility.isValidPassword("dCrunM5XMCoBvWs6KSLgR3rVgBMMUFob7HW34AY8");
 
         // Assert
         Assertions.assertFalse(result);
@@ -144,7 +144,7 @@ public class ValidationUtilsTestCase {
     @Test
     public void isValidPasswordWithOkayIshPassword_ValidPassword_ReturnsTrue() {
         // Act
-        boolean result = ValidationUtils.is_valid_password("n@Xduc\\'u=QHdr<B\\\\DR%:GAKE|/eY{7|<+9]L6Ymx$H+_x^3!g)?$H]z=ushUTAfn1/W(9O,$fYJF+\"*~");
+        boolean result = PatternMatchUtility.isValidPassword("n@Xduc\\'u=QHdr<B\\\\DR%:GAKE|/eY{7|<+9]L6Ymx$H+_x^3!g)?$H]z=ushUTAfn1/W(9O,$fYJF+\"*~");
 
         // Assert
         Assertions.assertTrue(result);

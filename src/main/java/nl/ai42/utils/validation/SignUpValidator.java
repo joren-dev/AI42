@@ -6,12 +6,12 @@ import javafx.scene.control.*;
 import javafx.util.Duration;
 import nl.ai42.AI42Main;
 import nl.ai42.utils.database.Row;
+import nl.ai42.utils.security.Sha3Hash;
+import nl.ai42.utils.validation.utility.StatusUtility;
+import nl.ai42.utils.validation.utility.ValidationUtility;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-
-import nl.ai42.utils.security.Sha3Hash;
-
 
 public class SignUpValidator {
     private TextField usernameTextField;
@@ -22,18 +22,16 @@ public class SignUpValidator {
     private Label invalidCredentialsLabel;
     private DatePicker datePicker;
 
-    public void set_credential_fields(TextField usernameTextField, TextField emailTextField, TextField passwordField,
-                                      TextField repeatPasswordField)
-    {
+    public void setCredentialFields(TextField usernameTextField, TextField emailTextField, TextField passwordField,
+                                    TextField repeatPasswordField) {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
         this.passwordField = passwordField;
         this.repeatPasswordField = repeatPasswordField;
     }
 
-    public void set_additional_fields(CheckBox termsConditionsCheckbox,
-                                      Label invalidCredentialsLabel, DatePicker datePicker)
-    {
+    public void setAdditionalFields(CheckBox termsConditionsCheckbox,
+                                    Label invalidCredentialsLabel, DatePicker datePicker) {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
         this.datePicker = datePicker;
@@ -49,124 +47,81 @@ public class SignUpValidator {
     }
 
     private boolean validateSignUpForm() {
-        if (!validateRequiredFields()) {
+        if (!ValidationUtility.validateRequiredFields(usernameTextField, emailTextField, passwordField,
+                repeatPasswordField, datePicker)) {
             handleEmptyFields();
             return false;
         }
 
-        if (!validateUsername())
-            return false;
-
-        if (!validateEmail())
-            return false;
-
-        if (!validatePassword())
-            return false;
-
-        if (!validateDateOfBirth())
-            return false;
-
-        if (!validateTermsConditions())
-            return false;
-
-        return true;
-    }
-
-    private boolean validateTermsConditions() {
-        if (!termsConditionsCheckbox.isSelected()) {
-            setErrorMessage("Please accept the terms.");
-            setErrorStyle(termsConditionsCheckbox);
+        if (!ValidationUtility.validateUsername(usernameTextField)) {
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Username does not satisfy requirements.");
+            StatusUtility.setErrorStyle(usernameTextField);
             return false;
         }
-        return true;
-    }
 
-    private boolean validateRequiredFields() {
-        if (isEmptyField(usernameTextField) || isEmptyField(emailTextField) ||
-                isEmptyField(passwordField) || isEmptyField(repeatPasswordField) ||
-                datePicker.getValue() == null) {
-            setErrorMessage("Not all required fields are filled in.");
+        if (!ValidationUtility.validateEmail(emailTextField)) {
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Email does not satisfy requirements.");
+            StatusUtility.setErrorStyle(emailTextField);
             return false;
         }
-        return true;
-    }
 
-    private boolean validateUsername() {
-        if (!ValidationUtils.is_valid_name(usernameTextField.getText())) {
-            setErrorMessage("Username does not satisfy requirements.");
-            setErrorStyle(usernameTextField);
+        if (!ValidationUtility.validatePassword(passwordField)) {
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Password does not satisfy requirements.");
+            StatusUtility.setErrorStyle(passwordField);
             return false;
         }
-        return true;
-    }
 
-    private boolean validateEmail() {
-        if (!ValidationUtils.is_valid_email(emailTextField.getText())) {
-            setErrorMessage("Email does not satisfy requirements.");
-            setErrorStyle(emailTextField);
+        if (!ValidationUtility.validateDateOfBirth(datePicker)) {
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please select a valid date of birth.");
+            StatusUtility.setErrorStyle(datePicker);
             return false;
         }
-        return true;
-    }
 
-    private boolean validatePassword() {
-        if (!ValidationUtils.is_valid_password(passwordField.getText())) {
-            setErrorMessage("Password does not satisfy requirements.");
-            setErrorStyle(passwordField);
+        if (!ValidationUtility.validateTermsConditions(termsConditionsCheckbox)) {
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please accept the terms.");
+            StatusUtility.setErrorStyle(termsConditionsCheckbox);
             return false;
         }
-        return true;
-    }
 
-    private boolean validateDateOfBirth() {
-        if (datePicker.getValue() != null) {
-            if (!ValidationUtils.is_valid_date(datePicker.getValue().toString())) {
-                setErrorMessage("Please select a valid date of birth.");
-                setErrorStyle(datePicker);
-                return false;
-            }
-        }
         return true;
-    }
-
-    private boolean isEmptyField(TextField textField) {
-        return textField.getText().isBlank();
     }
 
     private void handleEmptyFields() {
-        if (isEmptyField(usernameTextField))
-            setErrorStyle(usernameTextField);
+        StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please fill in all the required fields.");
 
-        if (isEmptyField(emailTextField))
-            setErrorStyle(emailTextField);
+        if (StatusUtility.isEmptyTextField(usernameTextField))
+            StatusUtility.setErrorStyle(usernameTextField);
 
-        if (isEmptyField(passwordField))
-            setErrorStyle(passwordField);
+        if (StatusUtility.isEmptyTextField(emailTextField))
+            StatusUtility.setErrorStyle(emailTextField);
 
-        if (isEmptyField(repeatPasswordField))
-            setErrorStyle(repeatPasswordField);
+        if (StatusUtility.isEmptyTextField(passwordField))
+            StatusUtility.setErrorStyle(passwordField);
 
-        if (datePicker.getValue() == null)
-            setErrorStyle(datePicker);
+        if (StatusUtility.isEmptyTextField(repeatPasswordField))
+            StatusUtility.setErrorStyle(repeatPasswordField);
+
+        if (StatusUtility.isEmptyDatePickerField(datePicker))
+            StatusUtility.setErrorStyle(datePicker);
     }
 
     private boolean checkUniqueCredentials() {
         if (isUsernameRegistered()) {
-            setErrorMessage("Username already registered.");
-            setErrorStyle(usernameTextField);
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Username already registered.");
+            StatusUtility.setErrorStyle(usernameTextField);
             return false;
         } else if (isEmailRegistered()) {
-            setErrorMessage("Email already registered.");
-            setErrorStyle(emailTextField);
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Email already registered.");
+            StatusUtility.setErrorStyle(emailTextField);
             return false;
         } else if (!repeatPasswordField.getText().equals(passwordField.getText())) {
-            setErrorMessage("The passwords don't match!");
-            setErrorStyle(passwordField);
-            setErrorStyle(repeatPasswordField);
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "The passwords don't match!");
+            StatusUtility.setErrorStyle(passwordField);
+            StatusUtility.setErrorStyle(repeatPasswordField);
             return false;
         } else if (datePicker.getValue() == null) {
-            setErrorMessage("Please select a date of birth.");
-            setErrorStyle(datePicker);
+            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please select a date of birth.");
+            StatusUtility.setErrorStyle(datePicker);
             return false;
         }
         return true;
@@ -183,7 +138,7 @@ public class SignUpValidator {
     }
 
     private void registerUser() throws NoSuchAlgorithmException {
-        setSuccessMessage("Registration successful!");
+        StatusUtility.setSuccessMessage(invalidCredentialsLabel, "Registration successful!");
         HashMap<String, String> data = new HashMap<>();
 
         data.put("username", usernameTextField.getText());
@@ -198,12 +153,8 @@ public class SignUpValidator {
     }
 
     private void resetFields() {
-        // Delay in milliseconds before resetting the fields
         final int delay = 2000;
-
-        // Create a timeline with the specified delay
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(delay), event -> {
-            // Reset the fields here
             usernameTextField.setText("");
             emailTextField.setText("");
             passwordField.setText("");
@@ -211,39 +162,15 @@ public class SignUpValidator {
             termsConditionsCheckbox.setSelected(false);
             datePicker.setValue(null);
         }));
-
-        // Start the timeline
         timeline.play();
     }
 
     private void resetErrorFields() {
-        clearErrorMessage();
-        clearErrorStyle(usernameTextField);
-        clearErrorStyle(emailTextField);
-        clearErrorStyle(passwordField);
-        clearErrorStyle(repeatPasswordField);
-        clearErrorStyle(datePicker);
-    }
-
-    private void setErrorMessage(String message) {
-        invalidCredentialsLabel.setText(message);
-        invalidCredentialsLabel.setStyle("-fx-text-fill: red;");
-    }
-
-    private void setSuccessMessage(String message) {
-        invalidCredentialsLabel.setText(message);
-        invalidCredentialsLabel.setStyle("-fx-text-fill: green;");
-    }
-
-    private void clearErrorMessage() {
-        invalidCredentialsLabel.setText("");
-    }
-
-    private void setErrorStyle(Control control) {
-        control.setStyle("-fx-border-color: red;");
-    }
-
-    private void clearErrorStyle(Control control) {
-        control.setStyle(null);
+        StatusUtility.clearErrorMessage(invalidCredentialsLabel);
+        StatusUtility.clearErrorStyle(usernameTextField);
+        StatusUtility.clearErrorStyle(emailTextField);
+        StatusUtility.clearErrorStyle(passwordField);
+        StatusUtility.clearErrorStyle(repeatPasswordField);
+        StatusUtility.clearErrorStyle(datePicker);
     }
 }
