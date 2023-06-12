@@ -468,30 +468,38 @@ table tr td dl, table tr td dl dt, table tr td dl dd {
     border: none;
     height:16px;
 }
-.memberSummary caption span.activeTableTab span, .packagesSummary caption span.activeTableTab span,
-.overviewSummary caption span.activeTableTab span, .typeSummary caption span.activeTableTab span {
-    white-space:nowrap;
-    padding-top:5px;
-    padding-left:12px;
-    padding-right:12px;
-    margin-right:3px;
-    display:inline-block;
-    float:left;
-    background-color:#F8981D;
-    height:16px;
+.memberSummary caption span.activeTableTab span,
+.packagesSummary caption span.activeTableTab span,
+.overviewSummary caption span.activeTableTab span,
+.typeSummary caption span.activeTableTab span,
+.memberSummary caption span.tableTab span,
+.packagesSummary caption span.tableTab span,
+.overviewSummary caption span.tableTab span,
+.typeSummary caption span.tableTab span {
+    white-space: nowrap;
+    padding-top: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-right: 3px;
+    display: inline-block;
+    float: left;
+    height: 16px;
 }
-.memberSummary caption span.tableTab span, .packagesSummary caption span.tableTab span,
-.overviewSummary caption span.tableTab span, .typeSummary caption span.tableTab span {
-    white-space:nowrap;
-    padding-top:5px;
-    padding-left:12px;
-    padding-right:12px;
-    margin-right:3px;
-    display:inline-block;
-    float:left;
-    background-color:#4D7A97;
-    height:16px;
+
+.memberSummary caption span.activeTableTab span,
+.memberSummary caption span.tableTab span {
+    background-color: #F8981D;
 }
+
+.packagesSummary caption span.activeTableTab span,
+.packagesSummary caption span.tableTab span,
+.overviewSummary caption span.activeTableTab span,
+.overviewSummary caption span.tableTab span,
+.typeSummary caption span.activeTableTab span,
+.typeSummary caption span.tableTab span {
+    background-color: #4D7A97;
+}
+
 .memberSummary caption span.tableTab, .memberSummary caption span.activeTableTab,
 .packagesSummary caption span.tableTab, .packagesSummary caption span.activeTableTab,
 .overviewSummary caption span.tableTab, .overviewSummary caption span.activeTableTab,
