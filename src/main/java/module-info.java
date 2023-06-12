@@ -15,4 +15,6 @@ module nl.ai42 {
     opens nl.ai42.utils.validation;
     exports nl.ai42.utils.database;
     opens nl.ai42.utils.database;
+    exports nl.ai42.utils.validation.utility;
+    opens nl.ai42.utils.validation.utility;
 }

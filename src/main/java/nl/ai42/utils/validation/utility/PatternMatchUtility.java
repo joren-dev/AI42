@@ -1,9 +1,9 @@
-package nl.ai42.utils.validation;
+package nl.ai42.utils.validation.utility;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ValidationUtils {
+public class PatternMatchUtility {
 
     public static boolean is_valid_name(final String name) {
         return name.matches("[a-zA-Z]+");
