@@ -42,6 +42,7 @@ public class SignUpValidator implements ValidatorInterface {
         // Check if any fields are empty
         if (!ValidationUtility.validateRequiredFields(usernameTextField, emailTextField, passwordField,
                 repeatPasswordField, datePicker)) {
+            setErrorMessage(invalidCredentialsLabel, "Please fill in all the required fields.");
             handleEmptyFields();
             return;
         }
@@ -91,8 +92,6 @@ public class SignUpValidator implements ValidatorInterface {
     }
 
     private void handleEmptyFields() {
-        setErrorMessage(invalidCredentialsLabel, "Please fill in all the required fields.");
-
         if (isEmptyTextField(usernameTextField))
             setErrorStyle(usernameTextField);
 
