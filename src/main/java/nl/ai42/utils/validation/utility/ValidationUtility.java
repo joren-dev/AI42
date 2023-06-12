@@ -24,24 +24,15 @@ public class ValidationUtility {
     }
 
     public static boolean validateUsername(TextField usernameTextField) {
-        if (!PatternMatchUtility.isValidName(usernameTextField.getText())) {
-            return false;
-        }
-        return true;
+        return PatternMatchUtility.isValidName(usernameTextField.getText());
     }
 
     public static boolean validateEmail(TextField emailTextField) {
-        if (!PatternMatchUtility.isValidEmail(emailTextField.getText())) {
-            return false;
-        }
-        return true;
+        return PatternMatchUtility.isValidEmail(emailTextField.getText());
     }
 
     public static boolean validatePassword(TextField passwordField) {
-        if (!PatternMatchUtility.isValidPassword(passwordField.getText())) {
-            return false;
-        }
-        return true;
+        return PatternMatchUtility.isValidPassword(passwordField.getText());
     }
 
     public static boolean validateDateOfBirth(DatePicker datePicker) {
