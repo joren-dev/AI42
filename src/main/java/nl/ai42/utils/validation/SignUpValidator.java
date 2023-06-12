@@ -7,13 +7,12 @@ import javafx.util.Duration;
 import nl.ai42.AI42Main;
 import nl.ai42.utils.database.Row;
 import nl.ai42.utils.security.Sha3Hash;
-import nl.ai42.utils.validation.utility.StatusUtility;
 import nl.ai42.utils.validation.utility.ValidationUtility;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
-public class SignUpValidator {
+public class SignUpValidator implements ValidatorInterface {
     private TextField usernameTextField;
     private TextField emailTextField;
     private TextField passwordField;
@@ -54,32 +53,32 @@ public class SignUpValidator {
         }
 
         if (!ValidationUtility.validateUsername(usernameTextField)) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Username does not satisfy requirements.");
-            StatusUtility.setErrorStyle(usernameTextField);
+            setErrorMessage(invalidCredentialsLabel, "Username does not satisfy requirements.");
+            setErrorStyle(usernameTextField);
             return false;
         }
 
         if (!ValidationUtility.validateEmail(emailTextField)) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Email does not satisfy requirements.");
-            StatusUtility.setErrorStyle(emailTextField);
+            setErrorMessage(invalidCredentialsLabel, "Email does not satisfy requirements.");
+            setErrorStyle(emailTextField);
             return false;
         }
 
         if (!ValidationUtility.validatePassword(passwordField)) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Password does not satisfy requirements.");
-            StatusUtility.setErrorStyle(passwordField);
+            setErrorMessage(invalidCredentialsLabel, "Password does not satisfy requirements.");
+            setErrorStyle(passwordField);
             return false;
         }
 
         if (!ValidationUtility.validateDateOfBirth(datePicker)) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please select a valid date of birth.");
-            StatusUtility.setErrorStyle(datePicker);
+            setErrorMessage(invalidCredentialsLabel, "Please select a valid date of birth.");
+            setErrorStyle(datePicker);
             return false;
         }
 
         if (!ValidationUtility.validateTermsConditions(termsConditionsCheckbox)) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please accept the terms.");
-            StatusUtility.setErrorStyle(termsConditionsCheckbox);
+            setErrorMessage(invalidCredentialsLabel, "Please accept the terms.");
+            setErrorStyle(termsConditionsCheckbox);
             return false;
         }
 
@@ -87,41 +86,41 @@ public class SignUpValidator {
     }
 
     private void handleEmptyFields() {
-        StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please fill in all the required fields.");
+        setErrorMessage(invalidCredentialsLabel, "Please fill in all the required fields.");
 
-        if (StatusUtility.isEmptyTextField(usernameTextField))
-            StatusUtility.setErrorStyle(usernameTextField);
+        if (isEmptyTextField(usernameTextField))
+            setErrorStyle(usernameTextField);
 
-        if (StatusUtility.isEmptyTextField(emailTextField))
-            StatusUtility.setErrorStyle(emailTextField);
+        if (isEmptyTextField(emailTextField))
+            setErrorStyle(emailTextField);
 
-        if (StatusUtility.isEmptyTextField(passwordField))
-            StatusUtility.setErrorStyle(passwordField);
+        if (isEmptyTextField(passwordField))
+            setErrorStyle(passwordField);
 
-        if (StatusUtility.isEmptyTextField(repeatPasswordField))
-            StatusUtility.setErrorStyle(repeatPasswordField);
+        if (isEmptyTextField(repeatPasswordField))
+            setErrorStyle(repeatPasswordField);
 
-        if (StatusUtility.isEmptyDatePickerField(datePicker))
-            StatusUtility.setErrorStyle(datePicker);
+        if (isEmptyDatePickerField(datePicker))
+            setErrorStyle(datePicker);
     }
 
     private boolean checkUniqueCredentials() {
         if (isUsernameRegistered()) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Username already registered.");
-            StatusUtility.setErrorStyle(usernameTextField);
+            setErrorMessage(invalidCredentialsLabel, "Username already registered.");
+            setErrorStyle(usernameTextField);
             return false;
         } else if (isEmailRegistered()) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Email already registered.");
-            StatusUtility.setErrorStyle(emailTextField);
+            setErrorMessage(invalidCredentialsLabel, "Email already registered.");
+            setErrorStyle(emailTextField);
             return false;
         } else if (!repeatPasswordField.getText().equals(passwordField.getText())) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "The passwords don't match!");
-            StatusUtility.setErrorStyle(passwordField);
-            StatusUtility.setErrorStyle(repeatPasswordField);
+            setErrorMessage(invalidCredentialsLabel, "The passwords don't match!");
+            setErrorStyle(passwordField);
+            setErrorStyle(repeatPasswordField);
             return false;
         } else if (datePicker.getValue() == null) {
-            StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please select a date of birth.");
-            StatusUtility.setErrorStyle(datePicker);
+            setErrorMessage(invalidCredentialsLabel, "Please select a date of birth.");
+            setErrorStyle(datePicker);
             return false;
         }
         return true;
@@ -138,7 +137,7 @@ public class SignUpValidator {
     }
 
     private void registerUser() throws NoSuchAlgorithmException {
-        StatusUtility.setSuccessMessage(invalidCredentialsLabel, "Registration successful!");
+        setSuccessMessage(invalidCredentialsLabel, "Registration successful!");
         HashMap<String, String> data = new HashMap<>();
 
         data.put("username", usernameTextField.getText());
@@ -166,11 +165,11 @@ public class SignUpValidator {
     }
 
     private void resetErrorFields() {
-        StatusUtility.clearErrorMessage(invalidCredentialsLabel);
-        StatusUtility.clearErrorStyle(usernameTextField);
-        StatusUtility.clearErrorStyle(emailTextField);
-        StatusUtility.clearErrorStyle(passwordField);
-        StatusUtility.clearErrorStyle(repeatPasswordField);
-        StatusUtility.clearErrorStyle(datePicker);
+        clearErrorMessage(invalidCredentialsLabel);
+        clearErrorStyle(usernameTextField);
+        clearErrorStyle(emailTextField);
+        clearErrorStyle(passwordField);
+        clearErrorStyle(repeatPasswordField);
+        clearErrorStyle(datePicker);
     }
 }
