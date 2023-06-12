@@ -15,11 +15,16 @@ public class ValidationUtility {
     public static boolean validateRequiredFields(TextField usernameTextField, TextField emailTextField,
                                                  TextField passwordField, TextField repeatPasswordField,
                                                  DatePicker datePicker) {
-        if (isEmptyField(usernameTextField) || isEmptyField(emailTextField) ||
-                isEmptyField(passwordField) || isEmptyField(repeatPasswordField) ||
-                datePicker.getValue() == null) {
+        if (isEmptyField(usernameTextField) ||
+                isEmptyField(emailTextField))
             return false;
-        }
+
+        if (isEmptyField(repeatPasswordField) || isEmptyField(passwordField))
+            return false;
+
+        if (datePicker.getValue() == null)
+            return false;
+
         return true;
     }
 
