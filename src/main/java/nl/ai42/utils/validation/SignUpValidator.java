@@ -38,20 +38,31 @@ public class SignUpValidator implements ValidatorInterface {
 
     public void validateAndRegister() throws NoSuchAlgorithmException {
         resetErrorFields();
+
+        // Check if any fields are empty
+        if (!ValidationUtility.validateRequiredFields(usernameTextField, emailTextField, passwordField,
+                repeatPasswordField, datePicker)) {
+            handleEmptyFields();
+            return;
+        }
+
+        // Validate valid the filled fields
         if (!validateSignUpForm())
             return;
 
+        // Check if the terms are agreed on
+        if (!ValidationUtility.validateTermsConditions(termsConditionsCheckbox)) {
+            setErrorMessage(invalidCredentialsLabel, "Please accept the terms.");
+            setErrorStyle(termsConditionsCheckbox);
+            return;
+        }
+
+        // Check if details are unique
         if (checkUniqueCredentials())
             registerUser();
     }
 
     private boolean validateSignUpForm() {
-        if (!ValidationUtility.validateRequiredFields(usernameTextField, emailTextField, passwordField,
-                repeatPasswordField, datePicker)) {
-            handleEmptyFields();
-            return false;
-        }
-
         if (!ValidationUtility.validateUsername(usernameTextField)) {
             setErrorMessage(invalidCredentialsLabel, "Username does not satisfy requirements.");
             setErrorStyle(usernameTextField);
@@ -73,12 +84,6 @@ public class SignUpValidator implements ValidatorInterface {
         if (!ValidationUtility.validateDateOfBirth(datePicker)) {
             setErrorMessage(invalidCredentialsLabel, "Please select a valid date of birth.");
             setErrorStyle(datePicker);
-            return false;
-        }
-
-        if (!ValidationUtility.validateTermsConditions(termsConditionsCheckbox)) {
-            setErrorMessage(invalidCredentialsLabel, "Please accept the terms.");
-            setErrorStyle(termsConditionsCheckbox);
             return false;
         }
 
