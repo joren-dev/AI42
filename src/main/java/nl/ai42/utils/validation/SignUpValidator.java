@@ -6,13 +6,12 @@ import javafx.scene.control.*;
 import javafx.util.Duration;
 import nl.ai42.AI42Main;
 import nl.ai42.utils.database.Row;
-
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-
 import nl.ai42.utils.security.Sha3Hash;
 import nl.ai42.utils.validation.utility.StatusUtility;
 import nl.ai42.utils.validation.utility.ValidationUtility;
+
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 public class SignUpValidator {
     private TextField usernameTextField;
@@ -24,7 +23,7 @@ public class SignUpValidator {
     private DatePicker datePicker;
 
     public void set_credential_fields(TextField usernameTextField, TextField emailTextField, TextField passwordField,
-                                      TextField repeatPasswordField) {
+                                    TextField repeatPasswordField) {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
         this.passwordField = passwordField;
@@ -32,7 +31,7 @@ public class SignUpValidator {
     }
 
     public void set_additional_fields(CheckBox termsConditionsCheckbox,
-                                      Label invalidCredentialsLabel, DatePicker datePicker) {
+                                    Label invalidCredentialsLabel, DatePicker datePicker) {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
         this.datePicker = datePicker;
@@ -87,26 +86,22 @@ public class SignUpValidator {
         return true;
     }
 
-    private boolean isEmptyField(TextField textField) {
-        return textField.getText().isBlank();
-    }
-
     private void handleEmptyFields() {
-        StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please fill in all the required forms.");
+        StatusUtility.setErrorMessage(invalidCredentialsLabel, "Please fill in all the required fields.");
 
-        if (isEmptyField(usernameTextField))
+        if (StatusUtility.isEmptyTextField(usernameTextField))
             StatusUtility.setErrorStyle(usernameTextField);
 
-        if (isEmptyField(emailTextField))
+        if (StatusUtility.isEmptyTextField(emailTextField))
             StatusUtility.setErrorStyle(emailTextField);
 
-        if (isEmptyField(passwordField))
+        if (StatusUtility.isEmptyTextField(passwordField))
             StatusUtility.setErrorStyle(passwordField);
 
-        if (isEmptyField(repeatPasswordField))
+        if (StatusUtility.isEmptyTextField(repeatPasswordField))
             StatusUtility.setErrorStyle(repeatPasswordField);
 
-        if (datePicker.getValue() == null)
+        if (StatusUtility.isEmptyDatePickerField(datePicker))
             StatusUtility.setErrorStyle(datePicker);
     }
 
@@ -158,12 +153,8 @@ public class SignUpValidator {
     }
 
     private void resetFields() {
-        // Delay in milliseconds before resetting the fields
         final int delay = 2000;
-
-        // Create a timeline with the specified delay
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(delay), event -> {
-            // Reset the fields here
             usernameTextField.setText("");
             emailTextField.setText("");
             passwordField.setText("");
@@ -171,8 +162,6 @@ public class SignUpValidator {
             termsConditionsCheckbox.setSelected(false);
             datePicker.setValue(null);
         }));
-
-        // Start the timeline
         timeline.play();
     }
 

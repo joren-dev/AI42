@@ -12,10 +12,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class LoginValidator {
     private final TextField usernameTextField;
-    private final PasswordField passwordField;
+    private final TextField passwordField;
     private final Label invalidCredentialsLabel;
 
-    public LoginValidator(TextField usernameTextField, PasswordField passwordField, Label invalidCredentialsLabel) {
+    public LoginValidator(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
         this.usernameTextField = usernameTextField;
         this.passwordField = passwordField;
         this.invalidCredentialsLabel = invalidCredentialsLabel;

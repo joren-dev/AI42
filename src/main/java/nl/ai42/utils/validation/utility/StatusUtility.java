@@ -1,6 +1,7 @@
 package nl.ai42.utils.validation.utility;
 
 import javafx.scene.control.Control;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -29,5 +30,9 @@ public class StatusUtility {
 
     public static boolean isEmptyTextField(TextField textField) {
         return textField.getText().isBlank();
+    }
+
+    public static boolean isEmptyDatePickerField(DatePicker datePicker) {
+        return datePicker.getValue() == null;
     }
 }
