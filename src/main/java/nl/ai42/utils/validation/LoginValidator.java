@@ -1,7 +1,6 @@
 package nl.ai42.utils.validation;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import nl.ai42.AI42Main;
 import nl.ai42.managers.SceneManager;

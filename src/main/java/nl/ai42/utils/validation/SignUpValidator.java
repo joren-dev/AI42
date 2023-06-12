@@ -22,7 +22,7 @@ public class SignUpValidator {
     private Label invalidCredentialsLabel;
     private DatePicker datePicker;
 
-    public void set_credential_fields(TextField usernameTextField, TextField emailTextField, TextField passwordField,
+    public void setCredentialFields(TextField usernameTextField, TextField emailTextField, TextField passwordField,
                                     TextField repeatPasswordField) {
         this.usernameTextField = usernameTextField;
         this.emailTextField = emailTextField;
@@ -30,7 +30,7 @@ public class SignUpValidator {
         this.repeatPasswordField = repeatPasswordField;
     }
 
-    public void set_additional_fields(CheckBox termsConditionsCheckbox,
+    public void setAdditionalFields(CheckBox termsConditionsCheckbox,
                                     Label invalidCredentialsLabel, DatePicker datePicker) {
         this.termsConditionsCheckbox = termsConditionsCheckbox;
         this.invalidCredentialsLabel = invalidCredentialsLabel;

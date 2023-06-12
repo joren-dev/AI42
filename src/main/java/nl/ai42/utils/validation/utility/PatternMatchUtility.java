@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public class PatternMatchUtility {
 
-    public static boolean is_valid_name(final String name) {
+    public static boolean isValidName(final String name) {
         return name.matches("[a-zA-Z]+");
     }
 
-    public static boolean is_valid_email(final String email) {
+    public static boolean isValidEmail(final String email) {
         if (email == null || email.isEmpty())
             return false;
 
@@ -22,12 +22,12 @@ public class PatternMatchUtility {
         return matcher.matches();
     }
 
-    public static boolean is_valid_full_name(final String client_type_name) {
+    public static boolean isValidFullName(final String client_type_name) {
         final String regex = "^[a-zA-Z][a-zA-Z ]*$";
         return client_type_name.matches(regex);
     }
 
-    public static boolean is_valid_password(final String password) {
+    public static boolean isValidPassword(final String password) {
         // Minimum password length of 8 characters
         if (password.length() < 8)
             return false;
@@ -52,7 +52,7 @@ public class PatternMatchUtility {
         return true;
     }
 
-    public static boolean is_valid_date(String date) {
+    public static boolean isValidDate(String date) {
         String pattern = "^\\d{4}-\\d{2}-\\d{2}$";
         return date.matches(pattern);
     }

@@ -24,21 +24,21 @@ public class ValidationUtility {
     }
 
     public static boolean validateUsername(TextField usernameTextField) {
-        if (!PatternMatchUtility.is_valid_name(usernameTextField.getText())) {
+        if (!PatternMatchUtility.isValidName(usernameTextField.getText())) {
             return false;
         }
         return true;
     }
 
     public static boolean validateEmail(TextField emailTextField) {
-        if (!PatternMatchUtility.is_valid_email(emailTextField.getText())) {
+        if (!PatternMatchUtility.isValidEmail(emailTextField.getText())) {
             return false;
         }
         return true;
     }
 
     public static boolean validatePassword(TextField passwordField) {
-        if (!PatternMatchUtility.is_valid_password(passwordField.getText())) {
+        if (!PatternMatchUtility.isValidPassword(passwordField.getText())) {
             return false;
         }
         return true;
@@ -46,7 +46,7 @@ public class ValidationUtility {
 
     public static boolean validateDateOfBirth(DatePicker datePicker) {
         if (datePicker.getValue() != null) {
-            if (!PatternMatchUtility.is_valid_date(datePicker.getValue().toString())) {
+            if (!PatternMatchUtility.isValidDate(datePicker.getValue().toString())) {
                 return false;
             }
         }
