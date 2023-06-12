@@ -153,30 +153,18 @@ sup {
     z-index:999;
     background-color:#ffffff;
 }
-.topNav {
-    background-color:#4D7A97;
-    color:#FFFFFF;
-    float:left;
-    padding:0;
-    width:100%;
-    clear:right;
-    height:2.8em;
-    padding-top:10px;
-    overflow:hidden;
-    font-size:12px; 
-}
-.bottomNav {
-    margin-top:10px;
-    background-color:#4D7A97;
-    color:#FFFFFF;
-    float:left;
-    padding:0;
-    width:100%;
-    clear:right;
-    height:2.8em;
-    padding-top:10px;
-    overflow:hidden;
-    font-size:12px;
+.topNav, .bottomNav {
+    background-color: #4D7A97;
+    color: #FFFFFF;
+    float: left;
+    padding: 0;
+    width: 100%;
+    clear: right;
+    height: 2.8em;
+    padding-top: 10px;
+    overflow: hidden;
+    font-size: 12px;
+    margin-top: 10px;
 }
 .subNav {
     background-color:#dee3e9;
