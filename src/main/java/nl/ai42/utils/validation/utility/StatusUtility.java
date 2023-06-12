@@ -2,6 +2,7 @@ package nl.ai42.utils.validation.utility;
 
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class StatusUtility {
     public static void setErrorMessage(Label label, String message) {
@@ -24,5 +25,9 @@ public class StatusUtility {
 
     public static void clearErrorStyle(Control control) {
         control.setStyle(null);
+    }
+
+    public static boolean isEmptyTextField(TextField textField) {
+        return textField.getText().isBlank();
     }
 }

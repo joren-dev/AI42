@@ -11,11 +11,11 @@ import nl.ai42.utils.security.Sha3Hash;
 import java.security.NoSuchAlgorithmException;
 
 public class LoginValidator {
-    private TextField usernameTextField;
-    private TextField passwordField;
-    private Label invalidCredentialsLabel;
+    private final TextField usernameTextField;
+    private final PasswordField passwordField;
+    private final Label invalidCredentialsLabel;
 
-    public LoginValidator(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
+    public LoginValidator(TextField usernameTextField, PasswordField passwordField, Label invalidCredentialsLabel) {
         this.usernameTextField = usernameTextField;
         this.passwordField = passwordField;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
@@ -33,7 +33,7 @@ public class LoginValidator {
     private boolean validateLoginForm() {
         boolean error = false;
 
-        if (isEmptyField(usernameTextField) || isEmptyField(passwordField)) {
+        if (StatusUtility.isEmptyTextField(usernameTextField) || StatusUtility.isEmptyTextField(passwordField)) {
             StatusUtility.setErrorMessage(invalidCredentialsLabel, "Not all required fields are filled in.");
             handleEmptyFields();
             error = true;
@@ -42,15 +42,11 @@ public class LoginValidator {
         return !error;
     }
 
-    private boolean isEmptyField(TextField textField) {
-        return textField.getText().isBlank();
-    }
-
     private void handleEmptyFields() {
-        if (isEmptyField(usernameTextField))
+        if (StatusUtility.isEmptyTextField(usernameTextField))
             StatusUtility.setErrorStyle(usernameTextField);
 
-        if (isEmptyField(passwordField))
+        if (StatusUtility.isEmptyTextField(passwordField))
             StatusUtility.setErrorStyle(passwordField);
     }
 
