@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 
-import nl.ai42.utils.validation.LoginValidator;
+import nl.ai42.utils.validation.SignInValidator;
 import nl.ai42.utils.validation.SignUpValidator;
 
 import java.awt.*;
@@ -85,10 +85,10 @@ public class LoginAndRegisterController {
     protected void onLoginButtonClick() throws NoSuchAlgorithmException {
         resetFields();
 
-        LoginValidator loginValidator = new LoginValidator(
+        SignInValidator signInValidator = new SignInValidator(
                 login_username_text_field, login_password_password_field, invalid_login_credentials
         );
-        loginValidator.validateAndLogin();
+        signInValidator.validateAndLogin();
 
         invalid_signup_credentials.setText("");
     }

@@ -9,12 +9,12 @@ import nl.ai42.utils.security.Sha3Hash;
 
 import java.security.NoSuchAlgorithmException;
 
-public class LoginValidator {
+public class SignInValidator {
     private final TextField usernameTextField;
     private final TextField passwordField;
     private final Label invalidCredentialsLabel;
 
-    public LoginValidator(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
+    public SignInValidator(TextField usernameTextField, TextField passwordField, Label invalidCredentialsLabel) {
         this.usernameTextField = usernameTextField;
         this.passwordField = passwordField;
         this.invalidCredentialsLabel = invalidCredentialsLabel;
