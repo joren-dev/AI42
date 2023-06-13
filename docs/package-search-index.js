@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"nl.ai42"},{"l":"nl.ai42.controllers"},{"l":"nl.ai42.entity.conversation"},{"l":"nl.ai42.managers"},{"l":"nl.ai42.managers.AIAdapter"},{"l":"nl.ai42.utils.database"},{"l":"nl.ai42.utils.security"},{"l":"nl.ai42.utils.validation"},{"l":"nl.ai42.utils.validation.utility"}]

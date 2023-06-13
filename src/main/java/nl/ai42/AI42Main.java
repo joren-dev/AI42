@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
 import nl.ai42.managers.SceneManager;
-import nl.ai42.utils.Database;
+import nl.ai42.utils.database.Database;
 
 public class AI42Main extends Application {
 

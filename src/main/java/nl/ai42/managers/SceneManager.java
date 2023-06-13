@@ -30,35 +30,29 @@ public class SceneManager {
         this.stage = stage;
     }
 
-    public void loadScene(final String fxmlFile) {
+    public void loadScene(String fxmlFile) {
         try {
-            final String resource_path = "/nl/ai42/views/" + fxmlFile;
-            final Parent root = FXMLLoader.load(getClass().getResource(resource_path));
+            final String resourcePath = "/nl/ai42/views/" + fxmlFile;
+            final Parent root = FXMLLoader.load(getClass().getResource(resourcePath));
 
-            final Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            // set current scene
-            current_scene = scene;
-
-            // Display scene
+            stage.setScene(new Scene(root));
+            current_scene = stage.getScene();
             stage.show();
+
+            // Set event handlers for window dragging
+            current_scene.getRoot().setOnMousePressed(event -> {
+                x_offset = event.getSceneX();
+                y_offset = event.getSceneY();
+            });
+
+            current_scene.getRoot().setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - x_offset);
+                stage.setY(event.getScreenY() - y_offset);
+            });
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // grabs your root here
-        this.getCurrent_scene().getRoot().setOnMousePressed(event -> {
-            x_offset = event.getSceneX();
-            y_offset = event.getSceneY();
-        });
-
-        // move window around
-        this.getCurrent_scene().getRoot().setOnMouseDragged(event -> {
-            stage.setX(event.getScreenX() - x_offset);
-            stage.setY(event.getScreenY() - y_offset);
-        });
     }
 
     public Scene getCurrent_scene()

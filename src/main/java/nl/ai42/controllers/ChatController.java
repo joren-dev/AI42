@@ -13,10 +13,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nl.ai42.AI42Main;
 import nl.ai42.entity.conversation.Conversation;
+import nl.ai42.managers.AIAdapter.AIManagerAdapter;
 import nl.ai42.managers.AIManager;
 import nl.ai42.managers.ConversationManager;
 import nl.ai42.managers.SceneManager;
-import nl.ai42.utils.Row;
+import nl.ai42.utils.database.Row;
 
 import java.util.ArrayList;
 
@@ -150,7 +151,7 @@ public class ChatController {
         if (message_box.getText().isBlank())
             return;
 
-        final String complete_ai_response = "Ai Response: " + AIManager.ask(message_box.getText());
+        final String complete_ai_response = "Ai Response: " + AIManagerAdapter.getInstance().processQuery(message_box.getText());
 
         // Combine both and display.
         addQuestionAndAnswer(message_box.getText(), complete_ai_response);
