@@ -26,7 +26,7 @@ public class AIManagerAdapter extends AIAdapter {
     @Override
     protected String performQuery(String processedQuery) {
         // Implement AIManager query execution logic
-        return processedQuery;
+        return aiManager.ask(processedQuery);
     }
 
     @Override
